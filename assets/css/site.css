@@ -591,3 +591,12 @@ body:not(.has-hero) section.page:first-of-type::after{display:none}
 .crumb-bar .crumb-wrap a:hover{color:#b84f15}
 .crumb-bar .crumb-wrap .sep{color:#c9b89e}
 .crumb-bar .crumb-wrap .now{color:#b84f15;font-weight:700}
+
+/* Social icons — brand original colors */
+.soc{width:40px;height:40px;background:#fff;border:1px solid rgba(184,79,21,0.25);border-radius:12px;display:inline-flex;align-items:center;justify-content:center;transition:all .25s ease;color:var(--brand,#999)}
+.soc svg{width:18px;height:18px;transition:color .25s ease}
+.soc:hover{background:var(--brand);border-color:var(--brand);transform:translateY(-2px);box-shadow:0 8px 20px -6px color-mix(in srgb, var(--brand) 55%, transparent)}
+.soc:hover svg{color:#fff}
+.soc-fb{--brand:#1877F2}
+.soc-yt{--brand:#FF0000}
+.soc-wa{--brand:#25D366}

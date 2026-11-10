@@ -1450,8 +1450,9 @@
     nodes.forEach(function(n){ io.observe(n); });
   }
 
-  // --- Contact form
-  document.getElementById('contact-form').addEventListener('submit', function(e){
+  // --- Contact form (only on pages that have it)
+  var __cfEl = document.getElementById('contact-form');
+  if (__cfEl) __cfEl.addEventListener('submit', function(e){
     e.preventDefault();
     var first = document.getElementById('cf-first').value.trim();
     var last = document.getElementById('cf-last').value.trim();

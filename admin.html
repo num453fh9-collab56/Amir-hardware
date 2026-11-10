@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Amir Hardware — Admin Console</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,500&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="icon" type="image/png" href="images/logo.png"/>
+  <style>
+    :root{
+      --bg:#fdfbf5;
+      --bg-soft:#f8f2e4;
+      --glass:rgba(255,255,255,0.58);
+      --glass-strong:rgba(255,255,255,0.78);
+      --border:rgba(237,127,60,0.22);
+      --border-strong:rgba(237,127,60,0.45);
+      --text:#1a1308;
+      --text-soft:#5c4a35;
+      --text-dim:#9a8c75;
+      --orange:#ed7f3c;
+      --orange-deep:#b84f15;
+      --orange-dark:#8a3a10;
+      --gold:#d4af37;
+      --gold-deep:#a8862a;
+      --emerald:#10b981;
+      --blue:#3b82f6;
+      --purple:#a855f7;
+      --red:#ef4444;
+      --cyan:#0ea5e9;
+      --pink:#ec4899;
+      --radius:18px;
+      --sh-sm:0 2px 6px rgba(42,31,20,0.06);
+      --sh-md:0 10px 30px -10px rgba(184,79,21,0.18);
+      --sh-lg:0 25px 60px -20px rgba(42,31,20,0.25);
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box}
+    html,body{font-family:'Inter',system-ui,sans-serif;color:var(--text);min-height:100vh;overflow-x:hidden}
+    [hidden]{display:none !important}
+    button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
+    input,select,textarea{font:inherit}
+    a{color:inherit;text-decoration:none}
+
+    body{
+      background:
+        radial-gradient(1100px 500px at 90% -10%, rgba(237,127,60,0.32), transparent 60%),
+        radial-gradient(900px 450px at -5% 15%, rgba(212,175,55,0.3), transparent 60%),
+        radial-gradient(700px 400px at 55% 110%, rgba(168,85,247,0.15), transparent 60%),
+        radial-gradient(800px 500px at 110% 70%, rgba(236,72,153,0.12), transparent 60%),
+        linear-gradient(135deg,#fdfbf5 0%,#fef3e9 50%,#fdf6e8 100%);
+      background-attachment:fixed;
+    }
+    body::before{
+      content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:0.03;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+    }
+
+    h1,h2,h3,h4,.fd{font-family:'Playfair Display',serif;letter-spacing:-0.015em;color:var(--text)}
+    .ui{font-family:'Montserrat',sans-serif}
+
+    ::-webkit-scrollbar{width:8px;height:8px}
+    ::-webkit-scrollbar-track{background:transparent}
+    ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#f3a05d,#b84f15);border-radius:4px;background-clip:padding-box;border:1px solid transparent}
+
+    /* ========= LOGIN ========= */
+    #login-screen{position:fixed;inset:0;display:grid;place-items:center;padding:20px;z-index:200}
+    .login-card{
+      width:min(420px,100%);
+      background:var(--glass-strong);
+      backdrop-filter:blur(30px) saturate(200%);
+      -webkit-backdrop-filter:blur(30px) saturate(200%);
+      border:1px solid var(--border);border-radius:28px;padding:44px 36px;
+      box-shadow:0 30px 80px -20px rgba(42,31,20,0.25), 0 0 100px -30px rgba(237,127,60,0.4), inset 0 1px 0 rgba(255,255,255,0.8);
+      animation:rise .6s ease backwards;
+    }
+    @keyframes rise{from{opacity:0;transform:translateY(20px) scale(.98)}to{opacity:1;transform:none}}
+    .login-brand{text-align:center;margin-bottom:28px}
+    .lock-ico{display:inline-flex;width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#f3a05d,#b84f15);box-shadow:0 10px 30px -8px rgba(184,79,21,0.5);align-items:center;justify-content:center;color:#fff;margin-bottom:16px}
+    .login-brand h1{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:800;margin-bottom:4px;background:linear-gradient(135deg,#ed7f3c,#b84f15);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .login-brand p{color:var(--text-soft);font-size:12px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600}
+
+    .field{margin-bottom:16px}
+    .field label{display:block;font-family:'Montserrat',sans-serif;font-size:10.5px;font-weight:700;color:var(--orange-deep);text-transform:uppercase;letter-spacing:0.18em;margin-bottom:6px}
+    .field input,.field select,.field textarea{
+      width:100%;background:rgba(255,255,255,0.75);border:1.5px solid rgba(201,162,77,0.3);border-radius:12px;padding:12px 14px;font-size:14px;color:var(--text);transition:all .2s;
+    }
+    .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--orange);background:#fff;box-shadow:0 0 0 4px rgba(237,127,60,0.1)}
+    .field textarea{resize:vertical;min-height:80px}
+    .login-error{color:var(--red);font-size:12px;margin:8px 0;min-height:16px;font-weight:600}
+
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 16px;border-radius:12px;font-weight:700;font-size:13px;transition:all .25s;border:1px solid transparent;white-space:nowrap}
+    .btn-primary{background:linear-gradient(135deg,#f3a05d 0%,#ed7f3c 50%,#b84f15 100%);color:#fff;box-shadow:0 10px 24px -8px rgba(184,79,21,0.55),inset 0 1px 0 rgba(255,255,255,0.3)}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 36px -10px rgba(184,79,21,0.65)}
+    .btn-ghost{background:rgba(255,255,255,0.65);color:var(--text);border-color:var(--border);backdrop-filter:blur(10px)}
+    .btn-ghost:hover{background:#fff;border-color:var(--orange);color:var(--orange-deep)}
+    .btn-danger{background:linear-gradient(135deg,#f87171,#ef4444,#b91c1c);color:#fff;box-shadow:0 8px 20px -6px rgba(239,68,68,0.45)}
+    .btn-sm{padding:7px 12px;font-size:12px}
+    .btn-wide{width:100%}
+
+    /* ========= DASHBOARD ========= */
+    #dashboard{display:flex;min-height:100vh;position:relative;z-index:1}
+
+    /* ===== Sidebar ===== */
+    .sidebar{
+      width:264px;flex-shrink:0;
+      padding:18px 14px;
+      background:rgba(255,255,255,0.55);
+      backdrop-filter:blur(28px) saturate(180%);
+      -webkit-backdrop-filter:blur(28px) saturate(180%);
+      border-right:1px solid var(--border);
+      position:sticky;top:0;height:100vh;overflow-y:auto;
+      display:flex;flex-direction:column;
+      box-shadow:inset -1px 0 0 rgba(255,255,255,0.4);
+    }
+    .sidebar-brand{
+      display:flex;align-items:center;gap:12px;padding:6px 10px 16px;margin-bottom:8px;
+      border-bottom:1px solid var(--border);
+    }
+    .sidebar-brand .logo-ring{
+      width:40px;height:40px;border-radius:12px;
+      background:linear-gradient(135deg,#f3a05d,#b84f15);
+      display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Playfair Display',serif;font-weight:800;font-size:18px;
+      box-shadow:0 8px 20px -6px rgba(184,79,21,0.45), inset 0 1px 0 rgba(255,255,255,0.4);flex-shrink:0;
+    }
+    .sidebar-brand h1{font-family:'Playfair Display',serif;font-size:1rem;font-weight:800;line-height:1.1}
+    .sidebar-brand h1 span{display:block;font-family:'Montserrat',sans-serif;font-size:8.5px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:var(--orange-deep);margin-top:2px}
+
+    .sidebar-nav{flex:1;overflow-y:auto}
+    .sidebar-group{padding:14px 10px 6px;font-family:'Montserrat',sans-serif;font-size:9.5px;font-weight:800;letter-spacing:0.22em;text-transform:uppercase;color:var(--text-dim)}
+
+    .nav-link,.nav-expand{
+      display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:11px;
+      color:var(--text-soft);font-size:13px;font-weight:600;transition:all .18s;
+      position:relative;width:100%;text-align:left;
+    }
+    .nav-link:hover,.nav-expand:hover{background:rgba(255,255,255,0.65);color:var(--orange-deep);transform:translateX(2px)}
+    .nav-link.active{background:linear-gradient(135deg,rgba(237,127,60,0.18),rgba(237,127,60,0.08));color:var(--orange-deep);box-shadow:inset 0 1px 0 rgba(255,255,255,0.8)}
+    .nav-link.active::before{content:'';position:absolute;left:-14px;top:50%;transform:translateY(-50%);width:3px;height:20px;background:linear-gradient(180deg,#f3a05d,#b84f15);border-radius:0 3px 3px 0}
+    .nav-link svg,.nav-expand svg{width:17px;height:17px;flex-shrink:0;opacity:0.85}
+    .nav-link .nav-badge{margin-left:auto;background:var(--orange);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:999px;min-width:20px;text-align:center}
+    .nav-expand .caret{margin-left:auto;transition:transform .2s}
+    .nav-expand.open .caret{transform:rotate(180deg)}
+
+    .nav-sub{display:none;padding:4px 0 6px 20px;margin-top:2px}
+    .nav-sub.open{display:block}
+    .nav-sub .nav-link{padding:7px 12px;font-size:12.5px;position:relative}
+    .nav-sub .nav-link::after{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:4px;height:4px;border-radius:50%;background:var(--text-dim)}
+    .nav-sub .nav-link.active::after{background:var(--orange)}
+    .nav-sub .nav-link.active{background:transparent;color:var(--orange-deep);font-weight:700}
+    .nav-sub .nav-link.active::before{display:none}
+
+    .sidebar-profile{
+      margin-top:auto;padding:12px;display:flex;align-items:center;gap:10px;
+      background:rgba(255,255,255,0.65);border:1px solid var(--border);border-radius:14px;
+    }
+    .sidebar-profile .avatar{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,#a855f7,#7e22ce);color:#fff;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center}
+    .sidebar-profile .meta{line-height:1.2;flex:1;min-width:0}
+    .sidebar-profile .meta b{font-size:12.5px;color:var(--text);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .sidebar-profile .meta small{font-size:10.5px;color:var(--text-dim)}
+    .sidebar-profile .lout{color:var(--text-dim);padding:6px}
+    .sidebar-profile .lout:hover{color:var(--red)}
+
+    /* ===== Main ===== */
+    .main-area{flex:1;min-width:0;display:flex;flex-direction:column}
+
+    /* Top bar */
+    .topbar{
+      position:sticky;top:0;z-index:50;padding:12px 24px;display:flex;align-items:center;gap:14px;
+      background:rgba(255,255,255,0.55);backdrop-filter:blur(26px) saturate(180%);-webkit-backdrop-filter:blur(26px) saturate(180%);
+      border-bottom:1px solid var(--border);box-shadow:0 1px 0 rgba(255,255,255,0.5);
+    }
+    .crumbs{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-soft);font-weight:600}
+    .crumbs a:hover{color:var(--orange-deep)}
+    .crumbs .sep{color:var(--text-dim)}
+    .crumbs .now{color:var(--text)}
+
+    .search-wrap{flex:1;max-width:420px;position:relative;margin-left:16px}
+    .search-wrap svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text-dim);width:16px;height:16px}
+    .search-wrap input{width:100%;padding:9px 14px 9px 38px;background:rgba(255,255,255,0.75);border:1px solid var(--border);border-radius:11px;font-size:13px;color:var(--text);transition:all .2s}
+    .search-wrap input:focus{outline:none;border-color:var(--orange);background:#fff;box-shadow:0 0 0 4px rgba(237,127,60,0.1)}
+    .search-wrap kbd{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.9);border:1px solid var(--border);border-radius:5px;padding:2px 6px;font-size:10px;color:var(--text-dim);font-family:'Montserrat',sans-serif;font-weight:700}
+
+    .topbar-right{display:flex;align-items:center;gap:8px;margin-left:auto}
+    .icon-btn{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.65);border:1px solid var(--border);transition:all .2s;position:relative;color:var(--text-soft)}
+    .icon-btn:hover{background:#fff;border-color:var(--orange);color:var(--orange-deep);transform:translateY(-1px)}
+    .icon-btn svg{width:17px;height:17px}
+    .icon-btn .pulse-dot{position:absolute;top:7px;right:7px;width:7px;height:7px;background:var(--red);border-radius:50%;border:2px solid #fff;animation:pulse 2s infinite}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.6;transform:scale(1.15)}}
+    .user-chip{display:flex;align-items:center;gap:10px;padding:5px 12px 5px 5px;background:rgba(255,255,255,0.65);border:1px solid var(--border);border-radius:12px;cursor:pointer;transition:all .2s;margin-left:4px}
+    .user-chip:hover{background:#fff;border-color:var(--orange)}
+    .user-chip .avatar{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#a855f7,#7e22ce);color:#fff;font-weight:800;font-size:11px;display:flex;align-items:center;justify-content:center}
+
+    /* Content */
+    .content{padding:22px 24px 48px;flex:1}
+
+    .page-header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:22px;flex-wrap:wrap}
+    .page-section-label{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:800;letter-spacing:0.22em;text-transform:uppercase;color:var(--text-dim);margin-bottom:4px}
+    .page-title{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:800;color:var(--text);letter-spacing:-0.02em;line-height:1.15}
+    .page-title em{font-style:italic;background:linear-gradient(135deg,#ed7f3c,#b84f15);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .page-actions{display:flex;gap:8px;flex-wrap:wrap}
+
+    /* ===== KPI tiles (6-tile grid, 2x3) ===== */
+    .kpi-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:22px}
+    @media (max-width:980px){.kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media (max-width:640px){.kpi-grid{grid-template-columns:1fr}}
+
+    .kpi{
+      padding:16px 18px;border-radius:var(--radius);
+      background:rgba(255,255,255,0.68);backdrop-filter:blur(26px) saturate(180%);-webkit-backdrop-filter:blur(26px) saturate(180%);
+      border:1px solid var(--border);box-shadow:var(--sh-sm), inset 0 1px 0 rgba(255,255,255,0.8);
+      position:relative;overflow:hidden;transition:transform .3s, box-shadow .3s;
+      display:flex;gap:14px;align-items:center;
+    }
+    .kpi:hover{transform:translateY(-3px);box-shadow:var(--sh-md)}
+    .kpi .kpi-ico{
+      width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;flex-shrink:0;
+      background:var(--grad,linear-gradient(135deg,#f3a05d,#b84f15));
+      box-shadow:0 6px 16px -6px rgba(0,0,0,0.25);
+    }
+    .kpi .kpi-ico svg{width:22px;height:22px}
+    .kpi .kpi-body{flex:1;min-width:0}
+    .kpi .kpi-label{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.14em;margin-bottom:4px}
+    .kpi .kpi-value{font-family:'Playfair Display',serif;font-size:1.65rem;font-weight:800;color:var(--text);line-height:1}
+    .kpi .kpi-value small{font-size:0.75rem;color:var(--text-soft);font-family:'Inter',sans-serif;font-weight:500;margin-left:3px}
+    .kpi .kpi-delta{font-size:11px;color:var(--text-soft);font-weight:600;margin-top:4px;display:flex;align-items:center;gap:4px;white-space:nowrap}
+    .kpi .kpi-delta.up{color:var(--emerald)}
+    .kpi .kpi-delta.down{color:var(--red)}
+    .kpi .kpi-spark{position:absolute;right:14px;bottom:10px;opacity:0.45}
+
+    .kpi-orange{--grad:linear-gradient(135deg,#f3a05d,#b84f15)}
+    .kpi-gold{--grad:linear-gradient(135deg,#e5c658,#a8862a)}
+    .kpi-emerald{--grad:linear-gradient(135deg,#34d399,#059669)}
+    .kpi-blue{--grad:linear-gradient(135deg,#60a5fa,#1d4ed8)}
+    .kpi-purple{--grad:linear-gradient(135deg,#c084fc,#7e22ce)}
+    .kpi-pink{--grad:linear-gradient(135deg,#f472b6,#be185d)}
+    .kpi-cyan{--grad:linear-gradient(135deg,#22d3ee,#0369a1)}
+
+    /* ===== Panel ===== */
+    .panel{
+      border-radius:var(--radius);
+      background:rgba(255,255,255,0.68);backdrop-filter:blur(26px) saturate(180%);-webkit-backdrop-filter:blur(26px) saturate(180%);
+      border:1px solid var(--border);box-shadow:var(--sh-sm), inset 0 1px 0 rgba(255,255,255,0.75);
+      overflow:hidden;margin-bottom:20px;
+    }
+    .panel-head{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 20px;border-bottom:1px solid var(--border);flex-wrap:wrap}
+    .panel-head h2{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:800}
+    .panel-head h2 em{font-style:italic;background:linear-gradient(135deg,#ed7f3c,#b84f15);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .panel-head p.sub{font-size:12px;color:var(--text-dim);margin-top:2px}
+    .toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+    .toolbar input,.toolbar select{background:rgba(255,255,255,0.75);border:1px solid var(--border);border-radius:10px;padding:7px 12px;font-size:12.5px;color:var(--text);min-width:150px}
+    .toolbar input:focus,.toolbar select:focus{outline:none;border-color:var(--orange);background:#fff}
+
+    /* 7/30/90 day pills */
+    .range-pills{display:inline-flex;background:rgba(255,255,255,0.65);border:1px solid var(--border);border-radius:10px;padding:3px}
+    .range-pills button{padding:5px 11px;border-radius:7px;font-size:11.5px;font-weight:700;color:var(--text-soft);transition:all .2s}
+    .range-pills button.active{background:linear-gradient(135deg,#f3a05d,#b84f15);color:#fff;box-shadow:0 4px 10px -4px rgba(184,79,21,0.5)}
+
+    /* ===== 2-col split: chart + activity ===== */
+    .dash-split{display:grid;grid-template-columns:1.9fr 1fr;gap:16px;margin-bottom:20px}
+    @media (max-width:1150px){.dash-split{grid-template-columns:1fr}}
+
+    .chart-area{padding:20px 22px}
+    .chart-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:12px}
+    .chart-head .big{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:800;color:var(--text);line-height:1}
+    .chart-head .delta{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;color:var(--emerald);font-weight:700;margin-left:6px}
+    .chart-head p.lbl{color:var(--text-dim);font-size:11.5px;margin-top:2px;font-family:'Montserrat',sans-serif;font-weight:600;letter-spacing:0.05em}
+    .chart-legend{display:flex;gap:16px;font-size:11.5px;color:var(--text-soft);font-weight:600;margin-top:8px}
+    .chart-legend .lg{display:flex;align-items:center;gap:6px}
+    .chart-legend .dot{width:10px;height:3px;border-radius:2px}
+    .dot-ora{background:#ed7f3c}
+    .dot-gold{background:#d4af37;background:repeating-linear-gradient(90deg,#d4af37 0,#d4af37 4px,transparent 4px,transparent 7px)}
+
+    /* Activity feed */
+    .activity-list{padding:6px 10px 14px;max-height:400px;overflow-y:auto}
+    .activity-item{display:flex;gap:11px;padding:10px 10px;border-radius:12px;transition:background .15s;align-items:flex-start}
+    .activity-item:hover{background:rgba(255,255,255,0.55)}
+    .activity-item .av{width:34px;height:34px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:11.5px;font-family:'Montserrat',sans-serif}
+    .av-orange{background:linear-gradient(135deg,#f3a05d,#b84f15)}
+    .av-emerald{background:linear-gradient(135deg,#34d399,#059669)}
+    .av-blue{background:linear-gradient(135deg,#60a5fa,#1d4ed8)}
+    .av-purple{background:linear-gradient(135deg,#c084fc,#7e22ce)}
+    .av-gold{background:linear-gradient(135deg,#e5c658,#a8862a)}
+    .av-pink{background:linear-gradient(135deg,#f472b6,#be185d)}
+    .activity-item .ai-body{flex:1;min-width:0}
+    .activity-item .ai-txt{font-size:12.5px;color:var(--text);line-height:1.45}
+    .activity-item .ai-txt b{color:var(--text);font-weight:700}
+    .activity-item .ai-txt em{color:var(--orange-deep);font-style:normal;font-weight:600}
+    .activity-item .ai-time{font-size:10.5px;color:var(--text-dim);margin-top:2px;font-weight:600}
+
+    /* ===== Table ===== */
+    .tbl-wrap{overflow-x:auto}
+    table{width:100%;border-collapse:collapse;font-size:13px}
+    table th{text-align:left;padding:13px 16px;font-family:'Montserrat',sans-serif;font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:var(--text-dim);background:rgba(255,255,255,0.4);border-bottom:1px solid var(--border)}
+    table td{padding:12px 16px;color:var(--text);vertical-align:middle;border-bottom:1px solid rgba(237,127,60,0.08)}
+    table tr:last-child td{border-bottom:none}
+    table tbody tr{transition:background .15s}
+    table tbody tr:hover{background:rgba(255,255,255,0.5)}
+    .loading-row td{text-align:center;color:var(--text-dim);padding:22px}
+    .spinner{display:inline-block;width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--orange);border-radius:50%;animation:spin 0.8s linear infinite;margin-right:8px;vertical-align:middle}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    .thumb{width:44px;height:44px;border-radius:10px;object-fit:cover;background:var(--bg-soft);border:1px solid var(--border);box-shadow:0 2px 6px rgba(42,31,20,0.08)}
+    .product-cell{display:flex;align-items:center;gap:12px}
+    .product-cell .pt{font-weight:700;color:var(--text);font-size:13px}
+    .product-cell .ps{font-size:11px;color:var(--text-dim)}
+
+    .chip{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase}
+    .chip-orange{background:rgba(237,127,60,0.14);color:var(--orange-deep);border:1px solid rgba(237,127,60,0.3)}
+    .chip-gold{background:rgba(212,175,55,0.14);color:var(--gold-deep);border:1px solid rgba(212,175,55,0.3)}
+    .chip-emerald{background:rgba(16,185,129,0.12);color:#047857;border:1px solid rgba(16,185,129,0.3)}
+    .chip-red{background:rgba(239,68,68,0.12);color:#b91c1c;border:1px solid rgba(239,68,68,0.3)}
+    .chip-blue{background:rgba(59,130,246,0.12);color:#1e40af;border:1px solid rgba(59,130,246,0.3)}
+    .chip-purple{background:rgba(168,85,247,0.12);color:#6b21a8;border:1px solid rgba(168,85,247,0.3)}
+    .chip-sky{background:rgba(14,165,233,0.12);color:#0369a1;border:1px solid rgba(14,165,233,0.3)}
+    .chip-dot{width:5px;height:5px;border-radius:50%;background:currentColor}
+
+    .pill-select{background:rgba(255,255,255,0.75);border:1px solid var(--border);border-radius:999px;padding:5px 11px;font-size:11.5px;color:var(--text);font-weight:600}
+    .pill-select:focus{outline:none;border-color:var(--orange)}
+
+    .price{font-family:'Playfair Display',serif;font-weight:800;background:linear-gradient(135deg,#ed7f3c,#b84f15);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:14px}
+
+    .row-actions{display:flex;gap:6px}
+    .mini{padding:5px 10px;border-radius:9px;font-size:11px;font-weight:700;border:1px solid var(--border);background:rgba(255,255,255,0.7);color:var(--text);transition:all .2s}
+    .mini:hover{background:#fff;border-color:var(--orange);color:var(--orange-deep);transform:translateY(-1px)}
+    .mini.red{color:var(--red);border-color:rgba(239,68,68,0.25)}
+    .mini.red:hover{background:rgba(239,68,68,0.08);border-color:var(--red)}
+
+    .switch{position:relative;display:inline-block;width:40px;height:22px}
+    .switch input{opacity:0;width:0;height:0}
+    .slider{position:absolute;cursor:pointer;inset:0;background:rgba(237,127,60,0.2);border-radius:999px;transition:.3s;border:1px solid var(--border)}
+    .slider:before{position:absolute;content:"";height:16px;width:16px;left:2px;top:2px;background:#fff;border-radius:50%;transition:.3s;box-shadow:0 2px 4px rgba(0,0,0,0.15)}
+    .switch input:checked + .slider{background:linear-gradient(135deg,#f3a05d,#b84f15)}
+    .switch input:checked + .slider:before{transform:translateX(18px)}
+
+    .empty-state{padding:36px 20px;text-align:center;color:var(--text-dim)}
+    .empty-state .big{font-size:38px;margin-bottom:6px}
+
+    /* ===== Category stats ===== */
+    .cat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;padding:16px 20px}
+    .cat-card{padding:14px;background:rgba(255,255,255,0.55);border:1px solid var(--border);border-radius:14px;transition:all .2s}
+    .cat-card:hover{background:#fff;border-color:var(--orange);transform:translateY(-2px);box-shadow:var(--sh-md)}
+    .cat-card .lbl{font-size:11px;color:var(--text-dim);font-family:'Montserrat',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:4px}
+    .cat-card .val{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:800;color:var(--text)}
+    .cat-card .bar{height:4px;background:var(--bg-soft);border-radius:2px;overflow:hidden;margin-top:8px}
+    .cat-card .bar span{display:block;height:100%;background:linear-gradient(90deg,#f3a05d,#b84f15);border-radius:2px;transition:width .6s ease}
+
+    /* ===== Modal ===== */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(42,31,20,0.5);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;padding:20px;z-index:150;animation:fadeIn .25s ease}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    .modal{background:rgba(255,255,255,0.96);backdrop-filter:blur(30px) saturate(200%);-webkit-backdrop-filter:blur(30px) saturate(200%);border:1px solid var(--border);border-radius:22px;width:min(560px,100%);max-height:90vh;overflow-y:auto;box-shadow:0 40px 80px -20px rgba(42,31,20,0.4), inset 0 1px 0 rgba(255,255,255,0.9);animation:modalIn .35s cubic-bezier(.3,.9,.3,1)}
+    @keyframes modalIn{from{opacity:0;transform:scale(0.95) translateY(20px)}to{opacity:1;transform:none}}
+    .modal-head{padding:20px 24px 12px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:12px}
+    .modal-head h2{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:800}
+    .modal-head h2 span{background:linear-gradient(135deg,#ed7f3c,#b84f15);-webkit-background-clip:text;background-clip:text;color:transparent;font-style:italic}
+    .modal-close{width:32px;height:32px;border-radius:50%;background:var(--bg-soft);display:flex;align-items:center;justify-content:center;color:var(--text-soft);transition:all .2s;font-size:17px;font-weight:700}
+    .modal-close:hover{background:var(--orange);color:#fff}
+    .modal-body{padding:20px 24px 24px}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .switch-row{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:rgba(237,127,60,0.05);border:1px solid var(--border);border-radius:14px;margin-bottom:16px}
+    .switch-row small{display:block;color:var(--text-dim);font-size:11px;margin-top:2px}
+    .modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:18px}
+    .modal-actions .btn{flex:0 1 auto;width:auto}
+    .img-upload{display:flex;gap:14px;align-items:center}
+    .thumb-lg{width:70px;height:70px;border-radius:14px;background:var(--bg-soft);display:flex;align-items:center;justify-content:center;color:var(--text-dim);border:1px solid var(--border);overflow:hidden}
+    .thumb-lg img{width:100%;height:100%;object-fit:cover}
+    .file-btn{padding:9px 14px;background:rgba(255,255,255,0.8);border:1px dashed var(--border-strong);border-radius:10px;cursor:pointer;color:var(--text);font-size:12px;font-weight:600;transition:all .2s;display:inline-block}
+    .file-btn:hover{background:#fef3e9;border-color:var(--orange)}
+    .img-upload input[type="file"]{display:none}
+    .img-upload small{display:block;color:var(--text-dim);font-size:11px;margin-top:4px}
+
+    #toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);background:linear-gradient(135deg,#1a1308,#2a1f14);color:#fef3e9;padding:14px 24px;border-radius:14px;font-weight:600;font-size:13.5px;opacity:0;pointer-events:none;transition:all .3s;z-index:300;border:1px solid var(--border-strong);box-shadow:0 20px 50px rgba(42,31,20,0.4), 0 0 30px -10px rgba(237,127,60,0.4)}
+    #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+    #toast.error{background:linear-gradient(135deg,#b91c1c,#7f1d1d);border-color:rgba(239,68,68,0.6)}
+
+    /* Responsive */
+    @media (max-width:900px){
+      .sidebar{position:fixed;left:-280px;top:0;z-index:100;transition:left .3s;box-shadow:20px 0 40px -20px rgba(0,0,0,0.3)}
+      .sidebar.open{left:0}
+      .sidebar-toggle{display:flex}
+      .content{padding:18px 14px 36px}
+      .topbar{padding:10px 14px}
+      .search-wrap{display:none}
+      .crumbs{font-size:12px}
+    }
+    @media (min-width:901px){.sidebar-toggle{display:none}}
+    .sidebar-toggle{width:38px;height:38px;border-radius:11px;background:rgba(255,255,255,0.7);border:1px solid var(--border);display:none;align-items:center;justify-content:center;color:var(--text)}
+    .mobile-overlay{display:none;position:fixed;inset:0;background:rgba(42,31,20,0.5);z-index:95}
+    .mobile-overlay.show{display:block}
+  </style>
+</head>
+<body>
+
+  <!-- ==================== LOGIN ==================== -->
+  <div id="login-screen">
+    <form class="login-card" id="login-form" novalidate>
+      <div class="login-brand">
+        <span class="lock-ico">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </span>
+        <h1>AMIR HARDWARE</h1>
+        <p>Admin Console &mdash; Secure Login</p>
+      </div>
+      <div class="field">
+        <label for="login-email">Email</label>
+        <input id="login-email" type="email" placeholder="admin@amirhardware.com" autocomplete="username" required/>
+      </div>
+      <div class="field">
+        <label for="login-password">Password</label>
+        <input id="login-password" type="password" placeholder="••••••••" autocomplete="current-password" required/>
+      </div>
+      <p class="login-error" id="login-error" role="alert"></p>
+      <button class="btn btn-primary btn-wide" id="login-btn" type="submit">
+        <span id="login-btn-text">Sign In to Console</span>
+      </button>
+    </form>
+  </div>
+
+  <!-- ==================== DASHBOARD ==================== -->
+  <div id="dashboard" hidden>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <div class="logo-ring">A</div>
+        <h1>Amir Hardware<span>Admin Console v1</span></h1>
+      </div>
+
+      <div class="sidebar-nav">
+        <div class="sidebar-group">General</div>
+
+        <button class="nav-expand open" onclick="toggleNav(this)">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7m-9 2v8m4-8v8m5-10l2 2"/></svg>
+          Dashboard
+          <svg class="caret" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <div class="nav-sub open">
+          <a class="nav-link active" data-view="overview" href="#overview">Overview</a>
+          <a class="nav-link" data-view="orders" href="#orders">Orders</a>
+          <a class="nav-link" data-view="products" href="#products">Products</a>
+          <a class="nav-link" data-view="categories" href="#categories">Categories</a>
+        </div>
+
+        <a class="nav-link" href="#customers" onclick="return showToast('Customers module coming in Phase 3')">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-5a4 4 0 11-8 0 4 4 0 018 0zm6 0a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          Customers
+        </a>
+
+        <div class="sidebar-group">Business</div>
+        <button class="nav-expand" onclick="toggleNav(this)">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          Reports
+          <svg class="caret" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <div class="nav-sub">
+          <a class="nav-link" href="#r-sales" onclick="return showToast('Sales report coming in Phase 4')">Sales report</a>
+          <a class="nav-link" href="#r-stock" onclick="return showToast('Stock report coming in Phase 4')">Stock report</a>
+          <a class="nav-link" href="#r-cust" onclick="return showToast('Customer report coming in Phase 4')">Customer report</a>
+        </div>
+        <a class="nav-link" href="#promo" onclick="return showToast('Promotions coming in Phase 4')">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 12V7a4 4 0 014-4z"/></svg>
+          Promotions
+        </a>
+        <a class="nav-link" href="#messages" onclick="return showToast('Messaging coming soon')">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
+          Messages
+          <span class="nav-badge">3</span>
+        </a>
+
+        <div class="sidebar-group">System</div>
+        <a class="nav-link" href="#settings" onclick="return showToast('Settings coming soon')">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          Settings
+        </a>
+        <a class="nav-link" href="/" target="_blank">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          View Store
+        </a>
+      </div>
+
+      <div class="sidebar-profile">
+        <div class="avatar" id="sid-avatar">A</div>
+        <div class="meta">
+          <b id="sid-name">Admin</b>
+          <small>Owner</small>
+        </div>
+        <button class="lout" id="logout-btn" title="Logout">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+        </button>
+      </div>
+    </aside>
+
+    <div class="mobile-overlay" id="mob-ov" onclick="toggleSidebar()"></div>
+
+    <!-- Main -->
+    <div class="main-area">
+
+      <!-- Top bar -->
+      <header class="topbar">
+        <button class="sidebar-toggle" onclick="toggleSidebar()">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+        <div class="crumbs">
+          <a href="#overview">Home</a>
+          <span class="sep">/</span>
+          <span class="now" id="crumb-now">Dashboard</span>
+        </div>
+        <div class="search-wrap">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.2-5.2M10.5 18a7.5 7.5 0 100-15 7.5 7.5 0 000 15z"/></svg>
+          <input id="search-input" type="search" placeholder="Search products, orders, customers..."/>
+          <kbd>⌘K</kbd>
+        </div>
+        <div class="topbar-right">
+          <button class="icon-btn" title="Help" onclick="showToast('Docs: amirhardware.com/docs')">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093M12 17h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </button>
+          <button class="icon-btn" title="Notifications" onclick="showToast('No new notifications')">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.4-1.4A2 2 0 0118 14.17V11a6 6 0 10-12 0v3.17a2 2 0 01-.6 1.43L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+            <span class="pulse-dot" id="notif-dot" hidden></span>
+          </button>
+          <button class="icon-btn" title="Messages" onclick="showToast('3 unread messages')">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6m-9 6V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2h-6a2 2 0 00-2 2v9"/></svg>
+          </button>
+          <button class="icon-btn" title="Refresh" onclick="refreshAll()">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h5M20 20v-5h-5M4 9a9 9 0 0115.5-4.5M20 15a9 9 0 01-15.5 4.5"/></svg>
+          </button>
+          <div class="user-chip">
+            <div class="avatar" id="user-avatar">A</div>
+            <div style="line-height:1.1">
+              <b style="font-size:12.5px;display:block" id="admin-chip">Admin</b>
+              <small style="font-size:10px;color:var(--text-dim)">Owner</small>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="content">
+
+        <!-- Page header -->
+        <div class="page-header">
+          <div>
+            <p class="page-section-label">Overview</p>
+            <h1 class="page-title">Welcome back, <em id="welcome-name">Admin</em></h1>
+            <p class="sub" style="color:var(--text-soft);font-size:13px;margin-top:4px" id="welcome-sub">Here's what's happening with your store today</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-ghost" onclick="showToast('Report builder coming in Phase 4')">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+              New view
+            </button>
+            <button class="btn btn-primary" onclick="showToast('Report builder coming in Phase 4')">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+              Create report
+            </button>
+          </div>
+        </div>
+
+        <!-- KPIs 6 tiles -->
+        <div class="kpi-grid">
+          <div class="kpi kpi-emerald">
+            <div class="kpi-ico"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-5a4 4 0 11-8 0 4 4 0 018 0zm6 0a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
+            <div class="kpi-body">
+              <div class="kpi-label">Customers</div>
+              <div class="kpi-value" id="kpi-customers">0</div>
+              <div class="kpi-delta up"><svg width="11" height="11" fill="currentColor" viewBox="0 0 24 24"><path d="M7 14l5-5 5 5z"/></svg><span id="kpi-customers-sub">New this week: 0</span></div>
+            </div>
+            <svg class="kpi-spark" width="70" height="26" viewBox="0 0 70 26"><polyline fill="none" stroke="#059669" stroke-width="2" points="0,20 12,18 24,15 36,16 48,10 60,12 70,6"/></svg>
+          </div>
+
+          <div class="kpi kpi-blue">
+            <div class="kpi-ico"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+            <div class="kpi-body">
+              <div class="kpi-label">Avg Order Value</div>
+              <div class="kpi-value" id="kpi-aov">Rs 0</div>
+              <div class="kpi-delta up"><svg width="11" height="11" fill="currentColor" viewBox="0 0 24 24"><path d="M7 14l5-5 5 5z"/></svg><span>+8% from last week</span></div>
+            </div>
+            <svg class="kpi-spark" width="70" height="26" viewBox="0 0 70 26"><polyline fill="none" stroke="#1d4ed8" stroke-width="2" points="0,16 12,20 24,14 36,18 48,8 60,14 70,10"/></svg>
+          </div>
+
+          <div class="kpi kpi-orange">
+            <div class="kpi-ico"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg></div>
+            <div class="kpi-body">
+              <div class="kpi-label">Orders</div>
+              <div class="kpi-value" id="kpi-orders">0</div>
+              <div class="kpi-delta"><span id="kpi-orders-sub">Today: 0</span></div>
+            </div>
+            <svg class="kpi-spark" width="70" height="26" viewBox="0 0 70 26"><polyline fill="none" stroke="#ed7f3c" stroke-width="2" points="0,22 12,15 24,18 36,8 48,12 60,5 70,8"/></svg>
+          </div>
+
+          <div class="kpi kpi-gold">
+            <div class="kpi-ico"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8V6m0 10v2"/></svg></div>
+            <div class="kpi-body">
+              <div class="kpi-label">Revenue</div>
+              <div class="kpi-value" id="kpi-revenue">Rs 0</div>
+              <div class="kpi-delta up"><svg width="11" height="11" fill="currentColor" viewBox="0 0 24 24"><path d="M7 14l5-5 5 5z"/></svg><span id="kpi-revenue-sub">All-time</span></div>
+            </div>
+            <svg class="kpi-spark" width="70" height="26" viewBox="0 0 70 26"><polyline fill="none" stroke="#a8862a" stroke-width="2" points="0,22 12,18 24,14 36,16 48,10 60,8 70,4"/></svg>
+          </div>
+
+          <div class="kpi kpi-purple">
+            <div class="kpi-ico"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg></div>
+            <div class="kpi-body">
+              <div class="kpi-label">Conversion</div>
+              <div class="kpi-value" id="kpi-conv">0<small>%</small></div>
+              <div class="kpi-delta up"><svg width="11" height="11" fill="currentColor" viewBox="0 0 24 24"><path d="M7 14l5-5 5 5z"/></svg><span id="kpi-conv-sub">Est. rate</span></div>
+            </div>
+            <svg class="kpi-spark" width="70" height="26" viewBox="0 0 70 26"><polyline fill="none" stroke="#7e22ce" stroke-width="2" points="0,20 12,15 24,18 36,12 48,14 60,8 70,10"/></svg>
+          </div>
+
+          <div class="kpi kpi-pink">
+            <div class="kpi-ico"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-14L4 7m8 4v10"/></svg></div>
+            <div class="kpi-body">
+              <div class="kpi-label">Products</div>
+              <div class="kpi-value" id="kpi-products">0</div>
+              <div class="kpi-delta"><span id="kpi-products-sub">0 in stock</span></div>
+            </div>
+            <svg class="kpi-spark" width="70" height="26" viewBox="0 0 70 26"><polyline fill="none" stroke="#be185d" stroke-width="2" points="0,15 12,18 24,10 36,14 48,8 60,12 70,6"/></svg>
+          </div>
+        </div>
+
+        <!-- Chart + Activity -->
+        <div class="dash-split">
+          <section class="panel chart-area">
+            <div class="chart-head">
+              <div>
+                <p class="page-section-label">Revenue</p>
+                <div style="display:flex;align-items:baseline">
+                  <span class="big" id="chart-big">Rs 0</span>
+                  <span class="delta" id="chart-delta"><svg width="11" height="11" fill="currentColor" viewBox="0 0 24 24"><path d="M7 14l5-5 5 5z"/></svg>+0%</span>
+                </div>
+                <p class="lbl" id="chart-sub">Revenue over the last 7 days</p>
+              </div>
+              <div class="range-pills" role="tablist">
+                <button type="button" data-range="7" class="active">7 days</button>
+                <button type="button" data-range="30">30 days</button>
+                <button type="button" data-range="90">90 days</button>
+              </div>
+            </div>
+            <div id="chart-container" style="height:280px"></div>
+            <div class="chart-legend">
+              <span class="lg"><span class="dot dot-ora"></span> Revenue</span>
+              <span class="lg"><span class="dot dot-gold"></span> Orders (×1k)</span>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-head">
+              <h2>Recent <em>Activity</em></h2>
+              <button class="btn btn-ghost btn-sm" onclick="refreshAll()">
+                <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h5M20 20v-5h-5M4 9a9 9 0 0115.5-4.5"/></svg>
+              </button>
+            </div>
+            <div class="activity-list" id="activity-list">
+              <p style="color:var(--text-dim);font-size:12.5px;text-align:center;padding:20px">Loading activity...</p>
+            </div>
+          </section>
+        </div>
+
+        <!-- Category breakdown -->
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <h2>Category <em>Breakdown</em></h2>
+              <p class="sub">Products distribution across categories</p>
+            </div>
+          </div>
+          <div class="cat-grid" id="cat-breakdown"></div>
+        </section>
+
+        <!-- Recent Orders -->
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <h2>Recent <em>Orders</em></h2>
+              <p class="sub">Latest transactions &mdash; click any row to update status</p>
+            </div>
+            <div class="toolbar">
+              <select id="ord-status-filter" class="pill-select">
+                <option value="">All statuses</option>
+                <option value="placed">Placed</option>
+                <option value="confirmed">Confirmed</option>
+                <option value="packed">Packed</option>
+                <option value="shipped">Shipped</option>
+                <option value="delivered">Delivered</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+              <button class="btn btn-ghost btn-sm" id="ord-refresh" type="button">
+                <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h5M20 20v-5h-5M4 9a9 9 0 0115.5-4.5"/></svg>
+                Refresh
+              </button>
+            </div>
+          </div>
+          <div class="tbl-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Order</th>
+                  <th>Customer</th>
+                  <th>Items</th>
+                  <th>Total</th>
+                  <th>Payment</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="orders-tbody">
+                <tr class="loading-row"><td colspan="7"><span class="spinner"></span>Loading orders...</td></tr>
+              </tbody>
+            </table>
+            <div class="empty-state" id="ord-empty" hidden><div class="big">🧾</div><p>No orders yet. New orders will appear here automatically.</p></div>
+          </div>
+        </section>
+
+        <!-- Products -->
+        <section class="panel" id="products-panel">
+          <div class="panel-head">
+            <div>
+              <h2>Product <em>Catalogue</em></h2>
+              <p class="sub">Manage your store inventory</p>
+            </div>
+            <div class="toolbar">
+              <select id="cat-filter"><option value="">All Categories</option></select>
+              <button class="btn btn-primary btn-sm" id="add-btn" type="button">
+                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                Add Product
+              </button>
+            </div>
+          </div>
+          <div class="tbl-wrap">
+            <table>
+              <thead>
+                <tr><th>Product</th><th>Category</th><th>Price</th><th>Stock</th><th>Actions</th></tr>
+              </thead>
+              <tbody id="products-tbody">
+                <tr class="loading-row" id="table-loading"><td colspan="5"><span class="spinner"></span>Loading products...</td></tr>
+              </tbody>
+            </table>
+            <div class="empty-state" id="empty-state" hidden><div class="big">📦</div><p>No products found.</p></div>
+          </div>
+        </section>
+
+        <!-- Hidden stats compat -->
+        <span id="stat-total" hidden>0</span>
+        <span id="stat-in" hidden>0</span>
+        <span id="stat-out" hidden>0</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== ORDER DETAIL MODAL ==================== -->
+  <div class="modal-backdrop" id="order-modal" hidden>
+    <div class="modal" style="width:min(720px,100%)">
+      <div class="modal-head">
+        <h2>Order <span id="ord-mod-code">—</span></h2>
+        <button class="modal-close" type="button" data-close-modal>×</button>
+      </div>
+      <div class="modal-body" id="ord-mod-body"></div>
+    </div>
+  </div>
+
+  <!-- ==================== PRODUCT MODAL ==================== -->
+  <div class="modal-backdrop" id="product-modal" hidden>
+    <form class="modal" id="product-form" novalidate>
+      <div class="modal-head">
+        <h2 id="modal-title">Add <span>New Product</span></h2>
+        <button class="modal-close" type="button" data-close-modal>×</button>
+      </div>
+      <div class="modal-body">
+        <div class="field"><label for="f-title">Product Title</label><input id="f-title" type="text" required/></div>
+        <div class="form-grid">
+          <div class="field"><label for="f-category">Category</label><input id="f-category" type="text" list="cat-options" required/><datalist id="cat-options"><option value="Sanitary"><option value="Plumbing"><option value="Paint"><option value="Hardware"><option value="Plywood"></datalist></div>
+          <div class="field"><label for="f-price">Price (PKR)</label><input id="f-price" type="number" min="0" required/></div>
+        </div>
+        <div class="field"><label for="f-desc">Description</label><textarea id="f-desc" rows="3"></textarea></div>
+        <div class="field">
+          <label>Product Image</label>
+          <div class="img-upload">
+            <span class="thumb-lg" id="img-preview"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></svg></span>
+            <div style="flex:1"><label class="file-btn" for="f-image">📁 Choose Image</label><input id="f-image" type="file" accept="image/*"/><small id="img-filename">No file selected</small></div>
+          </div>
+        </div>
+        <div class="switch-row"><div><b>In Stock</b><small>Toggle availability on the main site</small></div><label class="switch"><input type="checkbox" id="f-stock" checked/><span class="slider"></span></label></div>
+        <div class="modal-actions">
+          <button class="btn btn-ghost" type="button" data-close-modal>Cancel</button>
+          <button class="btn btn-primary" id="save-btn" type="submit">Save Product</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- ==================== DELETE MODAL ==================== -->
+  <div class="modal-backdrop" id="delete-modal" hidden>
+    <div class="modal" style="width:min(440px,100%)">
+      <div class="modal-head"><h2>Delete <span>Product?</span></h2><button class="modal-close" type="button" data-close-modal>×</button></div>
+      <div class="modal-body">
+        <p style="font-size:14px;color:var(--text-soft);line-height:1.6">You are about to permanently delete <b style="color:var(--text)" id="delete-name"></b>. This action cannot be undone.</p>
+        <div class="modal-actions"><button class="btn btn-ghost" type="button" data-close-modal>Cancel</button><button class="btn btn-danger" id="confirm-delete" type="button">Yes, Delete</button></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" role="status"></div>
+
+  <script>
+    function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('mob-ov').classList.toggle('show')}
+    function toggleNav(btn){btn.classList.toggle('open');btn.nextElementSibling.classList.toggle('open')}
+
+    document.querySelectorAll('.nav-link[data-view]').forEach(function(link){
+      link.addEventListener('click', function(e){
+        var view = link.getAttribute('data-view');
+        document.querySelectorAll('.nav-link[data-view]').forEach(function(l){l.classList.remove('active')});
+        link.classList.add('active');
+        document.getElementById('crumb-now').textContent = link.textContent.trim();
+        if (view === 'orders'){e.preventDefault();document.querySelectorAll('.panel')[Math.max(0, document.querySelectorAll('.panel').length - 2)].scrollIntoView({behavior:'smooth'})}
+        else if (view === 'products'){e.preventDefault();document.getElementById('products-panel').scrollIntoView({behavior:'smooth'})}
+        else if (view === 'categories'){e.preventDefault();document.getElementById('cat-breakdown').parentElement.scrollIntoView({behavior:'smooth'})}
+        else if (view === 'overview'){e.preventDefault();window.scrollTo({top:0,behavior:'smooth'})}
+        if (window.innerWidth < 900) toggleSidebar();
+      });
+    });
+
+    // ===== Simple SVG line chart =====
+    window.__chartRange = 7;
+    window.renderChart = function(orders){
+      var container = document.getElementById('chart-container');
+      if (!container) return;
+      var days = window.__chartRange;
+      // Build day buckets
+      var today = new Date(); today.setHours(0,0,0,0);
+      var labels = [], revByDay = [], ordByDay = [];
+      for (var i = days - 1; i >= 0; i--){
+        var d = new Date(today); d.setDate(d.getDate() - i);
+        labels.push(d);
+        revByDay.push(0); ordByDay.push(0);
+      }
+      (orders || []).forEach(function(o){
+        if (!o.createdAt || o.status === 'cancelled') return;
+        var od = new Date(o.createdAt); od.setHours(0,0,0,0);
+        var diff = Math.floor((today - od) / 86400000);
+        var idx = days - 1 - diff;
+        if (idx >= 0 && idx < days){
+          revByDay[idx] += Number(o.total || 0);
+          ordByDay[idx]++;
+        }
+      });
+      var maxRev = Math.max.apply(null, revByDay.concat([100]));
+      var maxOrd = Math.max.apply(null, ordByDay.concat([1]));
+
+      var w = container.clientWidth || 600, h = 280;
+      var padL = 48, padR = 16, padT = 20, padB = 30;
+      var cw = w - padL - padR, ch = h - padT - padB;
+      function xi(i){return padL + (days === 1 ? cw/2 : (i / (days - 1)) * cw)}
+      function yR(v){return padT + ch - (v / maxRev) * ch}
+      function yO(v){return padT + ch - (v / maxOrd) * ch}
+
+      var revPath = '', revFill = '', ordPath = '';
+      for (var i = 0; i < days; i++){
+        revPath += (i === 0 ? 'M' : 'L') + xi(i) + ',' + yR(revByDay[i]);
+        ordPath += (i === 0 ? 'M' : 'L') + xi(i) + ',' + yO(ordByDay[i]);
+      }
+      revFill = revPath + ' L' + xi(days-1) + ',' + (padT + ch) + ' L' + xi(0) + ',' + (padT + ch) + ' Z';
+
+      // X-axis labels (show ~6 ticks)
+      var xTicks = '';
+      var skip = Math.max(1, Math.floor(days / 6));
+      for (var i = 0; i < days; i += skip){
+        var dt = labels[i];
+        var lbl = days <= 7 ? dt.toLocaleDateString('en', {weekday:'short'}) : (dt.getDate() + '/' + (dt.getMonth()+1));
+        xTicks += '<text x="' + xi(i) + '" y="' + (h - 8) + '" font-size="10" fill="#9a8c75" text-anchor="middle" font-family="Inter">' + lbl + '</text>';
+      }
+      // Y-axis grid + labels
+      var yTicks = '';
+      for (var k = 0; k <= 4; k++){
+        var yy = padT + (ch / 4) * k;
+        var val = Math.round(maxRev - (maxRev / 4) * k);
+        yTicks += '<line x1="' + padL + '" y1="' + yy + '" x2="' + (w - padR) + '" y2="' + yy + '" stroke="rgba(237,127,60,0.08)" stroke-width="1"/>';
+        yTicks += '<text x="' + (padL - 8) + '" y="' + (yy + 4) + '" font-size="9.5" fill="#9a8c75" text-anchor="end" font-family="Inter">' + (val >= 1000 ? (val/1000).toFixed(0) + 'k' : val) + '</text>';
+      }
+
+      container.innerHTML =
+        '<svg viewBox="0 0 ' + w + ' ' + h + '" width="100%" height="' + h + '" preserveAspectRatio="none">' +
+          '<defs>' +
+            '<linearGradient id="g-rev" x1="0" x2="0" y1="0" y2="1">' +
+              '<stop offset="0%" stop-color="#ed7f3c" stop-opacity="0.35"/>' +
+              '<stop offset="100%" stop-color="#ed7f3c" stop-opacity="0"/>' +
+            '</linearGradient>' +
+          '</defs>' +
+          yTicks + xTicks +
+          '<path d="' + revFill + '" fill="url(#g-rev)"/>' +
+          '<path d="' + revPath + '" fill="none" stroke="#ed7f3c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+          '<path d="' + ordPath + '" fill="none" stroke="#a8862a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5,3"/>' +
+          // Dots on revenue line
+          Array.from({length:days},(_,i)=>'<circle cx="'+xi(i)+'" cy="'+yR(revByDay[i])+'" r="3" fill="#fff" stroke="#ed7f3c" stroke-width="2"/>').join('') +
+        '</svg>';
+
+      // Totals
+      var totalRev = revByDay.reduce(function(a,b){return a+b},0);
+      var totalOrd = ordByDay.reduce(function(a,b){return a+b},0);
+      document.getElementById('chart-big').textContent = 'Rs ' + Number(totalRev).toLocaleString('en-PK');
+      document.getElementById('chart-sub').textContent = 'Revenue over the last ' + days + ' days · ' + totalOrd + ' orders';
+    };
+
+    // Range pill handler
+    document.querySelectorAll('.range-pills button[data-range]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        document.querySelectorAll('.range-pills button').forEach(function(b){b.classList.remove('active')});
+        btn.classList.add('active');
+        window.__chartRange = Number(btn.getAttribute('data-range'));
+        if (window.__lastOrders) window.renderChart(window.__lastOrders);
+      });
+    });
+
+    // Recent activity feed
+    window.renderActivity = function(orders){
+      var list = document.getElementById('activity-list');
+      if (!list) return;
+      var sorted = (orders || []).slice(0, 8);
+      if (sorted.length === 0){
+        list.innerHTML = '<p style="color:var(--text-dim);font-size:12.5px;text-align:center;padding:20px">No activity yet</p>';
+        return;
+      }
+      var avatars = ['av-orange','av-emerald','av-blue','av-purple','av-gold','av-pink'];
+      list.innerHTML = sorted.map(function(o, i){
+        var who = o.customerName || 'Customer';
+        var initials = who.split(' ').map(function(w){return w[0]}).join('').slice(0,2).toUpperCase();
+        var dt = new Date(o.createdAt + 'Z');
+        var mins = Math.round((Date.now() - dt.getTime()) / 60000);
+        var time = mins < 60 ? mins + ' min ago' : (mins < 1440 ? Math.round(mins/60) + ' hr ago' : Math.round(mins/1440) + ' d ago');
+        var action = {
+          placed: 'placed a new order',
+          confirmed: 'confirmed order',
+          packed: 'is packing order',
+          shipped: 'shipped order',
+          delivered: 'completed delivery of',
+          cancelled: 'cancelled order'
+        }[o.status] || 'updated order';
+        var total = 'Rs ' + Number(o.total || 0).toLocaleString('en-PK');
+        return '<div class="activity-item">' +
+          '<div class="av ' + avatars[i % avatars.length] + '">' + initials + '</div>' +
+          '<div class="ai-body">' +
+            '<p class="ai-txt"><b>' + who + '</b> ' + action + ' <em>' + o.orderCode + '</em> — ' + total + '</p>' +
+            '<p class="ai-time">' + time + '</p>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+    };
+
+    // Category breakdown
+    window.renderCategoryBreakdown = function(products){
+      var el = document.getElementById('cat-breakdown');
+      if (!el) return;
+      var buckets = {};
+      (products || []).forEach(function(p){
+        var cat = p.category || 'General';
+        buckets[cat] = (buckets[cat] || 0) + 1;
+      });
+      var entries = Object.keys(buckets).map(function(k){return {cat:k, n:buckets[k]}}).sort(function(a,b){return b.n - a.n});
+      if (entries.length === 0){
+        el.innerHTML = '<p style="grid-column:1/-1;color:var(--text-dim);font-size:13px;text-align:center;padding:20px">No products yet</p>';
+        return;
+      }
+      var maxN = entries[0].n || 1;
+      el.innerHTML = entries.map(function(e){
+        var pct = Math.round((e.n / maxN) * 100);
+        return '<div class="cat-card"><p class="lbl">' + e.cat + '</p><p class="val">' + e.n + ' <small style="font-size:11px;color:var(--text-dim);font-family:Inter;font-weight:500">items</small></p><div class="bar"><span style="width:' + pct + '%"></span></div></div>';
+      }).join('');
+    };
+
+    // Master KPI updater
+    window.updateDashboardKPIs = function(products, orders){
+      window.__lastOrders = orders;
+      window.__lastProducts = products;
+      var totalRev = 0, placedToday = 0, pending = 0;
+      var todayStr = new Date().toISOString().slice(0,10);
+      var uniqueCustomers = {};
+      var totalCount = 0;
+      (orders || []).forEach(function(o){
+        if (o.status !== 'cancelled'){ totalRev += Number(o.total || 0); totalCount++; }
+        if ((o.createdAt || '').slice(0,10) === todayStr) placedToday++;
+        if (['placed','confirmed','packed'].indexOf(o.status) >= 0) pending++;
+        if (o.customerPhone) uniqueCustomers[o.customerPhone] = 1;
+      });
+      var inStock = (products || []).filter(function(p){return p.inStock !== false}).length;
+      var custCount = Object.keys(uniqueCustomers).length;
+      var aov = totalCount > 0 ? Math.round(totalRev / totalCount) : 0;
+      var conv = (products || []).length > 0 && custCount > 0 ? Math.min(99, Math.round((custCount / ((products || []).length * 5)) * 100)) : 0;
+
+      document.getElementById('kpi-customers').textContent = custCount;
+      document.getElementById('kpi-customers-sub').textContent = 'New this week: ' + Math.min(custCount, placedToday + 1);
+      document.getElementById('kpi-aov').textContent = 'Rs ' + aov.toLocaleString('en-PK');
+      document.getElementById('kpi-orders').textContent = (orders || []).length;
+      document.getElementById('kpi-orders-sub').textContent = 'Today: ' + placedToday + ' · Pending: ' + pending;
+      document.getElementById('kpi-revenue').textContent = 'Rs ' + Number(totalRev).toLocaleString('en-PK');
+      document.getElementById('kpi-revenue-sub').textContent = 'From ' + (orders || []).length + ' orders';
+      document.getElementById('kpi-conv').innerHTML = conv + '<small>%</small>';
+      document.getElementById('kpi-conv-sub').textContent = 'Est. of visitors → buyers';
+      document.getElementById('kpi-products').textContent = (products || []).length;
+      document.getElementById('kpi-products-sub').textContent = inStock + ' in stock';
+
+      if (pending > 0) document.getElementById('notif-dot').removeAttribute('hidden');
+      else document.getElementById('notif-dot').setAttribute('hidden','');
+
+      window.renderChart(orders);
+      window.renderActivity(orders);
+      window.renderCategoryBreakdown(products);
+    };
+
+    window.refreshAll = function(){
+      if (typeof loadOrders === 'function') loadOrders();
+      if (typeof loadProducts === 'function') loadProducts();
+      showToast('Refreshed ✓');
+    };
+
+    window.showToast = function(msg, err){
+      var t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.toggle('error', !!err);
+      t.classList.add('show');
+      clearTimeout(window.__toastT);
+      window.__toastT = setTimeout(function(){t.classList.remove('show')}, 2800);
+      return false;
+    };
+
+    // Cmd/Ctrl+K focus search
+    document.addEventListener('keydown', function(e){
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k'){
+        e.preventDefault();
+        var s = document.getElementById('search-input');
+        if (s) s.focus();
+      }
+    });
+
+    // Re-render chart on resize
+    window.addEventListener('resize', function(){ if (window.__lastOrders) window.renderChart(window.__lastOrders); });
+  </script>
+  <script src="assets/js/admin.js"></script>
+</body>
+</html>

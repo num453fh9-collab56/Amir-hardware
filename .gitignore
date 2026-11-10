@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+package-lock.json.bak
+
+# Secrets & local data
+.jwt-secret
+store.db
+store.db-journal
+*.db-shm
+*.db-wal
+.env
+.env.local
+
+# User uploads at runtime (comment out if you want them tracked)
+# uploads/
+
+# Backups
+*.old.html
+index.old.html
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+.vscode/
+.idea/
+
+# Build / cache
+*.log
+npm-debug.log*
+
+# Session folders
+.claude/
+scratchpad/
+
+# Misc large binaries
+Gemini_Generated_Image_*.jfif

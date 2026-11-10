@@ -1,0 +1,2251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Amir Hardware &amp; Paint Store | Premium Building Materials in Habibabad</title>
+  <meta name="description" content="Premium hardware, paints, plywood, sanitary ware and plumbing supplies. Trusted since 2010. Authorized dealer of Greenply, Merino, Brighto, Diamond, Master, Bosch and Stanley."/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config={darkMode:'class',theme:{extend:{
+      colors:{
+        cream:{50:'#fdfbf5',100:'#f8f2e4',200:'#f1e8d0',300:'#e5d6b4',400:'#d0bd92',500:'#b0996d'},
+        coffee:{900:'#1a1308',800:'#2a1f14',700:'#3d2f20',600:'#5c4a35',500:'#7a6a52',400:'#9a8c75',300:'#b9ad94'},
+        orange:{50:'#fef3e9',100:'#fde0c7',200:'#f9c196',300:'#f3a05d',400:'#ed7f3c',500:'#d9651f',600:'#b84f15',700:'#8a3a10',800:'#5a240a',900:'#2d1004'},
+        gold:{50:'#fbf6e3',100:'#f5ebbf',200:'#eedb8a',300:'#e5c658',400:'#d4af37',500:'#c69a2a',600:'#a8862a',700:'#7d6420',800:'#54441a',900:'#2e2612'},
+        wa:{400:'#25D366',500:'#128C7E'}
+      },
+      fontFamily:{display:['"Playfair Display"','serif'],sans:['Inter','sans-serif'],ui:['Montserrat','sans-serif']}
+    }}}
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&display=swap" rel="stylesheet"/>
+  <link rel="icon" type="image/png" href="images/logo.png"/>
+  <link rel="preload" as="image" href="images/hero-bg.jpg" fetchpriority="high"/>
+  <link rel="stylesheet" href="assets/css/site.css"/>
+</head>
+<body class="bg-cream-50 text-coffee-800 antialiased selection:bg-orange-400 selection:text-white">
+
+  <!-- =============== NAVBAR =============== -->
+  <header id="nav" class="fixed top-0 inset-x-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 md:h-20">
+        <a href="index.html" class="flex items-center gap-3 group">
+          <div class="relative">
+            <div class="absolute inset-0 bg-gold-400/30 blur-xl opacity-0 group-hover:opacity-100 transition-opacity rounded-full"></div>
+            <img src="images/logo.png" alt="Amir Hardware" class="relative w-10 h-10 md:w-11 md:h-11 rounded-xl object-cover ring-1 ring-gold-400/30"/>
+          </div>
+          <div class="hidden sm:block leading-tight">
+            <span class="fd font-bold text-base md:text-lg text-coffee-900 block tracking-tight">Amir Hardware</span>
+            <span class="ui text-[9.5px] tracking-[3px] text-gold-400 uppercase font-semibold">&amp; Paint Store</span>
+          </div>
+        </a>
+
+        <nav class="hidden md:flex items-center gap-6 lg:gap-10 ui text-[13px] font-semibold uppercase tracking-[0.15em]">
+          <a href="index.html" class="navlink active">Home</a>
+          <a href="shop.html" class="navlink">Shop</a>
+          <a href="products.html" class="navlink">Products</a>
+          <a href="gallery.html" class="navlink">Gallery</a>
+          <a href="about.html" class="navlink">About</a>
+          <a href="contact.html" class="navlink">Contact</a>
+        </nav>
+
+        <div class="flex items-center gap-2">
+          <button onclick="openSearch()" aria-label="Search" class="w-10 h-10 md:w-11 md:h-11 rounded-xl flex items-center justify-center border border-orange-300/60 bg-white/70 hover:bg-orange-50 hover:border-orange-400 hover:text-orange-600 transition">
+            <svg class="w-4.5 h-4.5 text-orange-600" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.2-5.2M10.5 18a7.5 7.5 0 100-15 7.5 7.5 0 000 15z"/></svg>
+          </button>
+          <button onclick="openWish()" aria-label="Wishlist" class="relative w-10 h-10 md:w-11 md:h-11 rounded-xl flex items-center justify-center border border-orange-300/60 bg-white/70 hover:bg-orange-50 hover:border-orange-400 hover:text-orange-600 transition">
+            <svg class="w-4.5 h-4.5 text-orange-600" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 016.364 0L12 7.636l1.318-1.318a4.5 4.5 0 116.364 6.364l-7.682 7.682-7.682-7.682a4.5 4.5 0 010-6.364z"/></svg>
+            <span id="wish-count" class="hidden absolute -top-1 -right-1 w-5 h-5 bg-gold-400 text-ink-900 rounded-full text-[10px] font-bold flex items-center justify-center">0</span>
+          </button>
+          <button id="cart-btn" aria-label="Inquiry cart" class="relative w-10 h-10 md:w-11 md:h-11 rounded-xl flex items-center justify-center border border-orange-300/60 bg-white/70 hover:bg-orange-50 hover:border-orange-400 hover:text-orange-600 transition">
+            <svg class="w-4.5 h-4.5 text-orange-600" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l3-7H5.4M7 13L5.4 5M7 13l-2 7m14-7l1 7m-9 0a1 1 0 11-2 0 1 1 0 012 0zm8 0a1 1 0 11-2 0 1 1 0 012 0z"/></svg>
+            <span id="cart-count" class="hidden absolute -top-1 -right-1 w-5 h-5 bg-gold-400 text-ink-900 rounded-full text-[10px] font-bold flex items-center justify-center">0</span>
+          </button>
+          <div class="relative hidden lg:block">
+            <button id="usr-btn" onclick="toggleUserMenu()" class="btn-gold inline-flex items-center gap-2 px-5 py-2.5 rounded-xl ui text-xs font-bold uppercase tracking-wider">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+              <span id="usr-label">Sign In</span>
+            </button>
+            <div id="usr-dropdown">
+              <div id="usr-logged-out">
+                <button onclick="openAuth('login')">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/></svg>
+                  Log in
+                </button>
+                <button onclick="openAuth('register')">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/></svg>
+                  Create account
+                </button>
+                <div class="usr-divider"></div>
+                <a href="tel:+923007090124">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                  +92 300 7090124
+                </a>
+              </div>
+              <div id="usr-logged-in" class="hidden">
+                <div class="px-3 py-2.5">
+                  <p class="fd font-bold text-coffee-900 text-sm" id="usr-name">—</p>
+                  <p class="text-xs text-coffee-500" id="usr-phone">—</p>
+                </div>
+                <div class="usr-divider"></div>
+                <button onclick="openOrders()">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+                  My Orders
+                </button>
+                <button onclick="openProfile()">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                  My Profile
+                </button>
+                <button onclick="openAddresses()">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.244-4.243a8 8 0 1111.313 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                  My Addresses
+                </button>
+                <button onclick="openCart()">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l3-7H5.4M7 13L5.4 5M7 13l-2 7m14-7l1 7"/></svg>
+                  My Cart
+                </button>
+                <div class="usr-divider"></div>
+                <button onclick="logoutUser()">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+                  Logout
+                </button>
+              </div>
+            </div>
+          </div>
+          <button id="mnav-btn" aria-label="Menu" class="md:hidden inline-flex items-center gap-2 h-10 px-3 rounded-xl border border-orange-300/60 bg-white/70 hover:bg-orange-50 transition">
+            <span class="ui text-[11px] font-bold text-orange-700 uppercase tracking-wider">Menu</span>
+            <div class="flex flex-col gap-1.5">
+              <span class="w-5 h-0.5 bg-gold-300 rounded"></span>
+              <span class="w-5 h-0.5 bg-gold-300 rounded"></span>
+              <span class="w-3 h-0.5 bg-gold-400 rounded ml-auto"></span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile nav -->
+  <div id="mnav" class="fixed inset-y-0 right-0 z-[70] w-full max-w-sm bg-cream-100 border-l border-orange-200/60 lg:hidden flex flex-col">
+    <div class="flex items-center justify-between p-5 border-b border-orange-200/60">
+      <span class="fd text-xl font-bold gold-text">Menu</span>
+      <button onclick="closeMnav()" class="w-10 h-10 rounded-xl flex items-center justify-center border border-orange-300/60 bg-white/70">
+        <svg class="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <nav class="flex-1 p-6 space-y-2 ui font-semibold uppercase tracking-wider text-sm">
+      <a href="index.html" onclick="closeMnav()" class="block py-3 px-4 rounded-xl text-coffee-900 hover:bg-orange-50 hover:text-orange-600 transition">Home</a>
+      <a href="shop.html" onclick="closeMnav()" class="block py-3 px-4 rounded-xl text-coffee-900 hover:bg-orange-50 hover:text-orange-600 transition">Shop</a>
+      <a href="products.html" onclick="closeMnav()" class="block py-3 px-4 rounded-xl text-coffee-900 hover:bg-orange-50 hover:text-orange-600 transition">Products</a>
+      <a href="gallery.html" onclick="closeMnav()" class="block py-3 px-4 rounded-xl text-coffee-900 hover:bg-orange-50 hover:text-orange-600 transition">Gallery</a>
+      <a href="about.html" onclick="closeMnav()" class="block py-3 px-4 rounded-xl text-coffee-900 hover:bg-orange-50 hover:text-orange-600 transition">About</a>
+      <a href="contact.html#faq" onclick="closeMnav()" class="block py-3 px-4 rounded-xl text-coffee-900 hover:bg-orange-50 hover:text-orange-600 transition">FAQ</a>
+      <a href="contact.html" onclick="closeMnav()" class="block py-3 px-4 rounded-xl text-coffee-900 hover:bg-orange-50 hover:text-orange-600 transition">Contact</a>
+      <div class="pt-4 space-y-3">
+        <a href="https://wa.me/923007090124" target="_blank" class="btn-gold block text-center py-3.5 rounded-xl text-sm">WhatsApp Us</a>
+        <a href="tel:+923007090124" class="btn-ghost block text-center py-3.5 rounded-xl text-sm">+92 300 7090124</a>
+      </div>
+    </nav>
+  </div>
+
+  <!-- =============== GALLERY BENTO =============== -->
+  <section id="gallery" class="page py-24 md:py-32 relative overflow-hidden bg-cream-50">
+    <div class="absolute inset-0 pointer-events-none">
+      <div class="absolute bottom-0 left-0 w-96 h-96 bg-gold-200/40 rounded-full blur-[140px]"></div>
+    </div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14 reveal">
+        <div class="divider-gold mb-6"><span class="line"></span><span class="label">Gallery</span><span class="line r"></span></div>
+        <h2 class="shead text-4xl sm:text-5xl md:text-6xl font-bold text-coffee-900 mb-5">From Our <em class="italic gold-text">Showroom</em></h2>
+        <p class="text-coffee-600 max-w-xl mx-auto text-base md:text-lg">Real photos from our Habibabad store — not stock imagery</p>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[160px] md:auto-rows-[220px]">
+        <div class="bento rounded-2xl overflow-hidden relative col-span-2 row-span-2 group cursor-pointer reveal">
+          <img src="uploads/WhatsApp%20Image%202026-08-12%20at%2012.17.20%20AM%20(1).jpeg" alt="Brighto Paints Collection" class="w-full h-full object-cover"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-ink-900 via-ink-900/40 to-transparent"></div>
+          <div class="absolute top-4 left-4"><span class="pill">Paints</span></div>
+          <div class="absolute bottom-5 left-5 right-5">
+            <h4 class="fd font-bold text-coffee-900 text-2xl mb-1">Brighto Velvet Collection</h4>
+            <p class="text-coffee-600 text-sm">Luxury interior emulsions in 60+ shades</p>
+          </div>
+        </div>
+        <div class="bento rounded-2xl overflow-hidden relative group cursor-pointer reveal reveal-d1">
+          <img src="uploads/WhatsApp%20Image%202026-08-12%20at%2012.17.20%20AM%20(2).jpeg" alt="Diamond Weather Guard" class="w-full h-full object-cover"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-ink-900/80 to-transparent"></div>
+          <div class="absolute bottom-3 left-3"><span class="pill text-[9px] py-1 px-3">Exterior</span></div>
+        </div>
+        <div class="bento rounded-2xl overflow-hidden relative group cursor-pointer reveal reveal-d2">
+          <img src="uploads/WhatsApp%20Image%202026-08-12%20at%2012.17.21%20AM.jpeg" alt="Master Primer" class="w-full h-full object-cover"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-ink-900/80 to-transparent"></div>
+          <div class="absolute bottom-3 left-3"><span class="pill text-[9px] py-1 px-3">Primer</span></div>
+        </div>
+        <div class="bento rounded-2xl overflow-hidden relative group cursor-pointer reveal reveal-d1">
+          <img src="uploads/WhatsApp%20Image%202026-08-12%20at%2012.17.21%20AM%20(1).jpeg" alt="Ceramic Basin" class="w-full h-full object-cover"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-ink-900/80 to-transparent"></div>
+          <div class="absolute bottom-3 left-3"><span class="pill text-[9px] py-1 px-3">Sanitary</span></div>
+        </div>
+        <div class="bento rounded-2xl overflow-hidden relative group cursor-pointer reveal reveal-d2">
+          <img src="uploads/WhatsApp%20Image%202026-08-12%20at%2012.17.21%20AM%20(2).jpeg" alt="Tool Collection" class="w-full h-full object-cover"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-ink-900/80 to-transparent"></div>
+          <div class="absolute bottom-3 left-3"><span class="pill text-[9px] py-1 px-3">Tools</span></div>
+        </div>
+        <div class="bento rounded-2xl overflow-hidden relative col-span-2 group cursor-pointer reveal reveal-d3">
+          <img src="uploads/WhatsApp%20Image%202026-08-12%20at%2012.17.22%20AM%20(1).jpeg" alt="Socket Spanner Kit" class="w-full h-full object-cover"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-ink-900 via-ink-900/40 to-transparent"></div>
+          <div class="absolute bottom-4 left-4 right-4">
+            <span class="pill mb-2">Hardware</span>
+            <h4 class="fd font-bold text-coffee-900 text-xl">Professional Tool Sets</h4>
+          </div>
+        </div>
+        <div class="bento rounded-2xl overflow-hidden relative group cursor-pointer reveal reveal-d1">
+          <img src="uploads/WhatsApp%20Image%202026-08-12%20at%2012.17.20%20AM.jpeg" alt="Plywood" class="w-full h-full object-cover"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-ink-900/80 to-transparent"></div>
+          <div class="absolute bottom-3 left-3"><span class="pill text-[9px] py-1 px-3">Plywood</span></div>
+        </div>
+        <div class="bento rounded-2xl overflow-hidden relative group cursor-pointer reveal reveal-d2">
+          <img src="uploads/WhatsApp%20Image%202026-08-12%20at%2012.17.23%20AM.jpeg" alt="Sunmica Laminate" class="w-full h-full object-cover"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-ink-900/80 to-transparent"></div>
+          <div class="absolute bottom-3 left-3"><span class="pill text-[9px] py-1 px-3">Laminate</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============== NEWSLETTER =============== -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+    <div class="newsletter-box">
+      <h3>Get Exclusive <em>Deals</em> &amp; Offers</h3>
+      <p>Subscribe to our newsletter — flash sales, new arrivals, aur contractor-only discounts sabse pehle aapke inbox me.</p>
+      <form id="nl-form" class="newsletter-form" onsubmit="submitNewsletter(event)">
+        <input id="nl-email" type="email" placeholder="your@email.com" required/>
+        <button type="submit">Subscribe</button>
+      </form>
+      <p id="nl-msg" class="text-xs mt-2 font-semibold" style="min-height:14px"></p>
+    </div>
+  </section>
+
+  <!-- =============== FOOTER =============== -->
+  <footer class="relative bg-cream-100 border-t border-orange-200/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div>
+          <a href="index.html" class="flex items-center gap-3 mb-5">
+            <img src="images/logo.png" alt="Amir Hardware" class="w-11 h-11 rounded-xl object-cover ring-1 ring-gold-400/30"/>
+            <div>
+              <span class="fd font-bold text-coffee-900 block">Amir Hardware</span>
+              <p class="ui text-[9px] tracking-[2.5px] text-gold-400 uppercase">&amp; Paint Store</p>
+            </div>
+          </a>
+          <p class="text-sm text-coffee-600 leading-relaxed mb-5">Habibabad's premier destination for premium building materials. Trusted since 2010.</p>
+          <div class="flex gap-2">
+            <a href="https://www.facebook.com/amirhardwarestore" target="_blank" class="w-10 h-10 bg-white border border-orange-300/60 rounded-xl flex items-center justify-center hover:bg-orange-400 hover:border-orange-400 transition group">
+              <svg class="w-4 h-4 text-gold-400 group-hover:text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06C2 17.08 5.66 21.24 10.44 22v-7.03H7.9v-2.91h2.54V9.85c0-2.52 1.49-3.91 3.77-3.91 1.09 0 2.23.2 2.23.2v2.47h-1.26c-1.24 0-1.63.78-1.63 1.57v1.88h2.78l-.45 2.91h-2.33V22C18.34 21.24 22 17.08 22 12.06z"/></svg>
+            </a>
+            <a href="https://www.youtube.com/@amirhardwarestore" target="_blank" class="w-10 h-10 bg-white border border-orange-300/60 rounded-xl flex items-center justify-center hover:bg-orange-400 hover:border-orange-400 transition group">
+              <svg class="w-4 h-4 text-gold-400 group-hover:text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 00-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 00.5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 002.12 2.14c1.88.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 002.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/></svg>
+            </a>
+            <a href="https://wa.me/923007090124" target="_blank" class="w-10 h-10 bg-white border border-orange-300/60 rounded-xl flex items-center justify-center hover:bg-orange-400 hover:border-orange-400 transition group">
+              <svg class="w-4 h-4 text-gold-400 group-hover:text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.297-.497.1-.198.05-.371-.025-.52-.074-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51M12.05 21.785h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>
+            </a>
+          </div>
+        </div>
+        <div>
+          <h4 class="fd font-bold text-coffee-900 mb-5 text-lg">Quick Links</h4>
+          <div class="space-y-3">
+            <a href="index.html" class="block text-sm text-coffee-600 hover:text-gold-400 transition">Home</a>
+            <a href="shop.html" class="block text-sm text-coffee-600 hover:text-gold-400 transition">Shop by Category</a>
+            <a href="products.html" class="block text-sm text-coffee-600 hover:text-gold-400 transition">Products</a>
+            <a href="gallery.html" class="block text-sm text-coffee-600 hover:text-gold-400 transition">Gallery</a>
+            <a href="about.html" class="block text-sm text-coffee-600 hover:text-gold-400 transition">About Us</a>
+            <a href="contact.html#faq" class="block text-sm text-coffee-600 hover:text-gold-400 transition">FAQ</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="fd font-bold text-coffee-900 mb-5 text-lg">Categories</h4>
+          <div class="space-y-3">
+            <a href="products.html" onclick="filterProducts('Paint')" class="block text-sm text-coffee-600 hover:text-gold-400 transition">Premium Paints</a>
+            <a href="products.html" onclick="filterProducts('Hardware')" class="block text-sm text-coffee-600 hover:text-gold-400 transition">Power &amp; Hand Tools</a>
+            <a href="products.html" onclick="filterProducts('Plumbing')" class="block text-sm text-coffee-600 hover:text-gold-400 transition">Plumbing Fittings</a>
+            <a href="products.html" onclick="filterProducts('Plywood')" class="block text-sm text-coffee-600 hover:text-gold-400 transition">Plywood &amp; Boards</a>
+            <a href="products.html" onclick="filterProducts('Sanitary')" class="block text-sm text-coffee-600 hover:text-gold-400 transition">Sanitary Ware</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="fd font-bold text-coffee-900 mb-5 text-lg">Get In Touch</h4>
+          <div class="space-y-3">
+            <p class="text-sm text-coffee-600">Main Bazar, Habibabad<br/>Punjab, Pakistan</p>
+            <a href="tel:+923007090124" class="block text-sm text-coffee-600 hover:text-gold-400 transition">+92 300 7090124</a>
+            <p class="text-sm text-coffee-600">Sat - Thu · 9 AM to 9 PM</p>
+            <a href="https://wa.me/923007090124" target="_blank" class="inline-flex items-center gap-2 mt-2 text-sm text-gold-400 hover:text-orange-600 transition ui font-semibold">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15M12.05 21.785h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>
+              Chat on WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-orange-200/60 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-sm text-coffee-500">&copy; 2026 Amir Hardware &amp; Paint Store. All rights reserved.</p>
+        <p class="text-xs text-coffee-400 ui uppercase tracking-wider">Crafted with precision · Habibabad, Punjab</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Float -->
+  <a href="https://wa.me/923007090124" target="_blank" class="wa-float fixed bottom-6 right-6 z-50 w-14 h-14 bg-wa-400 rounded-full flex items-center justify-center shadow-xl hover:scale-110 transition-all">
+    <svg class="w-7 h-7 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.297-.497.1-.198.05-.371-.025-.52-.074-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <!-- =============== SEARCH OVERLAY =============== -->
+  <div id="search-overlay" class="fixed inset-0 bg-cream-100/90 z-[80] flex items-start justify-center p-6 pt-24 md:pt-32" onclick="closeSearch(event)">
+    <div class="w-full max-w-2xl" onclick="event.stopPropagation()">
+      <div class="card-elev rounded-3xl border border-orange-300 p-6 md:p-8 shadow-2xl">
+        <div class="flex items-center gap-4 pb-5 border-b border-orange-300/60">
+          <svg class="w-6 h-6 text-gold-400 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.2-5.2M10.5 18a7.5 7.5 0 100-15 7.5 7.5 0 000 15z"/></svg>
+          <input id="search-input" placeholder="Search products, brands..." autocomplete="off"/>
+          <button onclick="closeSearch()" class="text-coffee-500 hover:text-gold-400 text-xs ui font-semibold uppercase tracking-wider">ESC</button>
+        </div>
+        <div id="search-results" class="pt-5 max-h-96 overflow-y-auto space-y-2"></div>
+        <div id="search-empty" class="pt-10 pb-5 text-center">
+          <p class="text-coffee-500 text-sm">Type to search our catalogue</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============== QUICK VIEW MODAL =============== -->
+  <div id="qv-overlay" class="fixed inset-0 bg-cream-100/85 z-[80] flex items-center justify-center p-4" onclick="closeQV(event)">
+    <div id="qv-modal" class="w-full max-w-4xl card-elev rounded-3xl border border-orange-300 overflow-hidden shadow-2xl relative" onclick="event.stopPropagation()">
+      <button onclick="closeQV()" class="absolute top-4 right-4 z-10 w-10 h-10 bg-cream-50/80 backdrop-blur border border-orange-300 rounded-full flex items-center justify-center hover:bg-orange-400 hover:border-orange-400 group transition">
+        <svg class="w-5 h-5 text-gold-400 group-hover:text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+      <div id="qv-body" class="grid md:grid-cols-2"></div>
+    </div>
+  </div>
+
+  <!-- =============== CART PANEL =============== -->
+  <div id="cart-overlay" class="fixed inset-0 bg-cream-100/70 z-[60]" onclick="closeCart()"></div>
+  <div id="cart-panel" class="fixed top-0 right-0 h-full w-full max-w-md bg-cream-50 z-[70] shadow-2xl flex flex-col border-l border-orange-300/60">
+    <div class="flex items-center justify-between p-6 border-b border-orange-200/60">
+      <div>
+        <div class="divider-gold mb-2"><span class="line"></span><span class="label text-[9px]">Your List</span></div>
+        <h3 class="fd font-bold text-xl text-coffee-900">Inquiry Cart</h3>
+        <p id="cart-subtitle" class="text-sm text-coffee-500 mt-0.5">0 items</p>
+      </div>
+      <button onclick="closeCart()" class="w-10 h-10 bg-white rounded-xl flex items-center justify-center border border-orange-300/60 hover:bg-orange-50 hover:border-orange-400 hover:text-orange-600 transition"><svg class="w-5 h-5 text-gold-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button>
+    </div>
+    <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-3"></div>
+    <div id="cart-empty-msg" class="flex-1 flex flex-col items-center justify-center p-6 text-center">
+      <div class="w-20 h-20 bg-orange-50 border border-orange-300 rounded-full flex items-center justify-center mb-5">
+        <svg class="w-9 h-9 text-coffee-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l3-7H5.4M7 13L5.4 5M7 13l-2 7m14-7l1 7m-9 0a1 1 0 11-2 0 1 1 0 012 0zm8 0a1 1 0 11-2 0 1 1 0 012 0z"/></svg>
+      </div>
+      <p class="fd font-bold text-coffee-900 mb-1 text-lg">Your cart is empty</p>
+      <p class="text-sm text-coffee-500 mb-6">Browse our catalogue and tap "Add to Inquiry"</p>
+      <button onclick="closeCart()" class="btn-ghost px-6 py-3 rounded-xl ui text-xs uppercase tracking-wider">Continue Shopping</button>
+    </div>
+    <div id="cart-footer" class="hidden border-t border-orange-200/60 p-6 space-y-3">
+      <div class="flex justify-between items-center">
+        <span class="ui text-xs text-coffee-600 uppercase tracking-wider">Subtotal</span>
+        <span id="cart-subtotal" class="fd font-bold text-xl gold-text">Rs 0</span>
+      </div>
+      <button onclick="startCheckout()" class="btn-gold w-full py-4 rounded-xl ui font-bold uppercase tracking-wider text-sm inline-flex items-center justify-center gap-2">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+        Proceed to Checkout
+      </button>
+      <div class="flex gap-2">
+        <button onclick="sendInquiry()" class="flex-1 py-2.5 rounded-xl ui text-[10.5px] font-bold uppercase tracking-wider bg-emerald-50 border border-emerald-200 text-emerald-700 hover:bg-emerald-100 transition">
+          WhatsApp Inquiry
+        </button>
+        <button onclick="clearCart()" class="flex-1 btn-ghost py-2.5 rounded-xl ui text-[10.5px] font-semibold uppercase tracking-wider">Clear Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============== AUTH MODAL =============== -->
+  <div id="auth-mdl" class="mdl-overlay">
+    <div class="mdl-card" onclick="event.stopPropagation()">
+      <div class="mdl-head">
+        <h3 id="auth-title">Welcome Back</h3>
+        <button onclick="closeAuth()" class="mdl-close"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button>
+      </div>
+      <div class="mdl-body">
+        <div class="tabs">
+          <button id="tab-login" class="active" onclick="switchAuthTab('login')">Log In</button>
+          <button id="tab-register" onclick="switchAuthTab('register')">Create Account</button>
+        </div>
+
+        <div id="auth-login" class="field-group">
+          <div class="field"><label>Phone Number</label><input id="l-phone" type="tel" placeholder="0300 7090124" autocomplete="tel"/></div>
+          <div class="field"><label>Password</label><input id="l-pass" type="password" placeholder="Your password" autocomplete="current-password"/></div>
+          <div id="l-err" class="field"></div>
+          <button onclick="doLogin()" class="btn-gold w-full py-3.5 rounded-xl ui font-bold uppercase tracking-wider text-sm">Log In</button>
+          <p class="text-xs text-coffee-500 text-center">Naya account? <button onclick="switchAuthTab('register')" class="text-orange-600 font-semibold hover:underline">Create account</button></p>
+        </div>
+
+        <div id="auth-register" class="field-group hidden">
+          <div class="field"><label>Full Name</label><input id="r-name" type="text" placeholder="John Doe" autocomplete="name"/></div>
+          <div class="field"><label>Phone Number</label><input id="r-phone" type="tel" placeholder="0300 7090124" autocomplete="tel"/></div>
+          <div class="field"><label>Email (optional)</label><input id="r-email" type="email" placeholder="you@example.com" autocomplete="email"/></div>
+          <div class="field"><label>City</label><input id="r-city" type="text" placeholder="Habibabad" autocomplete="address-level2"/></div>
+          <div class="field"><label>Password</label><input id="r-pass" type="password" placeholder="At least 4 characters" autocomplete="new-password"/></div>
+          <div id="r-err" class="field"></div>
+          <button onclick="doRegister()" class="btn-gold w-full py-3.5 rounded-xl ui font-bold uppercase tracking-wider text-sm">Create Account</button>
+          <p class="text-xs text-coffee-500 text-center">Pehle se account hai? <button onclick="switchAuthTab('login')" class="text-orange-600 font-semibold hover:underline">Log in</button></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============== CHECKOUT MODAL =============== -->
+  <div id="co-mdl" class="mdl-overlay">
+    <div class="mdl-card wide" onclick="event.stopPropagation()">
+      <div class="mdl-head">
+        <h3 id="co-title">Checkout</h3>
+        <button onclick="closeCheckout()" class="mdl-close"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button>
+      </div>
+      <div class="mdl-body">
+        <!-- Step indicator -->
+        <div class="flex items-center gap-2 mb-6 ui text-[10px] font-bold uppercase tracking-wider">
+          <span id="step-1-dot" class="flex items-center gap-2 text-orange-600"><span class="w-6 h-6 rounded-full bg-orange-400 text-white flex items-center justify-center">1</span> Address</span>
+          <span class="flex-1 h-px bg-orange-200"></span>
+          <span id="step-2-dot" class="flex items-center gap-2 text-coffee-400"><span class="w-6 h-6 rounded-full bg-cream-100 flex items-center justify-center">2</span> Payment</span>
+          <span class="flex-1 h-px bg-orange-200"></span>
+          <span id="step-3-dot" class="flex items-center gap-2 text-coffee-400"><span class="w-6 h-6 rounded-full bg-cream-100 flex items-center justify-center">3</span> Review</span>
+        </div>
+
+        <!-- Step 1: Address -->
+        <div id="co-step-1">
+          <div id="co-saved-addrs" class="hidden mb-4"></div>
+          <div class="field-group">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="field"><label>Full Name</label><input id="co-name" type="text" placeholder="Recipient name"/></div>
+              <div class="field"><label>Phone</label><input id="co-phone" type="tel" placeholder="0300 7090124"/></div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="field"><label>City</label>
+                <select id="co-city">
+                  <option value="Habibabad">Habibabad (Free)</option>
+                  <option value="Pattoki">Pattoki (Free)</option>
+                  <option value="Okara">Okara (Free)</option>
+                  <option value="Chunian">Chunian (Free)</option>
+                  <option value="Kasur">Kasur (Free)</option>
+                  <option value="Lahore">Lahore (Rs 250)</option>
+                  <option value="Sheikhupura">Sheikhupura (Rs 250)</option>
+                  <option value="Faisalabad">Faisalabad (Rs 400)</option>
+                  <option value="Multan">Multan (Rs 400)</option>
+                  <option value="Gujranwala">Gujranwala (Rs 400)</option>
+                  <option value="Sialkot">Sialkot (Rs 400)</option>
+                  <option value="Karachi">Karachi (Rs 600)</option>
+                  <option value="Islamabad">Islamabad (Rs 600)</option>
+                  <option value="Rawalpindi">Rawalpindi (Rs 600)</option>
+                  <option value="Peshawar">Peshawar (Rs 600)</option>
+                  <option value="Other">Other (Rs 350)</option>
+                </select>
+              </div>
+              <div class="field"><label>Preferred Delivery</label><input id="co-date" type="date"/></div>
+            </div>
+            <div class="field"><label>Full Address</label><textarea id="co-addr" placeholder="House/Shop no, street, area..." rows="2"></textarea></div>
+            <div class="field"><label>Notes (optional)</label><textarea id="co-notes" placeholder="Landmark, delivery instructions..." rows="2"></textarea></div>
+          </div>
+          <div class="flex justify-end mt-5">
+            <button onclick="coNext(2)" class="btn-gold px-7 py-3 rounded-xl ui text-xs font-bold uppercase tracking-wider">Next: Payment →</button>
+          </div>
+        </div>
+
+        <!-- Step 2: Payment -->
+        <div id="co-step-2" class="hidden">
+          <p class="ui text-[10px] font-bold text-coffee-500 uppercase tracking-[0.2em] mb-3">Choose Payment Method</p>
+          <div class="pm-row">
+            <div class="pm-chip sel" data-pm="COD" onclick="selPay(this)">
+              <div class="pm-ico" style="background:#10b981"><svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8V6m0 10v2"/></svg></div>
+              <div><p class="pm-name">Cash on Delivery</p><p class="pm-sub">Most popular</p></div>
+            </div>
+            <div class="pm-chip" data-pm="BANK_TRANSFER" onclick="selPay(this)">
+              <div class="pm-ico" style="background:#1e40af"><svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M3 6h18M3 14h18M3 18h18"/></svg></div>
+              <div><p class="pm-name">Bank Transfer</p><p class="pm-sub">IBFT / online</p></div>
+            </div>
+            <div class="pm-chip" data-pm="JAZZCASH" onclick="selPay(this)">
+              <div class="pm-ico" style="background:#ed1c24"><span class="text-white font-bold text-xs italic">J</span></div>
+              <div><p class="pm-name">JazzCash</p><p class="pm-sub">Mobile wallet</p></div>
+            </div>
+            <div class="pm-chip" data-pm="EASYPAISA" onclick="selPay(this)">
+              <div class="pm-ico" style="background:#00b050"><span class="text-white font-bold text-base">e</span></div>
+              <div><p class="pm-name">EasyPaisa</p><p class="pm-sub">Mobile wallet</p></div>
+            </div>
+            <div class="pm-chip" data-pm="CARD" onclick="selPay(this)">
+              <div class="pm-ico" style="background:#1a1f71"><svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M3 6h18v12H3V6z"/></svg></div>
+              <div><p class="pm-name">Debit/Credit</p><p class="pm-sub">Card payment</p></div>
+            </div>
+          </div>
+          <div id="pm-info" class="mt-4 p-3.5 bg-orange-50 border border-orange-200 rounded-xl text-xs text-coffee-600 leading-relaxed">
+            Pay cash when the order arrives. No advance payment required.
+          </div>
+          <div class="flex justify-between mt-5">
+            <button onclick="coNext(1)" class="btn-ghost px-5 py-3 rounded-xl ui text-xs font-bold uppercase tracking-wider">← Back</button>
+            <button onclick="coNext(3)" class="btn-gold px-7 py-3 rounded-xl ui text-xs font-bold uppercase tracking-wider">Next: Review →</button>
+          </div>
+        </div>
+
+        <!-- Step 3: Review -->
+        <div id="co-step-3" class="hidden">
+          <div id="co-summary"></div>
+          <div class="flex justify-between mt-5 gap-3">
+            <button onclick="coNext(2)" class="btn-ghost px-5 py-3 rounded-xl ui text-xs font-bold uppercase tracking-wider">← Back</button>
+            <button id="co-place" onclick="placeOrder()" class="btn-gold flex-1 py-3 rounded-xl ui text-xs font-bold uppercase tracking-wider">Place Order</button>
+          </div>
+        </div>
+
+        <!-- Step 4: Confirmation -->
+        <div id="co-step-done" class="hidden text-center py-6">
+          <div class="w-20 h-20 mx-auto mb-5 rounded-full bg-emerald-100 flex items-center justify-center">
+            <svg class="w-10 h-10 text-emerald-600" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+          </div>
+          <h3 class="fd font-bold text-2xl text-coffee-900 mb-2">Order Placed!</h3>
+          <p class="text-coffee-500 text-sm mb-1">Your order ID is</p>
+          <p id="co-code" class="fd font-bold text-2xl text-orange-600 mb-5">—</p>
+          <p class="text-coffee-600 text-sm mb-6 max-w-sm mx-auto leading-relaxed">Hum aapko WhatsApp par confirm karenge within 30 minutes. Order "My Orders" me track kar sakte hain.</p>
+          <div class="flex gap-3 justify-center flex-wrap">
+            <button onclick="closeCheckout();openOrders()" class="btn-gold px-5 py-3 rounded-xl ui text-xs font-bold uppercase tracking-wider">View My Orders</button>
+            <button onclick="closeCheckout()" class="btn-ghost px-5 py-3 rounded-xl ui text-xs font-bold uppercase tracking-wider">Continue Shopping</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============== MY PROFILE MODAL =============== -->
+  <div id="prof-mdl" class="mdl-overlay">
+    <div class="mdl-card" onclick="event.stopPropagation()">
+      <div class="mdl-head">
+        <h3>My Profile</h3>
+        <button onclick="closeProfile()" class="mdl-close"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button>
+      </div>
+      <div class="mdl-body">
+        <div class="mini-tabs">
+          <button id="pt-info" class="active" onclick="switchProfTab('info')">Profile Info</button>
+          <button id="pt-pwd" onclick="switchProfTab('pwd')">Password</button>
+        </div>
+        <div id="prof-info" class="field-group">
+          <div class="field"><label>Full Name</label><input id="pf-name" type="text"/></div>
+          <div class="field"><label>Phone (cannot be changed)</label><input id="pf-phone" type="tel" disabled style="opacity:0.6"/></div>
+          <div class="field"><label>Email</label><input id="pf-email" type="email" placeholder="you@example.com"/></div>
+          <div class="field"><label>Default City</label><input id="pf-city" type="text" placeholder="Habibabad"/></div>
+          <div id="pf-err" class="field"></div>
+          <button onclick="saveProfile()" class="btn-gold w-full py-3.5 rounded-xl ui font-bold uppercase tracking-wider text-sm">Save Changes</button>
+        </div>
+        <div id="prof-pwd" class="field-group hidden">
+          <div class="field"><label>Current Password</label><input id="pf-curpass" type="password" autocomplete="current-password"/></div>
+          <div class="field"><label>New Password</label><input id="pf-newpass" type="password" autocomplete="new-password" placeholder="At least 4 characters"/></div>
+          <div id="pf-pwd-err" class="field"></div>
+          <button onclick="savePassword()" class="btn-gold w-full py-3.5 rounded-xl ui font-bold uppercase tracking-wider text-sm">Update Password</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============== MY ADDRESSES MODAL =============== -->
+  <div id="addr-mdl" class="mdl-overlay">
+    <div class="mdl-card wide" onclick="event.stopPropagation()">
+      <div class="mdl-head">
+        <h3>My Addresses</h3>
+        <button onclick="closeAddresses()" class="mdl-close"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button>
+      </div>
+      <div class="mdl-body">
+        <div id="addr-list"></div>
+        <div id="addr-empty" class="hidden text-center py-6">
+          <p class="fd font-bold text-coffee-900 mb-1">No addresses saved</p>
+          <p class="text-sm text-coffee-500 mb-4">Add an address to speed up future checkouts</p>
+        </div>
+        <button onclick="openAddressEdit(null)" class="btn-gold w-full mt-3 py-3 rounded-xl ui font-bold uppercase tracking-wider text-sm inline-flex items-center justify-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+          Add New Address
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============== ADDRESS EDIT MODAL =============== -->
+  <div id="addr-edit-mdl" class="mdl-overlay">
+    <div class="mdl-card" onclick="event.stopPropagation()">
+      <div class="mdl-head">
+        <h3 id="addr-edit-title">New Address</h3>
+        <button onclick="closeAddressEdit()" class="mdl-close"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button>
+      </div>
+      <div class="mdl-body">
+        <div class="field-group">
+          <div class="field"><label>Label</label>
+            <select id="ae-label">
+              <option value="Home">Home</option>
+              <option value="Shop">Shop</option>
+              <option value="Office">Office</option>
+              <option value="Site">Construction Site</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="field"><label>Recipient Name</label><input id="ae-name" type="text"/></div>
+            <div class="field"><label>Phone</label><input id="ae-phone" type="tel" placeholder="0300 7090124"/></div>
+          </div>
+          <div class="field"><label>City</label>
+            <select id="ae-city">
+              <option value="Habibabad">Habibabad</option>
+              <option value="Pattoki">Pattoki</option>
+              <option value="Okara">Okara</option>
+              <option value="Chunian">Chunian</option>
+              <option value="Kasur">Kasur</option>
+              <option value="Lahore">Lahore</option>
+              <option value="Sheikhupura">Sheikhupura</option>
+              <option value="Faisalabad">Faisalabad</option>
+              <option value="Multan">Multan</option>
+              <option value="Gujranwala">Gujranwala</option>
+              <option value="Sialkot">Sialkot</option>
+              <option value="Karachi">Karachi</option>
+              <option value="Islamabad">Islamabad</option>
+              <option value="Rawalpindi">Rawalpindi</option>
+              <option value="Peshawar">Peshawar</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="field"><label>Full Address</label><textarea id="ae-addr" rows="2" placeholder="House/Shop no, street, area..."></textarea></div>
+          <div class="field"><label>Notes (optional)</label><textarea id="ae-notes" rows="2" placeholder="Landmark, delivery instructions..."></textarea></div>
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" id="ae-default" class="w-4 h-4 accent-orange-500"/>
+            <span class="text-sm text-coffee-600 font-medium">Set as default address</span>
+          </label>
+          <div id="ae-err" class="field"></div>
+          <button onclick="saveAddress()" class="btn-gold w-full py-3.5 rounded-xl ui font-bold uppercase tracking-wider text-sm">Save Address</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============== ORDER TRACKING MODAL =============== -->
+  <div id="track-mdl" class="mdl-overlay">
+    <div class="mdl-card wide" onclick="event.stopPropagation()">
+      <div class="mdl-head">
+        <h3 id="track-title">Order Tracking</h3>
+        <button onclick="closeTracking()" class="mdl-close"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button>
+      </div>
+      <div class="mdl-body" id="track-body"></div>
+    </div>
+  </div>
+
+  <!-- =============== MY ORDERS MODAL =============== -->
+  <div id="ord-mdl" class="mdl-overlay">
+    <div class="mdl-card wide" onclick="event.stopPropagation()">
+      <div class="mdl-head">
+        <h3>My Orders</h3>
+        <button onclick="closeOrders()" class="mdl-close"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button>
+      </div>
+      <div class="mdl-body">
+        <div id="ord-list" class="space-y-3"></div>
+        <div id="ord-empty" class="hidden text-center py-10">
+          <p class="fd font-bold text-coffee-900 mb-2">No orders yet</p>
+          <p class="text-sm text-coffee-500 mb-5">Browse our catalogue and place your first order!</p>
+          <button onclick="closeOrders()" class="btn-gold px-6 py-3 rounded-xl ui text-xs font-bold uppercase tracking-wider">Start Shopping</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast"></div>
+
+  <!-- =============== SCRIPT =============== -->
+  <script>
+  // Default seed products (shown instantly before API responds)
+  var PRODUCTS = [
+    {id:1, title:"Brighto Velvet Emulsion 5L", category:"Paint", brand:"Brighto", price:3500, img:"uploads/WhatsApp%20Image%202026-08-12%20at%2012.17.20%20AM%20(1).jpeg", desc:"Luxury velvet interior emulsion"},
+    {id:2, title:"Diamond Weather Guard 5L", category:"Paint", brand:"Diamond", price:4200, img:"uploads/WhatsApp%20Image%202026-08-12%20at%2012.17.20%20AM%20(2).jpeg", desc:"Exterior weatherproof coating"},
+    {id:3, title:"Greenply Plywood 12mm", category:"Plywood", brand:"Greenply", price:3200, img:"uploads/WhatsApp%20Image%202026-08-12%20at%2012.17.20%20AM.jpeg", desc:"Standard 12mm plywood sheet"},
+    {id:4, title:"Master Paints Primer 20L", category:"Paint", brand:"Master", price:2200, img:"uploads/WhatsApp%20Image%202026-08-12%20at%2012.17.21%20AM.jpeg", desc:"White wall primer for base coat"},
+    {id:5, title:"Ceramic Wash Basin", category:"Sanitary", brand:"Stanley", price:8500, img:"uploads/WhatsApp%20Image%202026-08-12%20at%2012.17.21%20AM%20(1).jpeg", desc:"Wall-mounted ceramic basin"},
+    {id:6, title:"Professional Tool Set", category:"Hardware", brand:"Bosch", price:8900, img:"uploads/WhatsApp%20Image%202026-08-12%20at%2012.17.21%20AM%20(2).jpeg", desc:"Complete home tool kit"},
+    {id:7, title:"Socket Spanner Kit 45pc", category:"Hardware", brand:"Stanley", price:5200, img:"uploads/WhatsApp%20Image%202026-08-12%20at%2012.17.22%20AM%20(1).jpeg", desc:"Heavy-duty socket set"},
+    {id:8, title:"Merino Sunmica Sheet", category:"Plywood", brand:"Merino", price:2200, img:"uploads/WhatsApp%20Image%202026-08-12%20at%2012.17.23%20AM.jpeg", desc:"Decorative sunmica laminate"},
+    {id:9, title:"Greenply Plywood 18mm", category:"Plywood", brand:"Greenply", price:4500, img:"uploads/piro4d-plywood-1536897_1920.jpg", desc:"Premium 18mm commercial plywood"},
+    {id:10, title:"Chrome Kitchen Faucet", category:"Sanitary", brand:"Stanley", price:3800, img:"uploads/10901427-faucet-3857471_1920.jpg", desc:"Single-lever chrome kitchen tap"},
+    {id:11, title:"Stanley Wrench Set 20pc", category:"Hardware", brand:"Stanley", price:3500, img:"uploads/l-hao-tools-2200627_1920.jpg", desc:"Chrome vanadium wrench set"},
+    {id:12, title:"CPVC Pipe Fittings Set", category:"Plumbing", brand:"Stanley", price:1500, img:"uploads/mikecastelan-tubes-5979674.jpg", desc:"CPVC pipes and connectors"}
+  ];
+
+  var cart = JSON.parse(localStorage.getItem('ah_cart') || '[]');
+  var wishlist = JSON.parse(localStorage.getItem('ah_wish') || '[]');
+  var PRODUCTS_LIVE = false;
+
+  var PK = function(n){ return 'Rs ' + Number(n).toLocaleString('en-PK'); };
+  var fmtCat = { Paint:'Paints', Hardware:'Hardware & Tools', Plywood:'Plywood & Wood', Sanitary:'Sanitary Ware', Plumbing:'Plumbing', General:'General' };
+
+  // ====== IMAGE POOLS ======
+  // All files in the uploads folder (video skipped). Each image used at most once.
+  var ALL_UPLOADS = [
+    '10901427-faucet-3857471_1920.jpg',
+    'WhatsApp Image 2026-08-12 at 12.17.20 AM (1).jpeg',
+    'WhatsApp Image 2026-08-12 at 12.17.20 AM (2).jpeg',
+    'WhatsApp Image 2026-08-12 at 12.17.20 AM.jpeg',
+    'WhatsApp Image 2026-08-12 at 12.17.21 AM (1).jpeg',
+    'WhatsApp Image 2026-08-12 at 12.17.21 AM (2).jpeg',
+    'WhatsApp Image 2026-08-12 at 12.17.21 AM.jpeg',
+    'WhatsApp Image 2026-08-12 at 12.17.22 AM (1).jpeg',
+    'WhatsApp Image 2026-08-12 at 12.17.23 AM.jpeg',
+    'l-hao-tools-2200627_1920.jpg',
+    'mikecastelan-tubes-5979674.jpg',
+    'myjanitors-bathroom-453420_1920.png',
+    'nytimber-timber-843056_1920.jpg',
+    'openclipart-vectors-power-drill-154903_1920.png',
+    'piro4d-plywood-1536897_1920.jpg',
+    'publicdomainpictures-construction-19696_1920.jpg'
+  ];
+
+  // Category-preferred ordering — best-matching uploads first, then neutral ones
+  var CAT_PREF = {
+    Paint: [
+      'publicdomainpictures-construction-19696_1920.jpg',
+      'WhatsApp Image 2026-08-12 at 12.17.20 AM (1).jpeg',
+      'WhatsApp Image 2026-08-12 at 12.17.20 AM (2).jpeg',
+      'WhatsApp Image 2026-08-12 at 12.17.21 AM.jpeg'
+    ],
+    Hardware: [
+      'l-hao-tools-2200627_1920.jpg',
+      'openclipart-vectors-power-drill-154903_1920.png',
+      'WhatsApp Image 2026-08-12 at 12.17.22 AM (1).jpeg',
+      'WhatsApp Image 2026-08-12 at 12.17.21 AM (2).jpeg'
+    ],
+    Plywood: [
+      'piro4d-plywood-1536897_1920.jpg',
+      'nytimber-timber-843056_1920.jpg',
+      'WhatsApp Image 2026-08-12 at 12.17.20 AM.jpeg',
+      'WhatsApp Image 2026-08-12 at 12.17.23 AM.jpeg'
+    ],
+    Sanitary: [
+      'myjanitors-bathroom-453420_1920.png',
+      '10901427-faucet-3857471_1920.jpg',
+      'WhatsApp Image 2026-08-12 at 12.17.21 AM (1).jpeg'
+    ],
+    Plumbing: [
+      'mikecastelan-tubes-5979674.jpg'
+    ],
+    General: []
+  };
+
+  // Unsplash backup pool — used when all uploads have been assigned. Each list has unique IDs.
+  var UNSPLASH_PREF = {
+    Paint: [
+      'https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?auto=format&fit=crop&w=900&q=85',
+      'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=900&q=85',
+      'https://images.unsplash.com/photo-1572177191856-3cde618dee1f?auto=format&fit=crop&w=900&q=85',
+      'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?auto=format&fit=crop&w=900&q=85',
+      'https://images.unsplash.com/photo-1562259944-a68a99e49b9a?auto=format&fit=crop&w=900&q=85',
+      'https://images.unsplash.com/photo-1588854337115-1c67d9247e4d?auto=format&fit=crop&w=900&q=85'
+    ],
+    Hardware: [
+      'https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=900&q=85',
+      'https://images.unsplash.com/photo-1530124566582-a618bc2615dc?auto=format&fit=crop&w=900&q=85',
+      'https://images.unsplash.com/photo-1572981779307-38e8e8f9c89b?auto=format&fit=crop&w=900&q=85',
+      'https://images.unsplash.com/photo-1416339442236-8ceb164046f8?auto=format&fit=crop&w=900&q=85',
+      'https://images.unsplash.com/photo-1572981779307-38e8e8f9c89b?auto=format&fit=crop&w=900&q=85',
+      'https://images.unsplash.com/photo-1572177191856-3cde618dee1f?auto=format&fit=crop&w=900&q=85'
+    ],
+    Plywood: [
+      'https://images.unsplash.com/photo-1544813547-e7ec84d49f91?auto=format&fit=crop&w=900&q=85',
+      'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=900&q=85',
+      'https://images.unsplash.com/photo-1560184897-cbfb0f67e6f6?auto=format&fit=crop&w=900&q=85',
+      'https://images.unsplash.com/photo-1565688527174-775059ac429c?auto=format&fit=crop&w=900&q=85'
+    ],
+    Sanitary: [
+      'https://images.unsplash.com/photo-1584622965147-af357855e4b6?auto=format&fit=crop&w=900&q=85',
+      'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=900&q=85',
+      'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=900&q=85',
+      'https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=900&q=85'
+    ],
+    Plumbing: [
+      'https://images.unsplash.com/photo-1540496905036-5937c10647cc?auto=format&fit=crop&w=900&q=85',
+      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=900&q=85',
+      'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=900&q=85'
+    ],
+    General: []
+  };
+  // General pool draws from the union of all category URLs — ensures variety for 'General' category fallback.
+  (function(){
+    var seen = {};
+    ['Paint','Hardware','Plywood','Sanitary','Plumbing'].forEach(function(c){
+      (UNSPLASH_PREF[c] || []).forEach(function(u){
+        if (!seen[u]){ seen[u] = true; UNSPLASH_PREF.General.push(u); }
+      });
+    });
+  })();
+
+  function toUploadUrl(name){
+    return 'uploads/' + name.replace(/ /g, '%20');
+  }
+  function stripUploadPath(src){
+    if (!src) return '';
+    return decodeURIComponent(String(src).replace(/^\/?uploads\//i, ''));
+  }
+
+  // Normalize the WHOLE list in a single pass — ensures each uploads image is assigned to at most one product.
+  function normalizeAll(rawList){
+    // Pass 1: collect filenames already claimed by products that brought their own image
+    var used = Object.create(null);
+    rawList.forEach(function(p){
+      var raw = p.image || p.img || '';
+      if (raw && !/logo\.png$/i.test(raw) && raw.indexOf('http') !== 0){
+        used[stripUploadPath(raw)] = true;
+      }
+    });
+
+    // Pass 2: process each product, assigning unique uploads for missing images
+    var unsplashCursor = {};
+    return rawList.map(function(p){
+      var raw = p.image || p.img || '';
+      var missing = !raw || /logo\.png$/i.test(raw);
+      var finalImg;
+      var cat = p.category || 'General';
+
+      if (missing){
+        // Build an ordered candidate list: category-preferred first, then anything else remaining
+        var candidates = (CAT_PREF[cat] || []).concat(ALL_UPLOADS);
+        var picked = null;
+        for (var i = 0; i < candidates.length; i++){
+          var name = candidates[i];
+          if (!used[name]){
+            picked = name;
+            used[name] = true;
+            break;
+          }
+        }
+        if (picked){
+          finalImg = toUploadUrl(picked);
+        } else {
+          // All uploads exhausted — pick a NOT-YET-USED Unsplash URL (category preferred, then General)
+          var catPool = UNSPLASH_PREF[cat] || [];
+          var genPool = UNSPLASH_PREF.General || [];
+          var unsplashCandidates = catPool.concat(genPool);
+          var upicked = null;
+          for (var j = 0; j < unsplashCandidates.length; j++){
+            var u = unsplashCandidates[j];
+            if (!used[u]){
+              upicked = u;
+              used[u] = true;
+              break;
+            }
+          }
+          finalImg = upicked || unsplashCandidates[(unsplashCursor[cat] = (unsplashCursor[cat] || 0) + 1) % Math.max(1, unsplashCandidates.length)] || 'images/logo.png';
+        }
+      } else {
+        finalImg = raw;
+      }
+
+      return {
+        id: p.id,
+        title: p.title,
+        category: cat,
+        brand: p.brand || 'Amir Hardware',
+        price: Number(p.price) || 0,
+        img: finalImg,
+        images: (Array.isArray(p.images) && p.images.length) ? p.images.slice() : (finalImg ? [finalImg] : []),
+        desc: p.description || p.desc || '',
+        inStock: p.inStock !== false,
+        stockQty: p.stockQty === undefined ? null : Number(p.stockQty),
+        rating: Number(p.rating) || 0,
+        reviewCount: Number(p.reviewCount) || 0,
+        flashDiscountPct: Number(p.flashDiscountPct) || 0,
+        isDealOfDay: !!p.isDealOfDay
+      };
+    });
+  }
+
+  // Legacy single-product normalizer still used by seed data merge paths
+  function normalizeProduct(p){ return normalizeAll([p])[0]; }
+
+  // ===== STAR RATING HTML =====
+  function starSvg(filled){
+    return '<svg fill="' + (filled ? 'currentColor' : 'none') + '" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">' +
+      '<path d="M12 2l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 16.8 6.2 19.9l1.1-6.5L2.6 8.8l6.5-.9L12 2z"/></svg>';
+  }
+  function starsHTML(rating, size){
+    var full = Math.round(Number(rating) || 0);
+    var html = '<span class="stars ' + (size || '') + '">';
+    for (var i = 1; i <= 5; i++){
+      html += '<span' + (i > full ? ' class="empty"' : '') + '>' + starSvg(i <= full) + '</span>';
+    }
+    html += '</span>';
+    return html;
+  }
+  function stockHTML(p){
+    if (p.inStock === false || (p.stockQty !== undefined && p.stockQty !== null && p.stockQty === 0)){
+      return '<div class="stock-badge out">Out of Stock</div>';
+    }
+    if (p.stockQty !== undefined && p.stockQty !== null && p.stockQty > 0 && p.stockQty <= 5){
+      return '<div class="stock-badge low">Only ' + p.stockQty + ' left</div>';
+    }
+    return '';
+  }
+
+  // ===== RECENTLY VIEWED =====
+  var recentlyViewed = [];
+  try { recentlyViewed = JSON.parse(localStorage.getItem('ah_recent') || '[]'); } catch(e){ recentlyViewed = []; }
+  function trackView(id){
+    recentlyViewed = recentlyViewed.filter(function(x){ return x !== id; });
+    recentlyViewed.unshift(id);
+    recentlyViewed = recentlyViewed.slice(0, 8);
+    try { localStorage.setItem('ah_recent', JSON.stringify(recentlyViewed)); } catch(e){}
+    renderRecentlyViewed();
+  }
+  function renderRecentlyViewed(){
+    var sec = document.getElementById('rv-section');
+    if (!sec) return;
+    var items = recentlyViewed.map(function(id){ return PRODUCTS.find(function(p){ return p.id === id; }); }).filter(Boolean);
+    if (items.length === 0){ sec.style.display = 'none'; return; }
+    sec.style.display = '';
+    document.getElementById('rv-scroll').innerHTML = items.map(function(p){
+      return '<div class="rv-item" onclick="openQV(' + p.id + ')">' +
+        '<div class="rvi"><img src="' + p.img + '" alt="' + p.title + '" loading="lazy" onerror="imgFallback(this,\'' + p.category + '\',' + p.id + ')"/></div>' +
+        '<p class="rvt">' + p.title + '</p>' +
+        '<p class="rvp">' + PK(p.price) + '</p>' +
+      '</div>';
+    }).join('');
+  }
+  function clearRecentlyViewed(){
+    recentlyViewed = [];
+    try { localStorage.removeItem('ah_recent'); } catch(e){}
+    renderRecentlyViewed();
+    toast('Recently viewed cleared');
+  }
+
+  // If an Unsplash URL fails, swap to a local fallback for that category (might already be used — accept duplicates only here)
+  window.imgFallback = function(el, cat, seed){
+    var locals = (CAT_PREF[cat] || []).concat(ALL_UPLOADS);
+    var n = Math.abs(Number(seed) || 1);
+    for (var i = 0; i < locals.length; i++){
+      var candidate = toUploadUrl(locals[(n + i) % locals.length]);
+      if (el.src.indexOf(candidate) < 0){
+        el.onerror = function(){ el.onerror = null; el.src = 'images/logo.png'; };
+        el.src = candidate;
+        return;
+      }
+    }
+    el.onerror = null;
+    el.src = 'images/logo.png';
+  };
+
+  function rebuildBrands() {
+    var brandSel = document.getElementById('s-brand');
+    var brands = [];
+    PRODUCTS.forEach(function(p){ if (p.brand && brands.indexOf(p.brand) < 0) brands.push(p.brand); });
+    var cur = brandSel.value;
+    var html = '<option value="">All Brands</option>';
+    brands.sort().forEach(function(b){ html += '<option value="' + b + '">' + b + '</option>'; });
+    brandSel.innerHTML = html;
+    brandSel.value = brands.indexOf(cur) > -1 ? cur : '';
+  }
+
+  function loadLiveProducts() {
+    if (!window.fetch) return;
+    var ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+    var timer = ctrl ? setTimeout(function(){ ctrl.abort(); }, 4000) : null;
+    fetch('api/products', ctrl ? { signal: ctrl.signal } : undefined)
+      .then(function(r){ if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then(function(data){
+        if (timer) clearTimeout(timer);
+        if (!Array.isArray(data) || data.length === 0) return;
+        PRODUCTS = normalizeAll(data);
+        PRODUCTS_LIVE = true;
+        cart = cart.filter(function(c){ return PRODUCTS.some(function(p){ return p.id === c.id; }); });
+        wishlist = wishlist.filter(function(w){ return PRODUCTS.some(function(p){ return p.id === w; }); });
+        persist();
+        rebuildBrands();
+        updateCartUI();
+        updateWishUI();
+        applyFilters();
+        renderRecentlyViewed();
+      })
+      .catch(function(){ if (timer) clearTimeout(timer); });
+  }
+
+  function renderProducts(items){
+    var grid = document.getElementById('product-grid');
+    var empty = document.getElementById('product-empty');
+    if (!items || items.length === 0){ grid.innerHTML = ''; empty.classList.remove('hidden'); return; }
+    empty.classList.add('hidden');
+    grid.innerHTML = items.map(function(p){
+      var inCart = cart.some(function(c){ return c.id === p.id; });
+      var inWish = wishlist.indexOf(p.id) > -1;
+      var out = p.inStock === false;
+      var flashOn = p.flashDiscountPct > 0;
+      var dealOn = p.isDealOfDay;
+      var salePrice = flashOn ? Math.round(p.price * (100 - p.flashDiscountPct) / 100) : p.price;
+      var flashBadge = dealOn
+        ? '<div class="flash-badge deal"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M11 21h-1l1-7H7.5c-.88 0-.33-.75-.31-.78C8.48 10.94 10.42 7.54 13.01 3h1l-1 7h3.51c.4 0 .62.19.4.66C12.97 17.55 11 21 11 21z"/></svg>DEAL OF DAY</div>'
+        : (flashOn ? '<div class="flash-badge"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M11 21h-1l1-7H7.5c-.88 0-.33-.75-.31-.78C8.48 10.94 10.42 7.54 13.01 3h1l-1 7h3.51c.4 0 .62.19.4.66C12.97 17.55 11 21 11 21z"/></svg>' + p.flashDiscountPct + '% OFF</div>' : '');
+      return '<div class="pcard rounded-2xl overflow-hidden group">' +
+        '<div class="pimg relative h-52 bg-white">' +
+          '<img src="' + p.img + '" alt="' + p.title + '" class="w-full h-full object-cover" loading="lazy" decoding="async" onerror="imgFallback(this,\'' + p.category + '\',' + p.id + ')"/>' +
+          flashBadge +
+          (flashBadge ? '' : '<div class="absolute top-3 left-3"><span class="inline-block px-2.5 py-1 bg-cream-100/80 backdrop-blur-md rounded-full text-[10px] font-bold text-gold-400 uppercase tracking-wider border border-orange-300">' + (fmtCat[p.category] || p.category) + '</span></div>') +
+          '<button class="wish-btn ' + (inWish ? 'active' : '') + '" onclick="toggleWish(' + p.id + ',event)">' +
+            '<svg class="w-4 h-4 text-gold-400" fill="' + (inWish ? 'currentColor' : 'none') + '" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 016.364 0L12 7.636l1.318-1.318a4.5 4.5 0 116.364 6.364l-7.682 7.682-7.682-7.682a4.5 4.5 0 010-6.364z"/></svg>' +
+          '</button>' +
+          stockHTML(p) +
+          '<div class="quick-row">' +
+            '<button class="quick-btn" onclick="openQV(' + p.id + ')">Quick View</button>' +
+          '</div>' +
+        '</div>' +
+        '<div class="p-5">' +
+          '<p class="ui text-[9.5px] font-bold text-gold-400 uppercase tracking-[0.2em] mb-1.5">' + p.brand + '</p>' +
+          '<h4 class="fd font-bold text-coffee-900 text-base mb-1.5 leading-snug line-clamp-2">' + p.title + '</h4>' +
+          (p.rating > 0 ? '<div class="rating-row">' + starsHTML(p.rating, 'sm') + '<span>' + p.rating.toFixed(1) + '</span><span class="count">(' + (p.reviewCount || 0) + ')</span></div>' : '') +
+          '<p class="text-xs text-coffee-500 mb-4 leading-relaxed line-clamp-2">' + p.desc + '</p>' +
+          '<div class="flex items-center justify-between gap-2">' +
+            '<span class="price text-xl">' + PK(salePrice) + (flashOn ? '<span class="price-strike">' + PK(p.price) + '</span>' : '') + '</span>' +
+            (out
+              ? '<button disabled class="px-3 py-2 rounded-lg ui text-[10.5px] font-bold bg-white text-coffee-400 uppercase tracking-wider cursor-not-allowed">Out</button>'
+              : '<button onclick="toggleCart(' + p.id + ')" class="ui text-[10.5px] font-bold uppercase tracking-wider px-4 py-2 rounded-lg transition-all ' + (inCart ? 'bg-orange-100/60 border border-orange-400 text-orange-600' : 'btn-gold') + '">' + (inCart ? '✓ Added' : '+ Add') + '</button>'
+            ) +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  function applyFilters(){
+    var cat = document.getElementById('s-cat').value;
+    var brand = document.getElementById('s-brand').value;
+    var sort = document.getElementById('s-sort').value;
+    var q = (document.getElementById('p-search').value || '').trim().toLowerCase();
+    var filtered = PRODUCTS.filter(function(p){
+      if (cat && p.category !== cat) return false;
+      if (brand && p.brand !== brand) return false;
+      if (q){
+        var hay = (p.title + ' ' + p.brand + ' ' + p.desc + ' ' + p.category).toLowerCase();
+        if (hay.indexOf(q) < 0) return false;
+      }
+      return true;
+    });
+    if (sort === 'price-asc') filtered.sort(function(a,b){ return a.price - b.price; });
+    else if (sort === 'price-desc') filtered.sort(function(a,b){ return b.price - a.price; });
+    else if (sort === 'name') filtered.sort(function(a,b){ return a.title.localeCompare(b.title); });
+    else filtered.sort(function(a,b){ return b.id - a.id; });
+    renderProducts(filtered);
+    var af = document.getElementById('active-filters');
+    var tags = [];
+    if (cat) tags.push({label:fmtCat[cat] || cat, key:'cat'});
+    if (brand) tags.push({label:brand, key:'brand'});
+    if (q) tags.push({label:'"'+q+'"', key:'q'});
+    if (tags.length){
+      af.innerHTML = '<span class="ui text-[10px] text-coffee-500 uppercase tracking-wider mr-1 self-center">Active:</span>' +
+        tags.map(function(t){ return '<span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-orange-50 border border-orange-300 rounded-full text-xs font-semibold text-orange-600">' + t.label + '</span>'; }).join('') +
+        '<button onclick="clearFilters()" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-orange-300/60 rounded-full text-xs font-semibold text-coffee-600 hover:text-gold-400 hover:border-orange-400 transition">Clear All</button>';
+      af.classList.remove('hidden');
+      af.classList.add('flex');
+    } else {
+      af.classList.add('hidden'); af.classList.remove('flex');
+    }
+  }
+
+  function clearFilters(){
+    document.getElementById('s-cat').value = '';
+    document.getElementById('s-brand').value = '';
+    document.getElementById('s-sort').value = 'newest';
+    document.getElementById('p-search').value = '';
+    applyFilters();
+  }
+
+  function filterProducts(cat){
+    document.getElementById('s-cat').value = cat;
+    applyFilters();
+    document.getElementById('products').scrollIntoView({behavior:'smooth'});
+  }
+
+  // --- Cart
+  function persist(){
+    try { localStorage.setItem('ah_cart', JSON.stringify(cart)); } catch(e){}
+    try { localStorage.setItem('ah_wish', JSON.stringify(wishlist)); } catch(e){}
+  }
+  function toggleCart(id){
+    var p = PRODUCTS.find(function(x){ return x.id === id; });
+    if (!p) return;
+    var idx = cart.findIndex(function(c){ return c.id === id; });
+    if (idx > -1){ cart.splice(idx, 1); toast('Removed from cart'); }
+    else { cart.push({id:p.id, title:p.title, price:p.price, img:p.img, qty:1}); toast('Added to inquiry cart ✓'); }
+    persist(); updateCartUI(); applyFilters();
+  }
+  function clearCart(){ cart = []; persist(); updateCartUI(); applyFilters(); }
+  function updateCartUI(){
+    var count = cart.reduce(function(s, c){ return s + (c.qty || 1); }, 0);
+    var subtotal = cart.reduce(function(s, c){ return s + (c.price * (c.qty || 1)); }, 0);
+    var badge = document.getElementById('cart-count');
+    badge.textContent = count;
+    badge.classList.toggle('hidden', count === 0);
+    document.getElementById('cart-subtitle').textContent = count + (count === 1 ? ' item' : ' items');
+    var subEl = document.getElementById('cart-subtotal');
+    if (subEl) subEl.textContent = PK(subtotal);
+    var items = document.getElementById('cart-items');
+    var empty = document.getElementById('cart-empty-msg');
+    var footer = document.getElementById('cart-footer');
+    if (cart.length === 0){
+      items.innerHTML = ''; empty.classList.remove('hidden'); empty.classList.add('flex'); footer.classList.add('hidden');
+      items.classList.add('hidden');
+      return;
+    }
+    empty.classList.add('hidden'); empty.classList.remove('flex');
+    footer.classList.remove('hidden');
+    items.classList.remove('hidden');
+    items.innerHTML = cart.map(function(c){
+      return '<div class="flex gap-3 p-3 bg-white rounded-xl border border-orange-200/60">' +
+        '<img src="' + c.img + '" alt="' + c.title + '" class="w-16 h-16 rounded-lg object-cover flex-shrink-0"/>' +
+        '<div class="flex-1 min-w-0">' +
+          '<p class="fd font-bold text-coffee-900 text-sm leading-snug line-clamp-2 mb-1">' + c.title + '</p>' +
+          '<div class="flex items-center justify-between">' +
+            '<span class="price text-sm">' + PK(c.price * (c.qty || 1)) + '</span>' +
+            '<div class="flex items-center gap-2">' +
+              '<button onclick="qtyMinus(' + c.id + ')" class="w-7 h-7 bg-cream-50 rounded-md text-gold-400 hover:bg-orange-100/60 border border-orange-300/60 transition">−</button>' +
+              '<span class="text-coffee-900 text-sm font-semibold w-5 text-center">' + (c.qty || 1) + '</span>' +
+              '<button onclick="qtyPlus(' + c.id + ')" class="w-7 h-7 bg-cream-50 rounded-md text-gold-400 hover:bg-orange-100/60 border border-orange-300/60 transition">+</button>' +
+              '<button onclick="toggleCart(' + c.id + ')" class="w-7 h-7 bg-cream-50 rounded-md text-red-400 hover:bg-red-400/15 border border-red-400/15 transition ml-1">' +
+                '<svg class="w-3.5 h-3.5 mx-auto" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6M1 7h22M9 3h6a1 1 0 011 1v3H8V4a1 1 0 011-1z"/></svg>' +
+              '</button>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+  function qtyPlus(id){ var c = cart.find(function(x){ return x.id === id; }); if (c){ c.qty = (c.qty || 1) + 1; persist(); updateCartUI(); } }
+  function qtyMinus(id){ var c = cart.find(function(x){ return x.id === id; }); if (c){ c.qty = (c.qty || 1) - 1; if (c.qty < 1) toggleCart(id); else { persist(); updateCartUI(); } } }
+  function openCart(){ document.getElementById('cart-overlay').classList.add('open'); document.getElementById('cart-panel').classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeCart(){ document.getElementById('cart-overlay').classList.remove('open'); document.getElementById('cart-panel').classList.remove('open'); document.body.style.overflow = ''; }
+  function sendInquiry(){
+    if (cart.length === 0) return;
+    var lines = cart.map(function(c, i){ return (i + 1) + '. ' + c.title + ' (x' + (c.qty || 1) + ') — ' + PK(c.price * (c.qty || 1)); });
+    var msg = 'Hello Amir Hardware, I would like to inquire about:\n\n' + lines.join('\n') + '\n\nPlease confirm availability and final pricing. Thank you.';
+    var url = 'https://wa.me/923007090124?text=' + encodeURIComponent(msg);
+    window.open(url, '_blank');
+    toast('Opening WhatsApp...');
+  }
+
+  // --- Wishlist
+  function toggleWish(id, ev){
+    if (ev) ev.stopPropagation();
+    var idx = wishlist.indexOf(id);
+    if (idx > -1){ wishlist.splice(idx, 1); toast('Removed from wishlist'); }
+    else { wishlist.push(id); toast('Saved to wishlist ♥'); }
+    persist(); updateWishUI(); applyFilters();
+  }
+  function updateWishUI(){
+    var badge = document.getElementById('wish-count');
+    badge.textContent = wishlist.length;
+    badge.classList.toggle('hidden', wishlist.length === 0);
+  }
+  function openWish(){
+    if (wishlist.length === 0){ toast('Wishlist is empty'); return; }
+    clearFilters();
+    var saved = PRODUCTS.filter(function(p){ return wishlist.indexOf(p.id) > -1; });
+    renderProducts(saved);
+    document.getElementById('products').scrollIntoView({behavior:'smooth'});
+    toast('Showing wishlist (' + wishlist.length + ')');
+  }
+
+  // --- Quick View
+  var QV_CURRENT = null;
+  var QV_IMAGES = [];
+  var QV_IDX = 0;
+
+  function openQV(id){
+    var p = PRODUCTS.find(function(x){ return x.id === id; });
+    if (!p) return;
+    QV_CURRENT = p;
+    trackView(p.id);
+    QV_IMAGES = (Array.isArray(p.images) && p.images.length) ? p.images.slice() : [p.img];
+    QV_IDX = 0;
+    renderQV();
+    document.getElementById('qv-overlay').classList.add('open');
+    document.getElementById('qv-modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    fetchReviews(p.id);
+    fetchRelated(p.id);
+  }
+
+  function renderQV(){
+    var p = QV_CURRENT;
+    if (!p) return;
+    var inCart = cart.some(function(c){ return c.id === p.id; });
+    var inWish = wishlist.indexOf(p.id) > -1;
+    var out = p.inStock === false || (p.stockQty !== undefined && p.stockQty !== null && p.stockQty === 0);
+    var thumbs = QV_IMAGES.length > 1 ? '<div class="qv-thumbs">' + QV_IMAGES.map(function(src, i){
+      return '<div class="qv-thumb ' + (i === QV_IDX ? 'active' : '') + '" onclick="qvGoto(' + i + ')"><img src="' + src + '" alt="thumb" onerror="imgFallback(this,\'' + p.category + '\',' + p.id + ')"/></div>';
+    }).join('') + '</div>' : '';
+    var nav = QV_IMAGES.length > 1
+      ? '<button class="qv-nav-btn qv-prev" onclick="qvPrev()"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg></button>' +
+        '<button class="qv-nav-btn qv-next" onclick="qvNext()"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></button>' +
+        '<span class="qv-img-count">' + (QV_IDX + 1) + ' / ' + QV_IMAGES.length + '</span>'
+      : '';
+    var ratingRow = p.rating > 0
+      ? '<div class="flex items-center gap-2 mb-3">' + starsHTML(p.rating, 'lg') + '<span class="fd font-bold text-coffee-900">' + p.rating.toFixed(1) + '</span><span class="text-xs text-coffee-500">(' + (p.reviewCount || 0) + ' reviews)</span></div>'
+      : '';
+    var stockLine = out
+      ? '<span class="ui text-xs font-bold text-red-500 uppercase tracking-wider">Out of Stock</span>'
+      : (p.stockQty !== undefined && p.stockQty !== null && p.stockQty <= 5 && p.stockQty > 0
+          ? '<span class="ui text-xs font-bold text-orange-600 uppercase tracking-wider">Only ' + p.stockQty + ' left</span>'
+          : '<span class="ui text-xs font-bold text-emerald-500 uppercase tracking-wider">In Stock</span>');
+
+    document.getElementById('qv-body').innerHTML =
+      '<div class="qv-gallery">' +
+        '<div class="qv-main" onclick="qvToggleZoom(this)"><img src="' + QV_IMAGES[QV_IDX] + '" alt="' + p.title + '" decoding="async" onerror="imgFallback(this,\'' + p.category + '\',' + p.id + ')"/></div>' +
+        '<div class="absolute top-4 left-4"><span class="inline-block px-3 py-1.5 bg-white/90 backdrop-blur rounded-full text-xs font-bold text-orange-600 uppercase tracking-wider border border-orange-300">' + (fmtCat[p.category] || p.category) + '</span></div>' +
+        nav + thumbs +
+      '</div>' +
+      '<div class="p-6 md:p-10 flex flex-col overflow-y-auto" style="max-height:88vh">' +
+        '<p class="ui text-xs font-bold text-orange-600 uppercase tracking-[0.25em] mb-2">' + p.brand + '</p>' +
+        '<h3 class="fd font-bold text-coffee-900 text-2xl md:text-3xl mb-3 leading-tight">' + p.title + '</h3>' +
+        ratingRow +
+        '<p class="text-coffee-600 text-sm leading-relaxed mb-6">' + (p.desc || 'Premium quality product from ' + p.brand + '.') + '</p>' +
+        '<div class="flex items-baseline gap-3 mb-6">' +
+          '<span class="price text-4xl">' + PK(p.price) + '</span>' + stockLine +
+        '</div>' +
+        '<ul class="space-y-2 mb-6 text-sm text-coffee-600">' +
+          '<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-gold-400"></span> Authorized dealer — 100% genuine</li>' +
+          '<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-gold-400"></span> Same-day delivery within Habibabad</li>' +
+          '<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-gold-400"></span> Manufacturer warranty included</li>' +
+        '</ul>' +
+        '<div class="flex flex-wrap gap-3 mb-4">' +
+          (out
+            ? '<button disabled class="flex-1 py-3.5 rounded-xl ui font-bold uppercase tracking-wider text-sm bg-white text-coffee-400 cursor-not-allowed">Out of Stock</button>'
+            : '<button onclick="toggleCart(' + p.id + ');renderQV()" class="flex-1 py-3.5 rounded-xl ui font-bold uppercase tracking-wider text-sm ' + (inCart ? 'bg-orange-100/60 border border-orange-400 text-orange-600' : 'btn-gold') + '">' + (inCart ? '✓ In Cart' : '+ Add to Cart') + '</button>'
+          ) +
+          '<button onclick="toggleWish(' + p.id + ');renderQV()" class="w-14 flex items-center justify-center rounded-xl border border-orange-300 bg-white hover:bg-orange-50 transition">' +
+            '<svg class="w-5 h-5 text-orange-600" fill="' + (inWish ? 'currentColor' : 'none') + '" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 016.364 0L12 7.636l1.318-1.318a4.5 4.5 0 116.364 6.364l-7.682 7.682-7.682-7.682a4.5 4.5 0 010-6.364z"/></svg>' +
+          '</button>' +
+          '<a href="https://wa.me/923007090124?text=' + encodeURIComponent('Hi, I want to know more about: ' + p.title) + '" target="_blank" class="w-14 flex items-center justify-center rounded-xl border border-emerald-300 bg-emerald-50 hover:bg-emerald-100 transition">' +
+            '<svg class="w-5 h-5 text-emerald-600" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15"/></svg>' +
+          '</a>' +
+        '</div>' +
+        '<div id="qv-reviews" class="reviews-section"><p class="text-coffee-500 text-sm">Loading reviews...</p></div>' +
+        '<div id="qv-related" class="related-section" style="display:none"><p class="related-head">You may also like</p><div class="related-grid" id="qv-related-grid"></div></div>' +
+      '</div>';
+  }
+
+  function qvGoto(i){ QV_IDX = Math.max(0, Math.min(QV_IMAGES.length - 1, i)); renderQV(); }
+  function qvPrev(){ QV_IDX = (QV_IDX - 1 + QV_IMAGES.length) % QV_IMAGES.length; renderQV(); }
+  function qvNext(){ QV_IDX = (QV_IDX + 1) % QV_IMAGES.length; renderQV(); }
+  function qvToggleZoom(el){ el.classList.toggle('zoomed'); }
+
+  function fetchReviews(productId){
+    fetch('api/reviews?productId=' + productId)
+      .then(function(r){ return r.json(); })
+      .then(function(data){ renderReviews(productId, data); })
+      .catch(function(){ var b = document.getElementById('qv-reviews'); if (b) b.innerHTML = '<p class="text-coffee-500 text-sm">Could not load reviews.</p>'; });
+  }
+
+  function renderReviews(productId, data){
+    var box = document.getElementById('qv-reviews');
+    if (!box) return;
+    var avg = data.average || 0;
+    var count = data.count || 0;
+    var dist = data.distribution || [0,0,0,0,0];
+    var maxD = Math.max.apply(null, dist.concat([1]));
+    var distHtml = '<div class="rev-dist">' +
+      [5,4,3,2,1].map(function(star){
+        var n = dist[star - 1] || 0;
+        var pct = Math.round((n / maxD) * 100);
+        return '<div class="rev-dist-row"><span class="lbl">' + star + '</span>' + starsHTML(1, 'sm').replace(/<span class="stars sm">([\s\S]*?)<\/span>/, '<svg style="width:10px;height:10px;color:#d4af37" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 16.8 6.2 19.9l1.1-6.5L2.6 8.8l6.5-.9L12 2z"/></svg>') + '<div class="bar"><span style="width:' + pct + '%"></span></div><span class="n">' + n + '</span></div>';
+      }).join('') + '</div>';
+    var summaryHtml = count > 0
+      ? '<div class="rev-summary">' +
+          '<div style="text-align:center"><div class="rev-big">' + avg.toFixed(1) + '</div><div class="rev-big-sub">out of 5</div>' + starsHTML(avg, 'lg') + '<p class="text-xs text-coffee-500 mt-1">' + count + ' reviews</p></div>' +
+          distHtml +
+        '</div>'
+      : '<p class="text-coffee-500 text-sm mb-4">No reviews yet. Be the first!</p>';
+    var formHtml = AUTH_USER
+      ? '<div class="rev-form"><p class="ui text-[10px] font-bold text-orange-600 uppercase tracking-[0.18em] mb-2">Write a Review</p>' +
+          '<div class="star-input" id="star-input">' +
+            [1,2,3,4,5].map(function(n){ return '<button type="button" onclick="setReviewStar(' + n + ')" data-n="' + n + '" class="active">' + starSvg(1) + '</button>'; }).join('') +
+          '</div>' +
+          '<input id="rev-title" type="text" placeholder="Short title (optional)"/>' +
+          '<textarea id="rev-body" placeholder="Share your experience..."></textarea>' +
+          '<button onclick="submitReview(' + productId + ')" class="btn-gold mt-3 px-5 py-2.5 rounded-xl ui text-xs font-bold uppercase tracking-wider">Post Review</button>' +
+        '</div>'
+      : '<div class="rev-form" style="text-align:center"><p class="text-xs text-coffee-600">Please <button onclick="closeQV({target:{id:\'qv-overlay\'}});openAuth(\'login\')" class="text-orange-600 font-semibold hover:underline">log in</button> to write a review.</p></div>';
+    var listHtml = (data.reviews || []).map(function(r){
+      var initials = (r.userName || 'C').split(' ').map(function(w){return w[0]}).join('').slice(0,2).toUpperCase();
+      var dt = new Date((r.createdAt || '') + 'Z');
+      var dateStr = dt.toLocaleDateString('en-PK', {day:'numeric', month:'short', year:'numeric'});
+      return '<div class="rev-item">' +
+        '<div class="rev-head"><div class="av">' + initials + '</div><div class="who"><b>' + r.userName + '</b><small>' + dateStr + '</small></div>' + (r.verifiedPurchase ? '<span class="verified">✓ Verified</span>' : '') + '</div>' +
+        starsHTML(r.rating, 'sm') +
+        (r.title ? '<p class="rev-title">' + r.title + '</p>' : '') +
+        (r.body ? '<p class="rev-body">' + r.body + '</p>' : '') +
+      '</div>';
+    }).join('');
+    box.innerHTML = '<h4 class="fd font-bold text-coffee-900 text-lg mb-4">Customer <em class="italic" style="background:linear-gradient(135deg,#ed7f3c,#b84f15);-webkit-background-clip:text;background-clip:text;color:transparent">Reviews</em></h4>' + summaryHtml + formHtml + listHtml;
+  }
+
+  var REV_STAR = 5;
+  function setReviewStar(n){
+    REV_STAR = n;
+    var btns = document.querySelectorAll('#star-input button');
+    btns.forEach(function(b, i){
+      b.classList.toggle('active', i < n);
+      b.innerHTML = starSvg(i < n ? 1 : 0);
+    });
+  }
+
+  function submitReview(productId){
+    if (!AUTH_USER){ openAuth('login'); return; }
+    var title = (document.getElementById('rev-title') || {}).value || '';
+    var body = (document.getElementById('rev-body') || {}).value || '';
+    fetch('api/reviews', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json', 'Authorization':'Bearer ' + AUTH_TOKEN},
+      body: JSON.stringify({ productId: productId, rating: REV_STAR, title: title, body: body })
+    })
+      .then(function(r){ return r.json().then(function(d){ return {ok:r.ok, data:d}; }); })
+      .then(function(res){
+        if (!res.ok){ toast(res.data.error || 'Could not post review'); return; }
+        toast(res.data.updated ? 'Review updated ✓' : 'Review posted ✓');
+        fetchReviews(productId);
+        loadLiveProducts();
+      })
+      .catch(function(){ toast('Network error'); });
+  }
+
+  function fetchRelated(productId){
+    fetch('api/products/' + productId + '/related')
+      .then(function(r){ return r.json(); })
+      .then(function(list){
+        if (!Array.isArray(list) || list.length === 0) return;
+        var box = document.getElementById('qv-related');
+        if (!box) return;
+        box.style.display = '';
+        document.getElementById('qv-related-grid').innerHTML = list.map(function(p){
+          var pn = normalizeProduct(p);
+          return '<div class="related-card" onclick="openQV(' + pn.id + ')">' +
+            '<div class="rimg"><img src="' + pn.img + '" alt="' + pn.title + '" loading="lazy" onerror="imgFallback(this,\'' + pn.category + '\',' + pn.id + ')"/></div>' +
+            '<p class="rt">' + pn.title + '</p>' +
+            '<p class="rp">' + PK(pn.price) + '</p>' +
+          '</div>';
+        }).join('');
+      })
+      .catch(function(){ /* ignore */ });
+  }
+  function closeQV(ev){
+    if (ev && ev.target && ev.target.id !== 'qv-overlay' && !ev.target.closest('[onclick*="closeQV"]')) return;
+    document.getElementById('qv-overlay').classList.remove('open');
+    document.getElementById('qv-modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // --- Search
+  function openSearch(){
+    document.getElementById('search-overlay').classList.add('open');
+    setTimeout(function(){ document.getElementById('search-input').focus(); }, 50);
+    document.body.style.overflow = 'hidden';
+  }
+  function closeSearch(ev){
+    if (ev && ev.target && ev.target.id !== 'search-overlay') return;
+    document.getElementById('search-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function doSearch(q){
+    var results = document.getElementById('search-results');
+    var empty = document.getElementById('search-empty');
+    if (!q || q.length < 1){ results.innerHTML = ''; empty.classList.remove('hidden'); empty.textContent = 'Type to search our catalogue'; return; }
+    var ql = q.toLowerCase();
+    var hits = PRODUCTS.filter(function(p){
+      return (p.title + ' ' + p.brand + ' ' + p.desc + ' ' + p.category).toLowerCase().indexOf(ql) > -1;
+    }).slice(0, 8);
+    if (hits.length === 0){ results.innerHTML = ''; empty.classList.remove('hidden'); empty.textContent = 'No matches — try a different keyword'; return; }
+    empty.classList.add('hidden');
+    results.innerHTML = hits.map(function(p){
+      return '<div class="sresult-item" onclick="closeSearch();openQV(' + p.id + ')">' +
+        '<img src="' + p.img + '" class="w-14 h-14 rounded-lg object-cover flex-shrink-0" loading="lazy" onerror="imgFallback(this,\'' + p.category + '\',' + p.id + ')"/>' +
+        '<div class="flex-1 min-w-0">' +
+          '<p class="ui text-[10px] font-bold text-gold-400/80 uppercase tracking-wider">' + p.brand + '</p>' +
+          '<p class="fd font-bold text-coffee-900 text-sm leading-tight truncate">' + p.title + '</p>' +
+          '<p class="text-xs text-coffee-500 truncate">' + (fmtCat[p.category] || p.category) + '</p>' +
+        '</div>' +
+        '<span class="price text-sm flex-shrink-0">' + PK(p.price) + '</span>' +
+      '</div>';
+    }).join('');
+  }
+
+  // --- Toast
+  function toast(msg){
+    var t = document.getElementById('toast');
+    t.textContent = msg; t.classList.add('show');
+    clearTimeout(window.__toastT);
+    window.__toastT = setTimeout(function(){ t.classList.remove('show'); }, 2600);
+  }
+
+  // --- Mobile nav
+  function openMnav(){ document.getElementById('mnav').classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeMnav(){ document.getElementById('mnav').classList.remove('open'); document.body.style.overflow=''; }
+
+  // --- Scroll handlers
+  function onScroll(){
+    var nav = document.getElementById('nav');
+    if (window.scrollY > 10) nav.classList.add('scrolled'); else nav.classList.remove('scrolled');
+    // Section highlight
+    var links = document.querySelectorAll('nav a.navlink');
+    var secs = ['home','categories','products','gallery','about','contact'];
+    var current = 'home';
+    for (var i = 0; i < secs.length; i++){
+      var el = document.getElementById(secs[i]);
+      if (!el) continue;
+      if (el.getBoundingClientRect().top < 120) current = secs[i];
+    }
+    links.forEach(function(a){
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  }
+
+  // --- Reveal on scroll
+  function initReveal(){
+    var els = document.querySelectorAll('.reveal:not(.on)');
+    if (!('IntersectionObserver' in window)){ els.forEach(function(el){ el.classList.add('on'); }); return; }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); }
+      });
+    }, {threshold:0.05, rootMargin:'0px 0px -30px 0px'});
+    els.forEach(function(el){ io.observe(el); });
+    // Safety fallback: reveal anything missed after 3 seconds
+    setTimeout(function(){
+      document.querySelectorAll('.reveal:not(.on)').forEach(function(el){ el.classList.add('on'); });
+    }, 3000);
+  }
+
+  // --- Stat counters
+  function animateCount(el){
+    var target = parseInt(el.getAttribute('data-count'), 10);
+    if (!target || isNaN(target)) return;
+    var dur = 1800, start = performance.now();
+    function step(now){
+      var p = Math.min((now - start) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.floor(target * eased).toLocaleString('en-PK');
+      if (p < 1) requestAnimationFrame(step);
+      else el.textContent = target.toLocaleString('en-PK');
+    }
+    requestAnimationFrame(step);
+  }
+  function initCounters(){
+    var nodes = document.querySelectorAll('[data-count]');
+    if (!('IntersectionObserver' in window)){ nodes.forEach(animateCount); return; }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ animateCount(e.target); io.unobserve(e.target); }
+      });
+    }, {threshold:0.4});
+    nodes.forEach(function(n){ io.observe(n); });
+  }
+
+  // --- Contact form
+  document.getElementById('contact-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    var first = document.getElementById('cf-first').value.trim();
+    var last = document.getElementById('cf-last').value.trim();
+    var phone = document.getElementById('cf-phone').value.trim();
+    var subj = document.getElementById('cf-subj').value.trim();
+    var msg = document.getElementById('cf-msg').value.trim();
+    var text = 'Hello Amir Hardware,\n\n' +
+      'Name: ' + first + ' ' + last + '\n' +
+      (phone ? 'Phone: ' + phone + '\n' : '') +
+      'Subject: ' + subj + '\n\n' + msg;
+    window.open('https://wa.me/923007090124?text=' + encodeURIComponent(text), '_blank');
+    toast('Opening WhatsApp...');
+    e.target.reset();
+  });
+
+  // ===== AUTH / CHECKOUT / ORDERS =====
+  var AUTH_TOKEN = localStorage.getItem('ah_user_token') || '';
+  var AUTH_USER = null;
+  try { AUTH_USER = JSON.parse(localStorage.getItem('ah_user') || 'null'); } catch(e){ AUTH_USER = null; }
+
+  function saveAuth(token, user){
+    AUTH_TOKEN = token || '';
+    AUTH_USER = user || null;
+    if (token) localStorage.setItem('ah_user_token', token); else localStorage.removeItem('ah_user_token');
+    if (user) localStorage.setItem('ah_user', JSON.stringify(user)); else localStorage.removeItem('ah_user');
+    renderUserUI();
+    if (user) fetchUserPoints();
+  }
+
+  var USER_POINTS = { balance: 0, rupeeValue: 0 };
+
+  function fetchUserPoints(){
+    if (!AUTH_USER){ USER_POINTS = { balance: 0, rupeeValue: 0 }; renderUserUI(); return; }
+    fetch('api/user/points', {headers:{'Authorization':'Bearer '+AUTH_TOKEN}})
+      .then(function(r){ return r.json(); })
+      .then(function(d){ USER_POINTS = { balance: d.balance || 0, rupeeValue: d.rupeeValue || 0 }; renderUserUI(); })
+      .catch(function(){});
+  }
+
+  function renderUserUI(){
+    var lbl = document.getElementById('usr-label');
+    var loggedOut = document.getElementById('usr-logged-out');
+    var loggedIn = document.getElementById('usr-logged-in');
+    if (AUTH_USER){
+      lbl.textContent = AUTH_USER.name.split(' ')[0];
+      loggedOut.classList.add('hidden');
+      loggedIn.classList.remove('hidden');
+      document.getElementById('usr-name').textContent = AUTH_USER.name;
+      var phoneEl = document.getElementById('usr-phone');
+      if (USER_POINTS.balance > 0){
+        phoneEl.innerHTML = AUTH_USER.phone + ' <span class="points-chip" style="margin-left:4px"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 16.8 6.2 19.9l1.1-6.5L2.6 8.8l6.5-.9L12 2z"/></svg>' + USER_POINTS.balance + '</span>';
+      } else {
+        phoneEl.textContent = AUTH_USER.phone;
+      }
+    } else {
+      lbl.textContent = 'Sign In';
+      loggedOut.classList.remove('hidden');
+      loggedIn.classList.add('hidden');
+    }
+  }
+
+  function toggleUserMenu(){ document.getElementById('usr-dropdown').classList.toggle('open'); }
+  document.addEventListener('click', function(e){
+    var dd = document.getElementById('usr-dropdown');
+    var btn = document.getElementById('usr-btn');
+    if (!dd || !btn) return;
+    if (!dd.contains(e.target) && !btn.contains(e.target)) dd.classList.remove('open');
+  });
+
+  // --- Auth modal
+  function openAuth(tab){
+    document.getElementById('usr-dropdown').classList.remove('open');
+    switchAuthTab(tab || 'login');
+    document.getElementById('auth-mdl').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeAuth(){ document.getElementById('auth-mdl').classList.remove('open'); document.body.style.overflow = ''; }
+  function switchAuthTab(which){
+    var isLogin = which === 'login';
+    document.getElementById('tab-login').classList.toggle('active', isLogin);
+    document.getElementById('tab-register').classList.toggle('active', !isLogin);
+    document.getElementById('auth-login').classList.toggle('hidden', !isLogin);
+    document.getElementById('auth-register').classList.toggle('hidden', isLogin);
+    document.getElementById('auth-title').textContent = isLogin ? 'Welcome Back' : 'Create Account';
+    document.getElementById('l-err').innerHTML = '';
+    document.getElementById('r-err').innerHTML = '';
+  }
+  function showErr(id, msg){ document.getElementById(id).innerHTML = '<p class="err">' + msg + '</p>'; }
+
+  function doLogin(){
+    var phone = document.getElementById('l-phone').value.trim();
+    var pass = document.getElementById('l-pass').value;
+    if (!phone || !pass) return showErr('l-err', 'Please enter phone and password.');
+    document.getElementById('l-err').innerHTML = '<p class="hint">Logging in...</p>';
+    fetch('api/user/login', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({phone: phone, password: pass}) })
+      .then(function(r){ return r.json().then(function(d){ return {ok:r.ok, data:d}; }); })
+      .then(function(res){
+        if (!res.ok) return showErr('l-err', res.data.error || 'Login failed.');
+        saveAuth(res.data.token, res.data.user);
+        toast('Welcome back, ' + res.data.user.name.split(' ')[0] + '!');
+        closeAuth();
+        if (window.__pendingCheckout){ window.__pendingCheckout = false; startCheckout(); }
+      })
+      .catch(function(){ showErr('l-err', 'Network error. Try again.'); });
+  }
+
+  function doRegister(){
+    var name = document.getElementById('r-name').value.trim();
+    var phone = document.getElementById('r-phone').value.trim();
+    var email = document.getElementById('r-email').value.trim();
+    var city = document.getElementById('r-city').value.trim();
+    var pass = document.getElementById('r-pass').value;
+    if (!name || !phone || !pass) return showErr('r-err', 'Name, phone, and password are required.');
+    if (pass.length < 4) return showErr('r-err', 'Password must be at least 4 characters.');
+    document.getElementById('r-err').innerHTML = '<p class="hint">Creating account...</p>';
+    fetch('api/user/register', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({name:name, phone:phone, email:email, city:city, password:pass}) })
+      .then(function(r){ return r.json().then(function(d){ return {ok:r.ok, data:d}; }); })
+      .then(function(res){
+        if (!res.ok) return showErr('r-err', res.data.error || 'Registration failed.');
+        saveAuth(res.data.token, res.data.user);
+        toast('Welcome, ' + res.data.user.name.split(' ')[0] + '! Account created.');
+        closeAuth();
+        if (window.__pendingCheckout){ window.__pendingCheckout = false; startCheckout(); }
+      })
+      .catch(function(){ showErr('r-err', 'Network error. Try again.'); });
+  }
+
+  function logoutUser(){
+    saveAuth('', null);
+    SAVED_ADDRESSES = [];
+    document.getElementById('usr-dropdown').classList.remove('open');
+    toast('Logged out');
+  }
+
+  // ===== PROFILE =====
+  function openProfile(){
+    if (!AUTH_USER){ openAuth('login'); return; }
+    document.getElementById('usr-dropdown').classList.remove('open');
+    document.getElementById('pf-name').value = AUTH_USER.name || '';
+    document.getElementById('pf-phone').value = AUTH_USER.phone || '';
+    document.getElementById('pf-email').value = AUTH_USER.email || '';
+    document.getElementById('pf-city').value = AUTH_USER.city || '';
+    document.getElementById('pf-err').innerHTML = '';
+    document.getElementById('pf-pwd-err').innerHTML = '';
+    switchProfTab('info');
+    document.getElementById('prof-mdl').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeProfile(){ document.getElementById('prof-mdl').classList.remove('open'); document.body.style.overflow = ''; }
+  function switchProfTab(which){
+    var isInfo = which === 'info';
+    document.getElementById('pt-info').classList.toggle('active', isInfo);
+    document.getElementById('pt-pwd').classList.toggle('active', !isInfo);
+    document.getElementById('prof-info').classList.toggle('hidden', !isInfo);
+    document.getElementById('prof-pwd').classList.toggle('hidden', isInfo);
+  }
+  function saveProfile(){
+    var payload = {
+      name: document.getElementById('pf-name').value.trim(),
+      email: document.getElementById('pf-email').value.trim(),
+      city: document.getElementById('pf-city').value.trim()
+    };
+    if (!payload.name){ document.getElementById('pf-err').innerHTML = '<p class="err">Name is required.</p>'; return; }
+    fetch('api/user/profile', { method:'PUT', headers:{'Content-Type':'application/json','Authorization':'Bearer '+AUTH_TOKEN}, body:JSON.stringify(payload) })
+      .then(function(r){ return r.json().then(function(d){ return {ok:r.ok, data:d}; }); })
+      .then(function(res){
+        if (!res.ok){ document.getElementById('pf-err').innerHTML = '<p class="err">' + (res.data.error || 'Save failed') + '</p>'; return; }
+        saveAuth(AUTH_TOKEN, res.data.user);
+        toast('Profile updated ✓');
+        closeProfile();
+      })
+      .catch(function(){ document.getElementById('pf-err').innerHTML = '<p class="err">Network error</p>'; });
+  }
+  function savePassword(){
+    var cur = document.getElementById('pf-curpass').value;
+    var neu = document.getElementById('pf-newpass').value;
+    if (!cur || !neu){ document.getElementById('pf-pwd-err').innerHTML = '<p class="err">Both fields are required.</p>'; return; }
+    fetch('api/user/password', { method:'PUT', headers:{'Content-Type':'application/json','Authorization':'Bearer '+AUTH_TOKEN}, body:JSON.stringify({currentPassword:cur, newPassword:neu}) })
+      .then(function(r){ return r.json().then(function(d){ return {ok:r.ok, data:d}; }); })
+      .then(function(res){
+        if (!res.ok){ document.getElementById('pf-pwd-err').innerHTML = '<p class="err">' + (res.data.error || 'Update failed') + '</p>'; return; }
+        toast('Password updated ✓');
+        document.getElementById('pf-curpass').value = '';
+        document.getElementById('pf-newpass').value = '';
+        closeProfile();
+      })
+      .catch(function(){ document.getElementById('pf-pwd-err').innerHTML = '<p class="err">Network error</p>'; });
+  }
+
+  // ===== ADDRESSES =====
+  var SAVED_ADDRESSES = [];
+  var EDITING_ADDR = null;
+
+  function fetchAddresses(){
+    if (!AUTH_USER) return Promise.resolve([]);
+    return fetch('api/user/addresses', {headers:{'Authorization':'Bearer '+AUTH_TOKEN}})
+      .then(function(r){ return r.json(); })
+      .then(function(list){ SAVED_ADDRESSES = Array.isArray(list) ? list : []; return SAVED_ADDRESSES; })
+      .catch(function(){ return []; });
+  }
+
+  function openAddresses(){
+    if (!AUTH_USER){ openAuth('login'); return; }
+    document.getElementById('usr-dropdown').classList.remove('open');
+    document.getElementById('addr-mdl').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    renderAddresses();
+    fetchAddresses().then(renderAddresses);
+  }
+  function closeAddresses(){ document.getElementById('addr-mdl').classList.remove('open'); document.body.style.overflow = ''; }
+
+  function renderAddresses(){
+    var list = document.getElementById('addr-list');
+    var empty = document.getElementById('addr-empty');
+    if (!list) return;
+    if (SAVED_ADDRESSES.length === 0){
+      list.innerHTML = '';
+      empty.classList.remove('hidden');
+      return;
+    }
+    empty.classList.add('hidden');
+    list.innerHTML = SAVED_ADDRESSES.map(function(a){
+      return '<div class="addr-card ' + (a.isDefault ? 'default' : '') + '">' +
+        '<div class="addr-head">' +
+          '<span class="addr-label">' + a.label + (a.isDefault ? ' <span class="default-badge">Default</span>' : '') + '</span>' +
+        '</div>' +
+        '<p class="addr-name">' + a.name + ' · ' + a.phone + '</p>' +
+        '<p class="addr-body">' + a.addressLine + '<br/><em>' + a.city + '</em>' + (a.notes ? ' — ' + a.notes : '') + '</p>' +
+        '<div class="addr-actions">' +
+          (a.isDefault ? '' : '<button onclick="setDefaultAddress(' + a.id + ')">Set Default</button>') +
+          '<button onclick="openAddressEdit(' + a.id + ')">Edit</button>' +
+          '<button class="red" onclick="deleteAddress(' + a.id + ')">Delete</button>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  function openAddressEdit(id){
+    EDITING_ADDR = id;
+    document.getElementById('addr-edit-title').textContent = id ? 'Edit Address' : 'New Address';
+    document.getElementById('ae-err').innerHTML = '';
+    if (id){
+      var a = SAVED_ADDRESSES.find(function(x){ return x.id === id; });
+      if (a){
+        document.getElementById('ae-label').value = a.label;
+        document.getElementById('ae-name').value = a.name;
+        document.getElementById('ae-phone').value = a.phone;
+        document.getElementById('ae-city').value = a.city;
+        document.getElementById('ae-addr').value = a.addressLine;
+        document.getElementById('ae-notes').value = a.notes || '';
+        document.getElementById('ae-default').checked = a.isDefault;
+      }
+    } else {
+      document.getElementById('ae-label').value = 'Home';
+      document.getElementById('ae-name').value = AUTH_USER ? AUTH_USER.name : '';
+      document.getElementById('ae-phone').value = AUTH_USER ? AUTH_USER.phone : '';
+      document.getElementById('ae-city').value = AUTH_USER && AUTH_USER.city ? AUTH_USER.city : 'Habibabad';
+      document.getElementById('ae-addr').value = '';
+      document.getElementById('ae-notes').value = '';
+      document.getElementById('ae-default').checked = SAVED_ADDRESSES.length === 0;
+    }
+    document.getElementById('addr-edit-mdl').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeAddressEdit(){ document.getElementById('addr-edit-mdl').classList.remove('open'); document.body.style.overflow = SAVED_ADDRESSES ? 'hidden' : ''; }
+
+  function saveAddress(){
+    var payload = {
+      label: document.getElementById('ae-label').value,
+      name: document.getElementById('ae-name').value.trim(),
+      phone: document.getElementById('ae-phone').value.trim(),
+      city: document.getElementById('ae-city').value,
+      addressLine: document.getElementById('ae-addr').value.trim(),
+      notes: document.getElementById('ae-notes').value.trim(),
+      isDefault: document.getElementById('ae-default').checked
+    };
+    if (!payload.name || !payload.phone || !payload.addressLine){
+      document.getElementById('ae-err').innerHTML = '<p class="err">Name, phone, and address are required.</p>';
+      return;
+    }
+    var url = EDITING_ADDR ? ('api/user/addresses/' + EDITING_ADDR) : 'api/user/addresses';
+    var method = EDITING_ADDR ? 'PUT' : 'POST';
+    fetch(url, { method:method, headers:{'Content-Type':'application/json','Authorization':'Bearer '+AUTH_TOKEN}, body:JSON.stringify(payload) })
+      .then(function(r){ return r.json().then(function(d){ return {ok:r.ok, data:d}; }); })
+      .then(function(res){
+        if (!res.ok){ document.getElementById('ae-err').innerHTML = '<p class="err">' + (res.data.error || 'Save failed') + '</p>'; return; }
+        toast(EDITING_ADDR ? 'Address updated ✓' : 'Address saved ✓');
+        closeAddressEdit();
+        fetchAddresses().then(renderAddresses);
+      })
+      .catch(function(){ document.getElementById('ae-err').innerHTML = '<p class="err">Network error</p>'; });
+  }
+
+  function setDefaultAddress(id){
+    var a = SAVED_ADDRESSES.find(function(x){ return x.id === id; });
+    if (!a) return;
+    fetch('api/user/addresses/' + id, { method:'PUT', headers:{'Content-Type':'application/json','Authorization':'Bearer '+AUTH_TOKEN}, body:JSON.stringify({isDefault:true}) })
+      .then(function(r){ return r.json(); })
+      .then(function(){ toast('Default address updated'); fetchAddresses().then(renderAddresses); });
+  }
+  function deleteAddress(id){
+    if (!confirm('Delete this address?')) return;
+    fetch('api/user/addresses/' + id, { method:'DELETE', headers:{'Authorization':'Bearer '+AUTH_TOKEN} })
+      .then(function(r){ return r.json(); })
+      .then(function(){ toast('Address deleted'); fetchAddresses().then(renderAddresses); });
+  }
+
+  // ===== ORDER TRACKING =====
+  function openTracking(order){
+    var body = document.getElementById('track-body');
+    var statuses = ['placed','confirmed','packed','shipped','delivered'];
+    var current = statuses.indexOf(order.status);
+    var isCancelled = order.status === 'cancelled';
+    var stepsHtml = '';
+    for (var i = 0; i < statuses.length; i++){
+      var cls = isCancelled && i === 0 ? 'cancelled' : (i < current ? 'done' : (i === current ? 'active' : ''));
+      var icon = cls === 'done' ? '✓' : (i + 1);
+      stepsHtml += '<div class="track-step ' + cls + '"><div class="dot">' + icon + '</div><div class="label">' + statuses[i].toUpperCase() + '</div></div>';
+      if (i < statuses.length - 1){
+        stepsHtml += '<div class="track-line ' + (i < current ? 'done' : '') + '"></div>';
+      }
+    }
+    if (isCancelled){
+      stepsHtml = '<div class="track-step cancelled"><div class="dot">✕</div><div class="label">CANCELLED</div></div>';
+    }
+
+    var etaText = order.estimatedDelivery || order.deliveryDate || 'TBD';
+    var trackInfoHtml = '';
+    if (order.courier || order.trackingNumber || order.deliverySlot){
+      trackInfoHtml = '<div class="track-info">' +
+        (order.courier ? '<div class="ti-row"><span>Courier</span><b>' + order.courier + '</b></div>' : '') +
+        (order.trackingNumber ? '<div class="ti-row"><span>Tracking #</span><span class="ti-code">' + order.trackingNumber + '</span></div>' : '') +
+        (order.deliverySlot ? '<div class="ti-row"><span>Delivery slot</span><b>' + order.deliverySlot + '</b></div>' : '') +
+        '<div class="ti-row"><span>Estimated delivery</span><b>' + etaText + '</b></div>' +
+      '</div>';
+    }
+
+    var itemsHtml = (order.items || []).map(function(it){
+      return '<div class="flex gap-3 py-2 border-b border-orange-200/40 last:border-0">' +
+        '<img src="' + (it.image || 'images/logo.png') + '" class="w-12 h-12 rounded-lg object-cover flex-shrink-0"/>' +
+        '<div class="flex-1 min-w-0"><p class="fd font-bold text-coffee-900 text-sm">' + it.title + '</p><p class="text-xs text-coffee-500">Qty: ' + it.qty + ' × ' + PK(it.price) + '</p></div>' +
+        '<span class="fd font-bold text-coffee-900 text-sm">' + PK(it.price * it.qty) + '</span>' +
+      '</div>';
+    }).join('');
+
+    document.getElementById('track-title').textContent = 'Track Order ' + order.orderCode;
+    body.innerHTML =
+      '<div class="track-progress">' + stepsHtml + '</div>' +
+      trackInfoHtml +
+      '<div class="mt-5 mb-3"><p class="ui text-[10px] font-bold text-orange-600 uppercase tracking-[0.18em] mb-2">Delivery To</p>' +
+        '<div class="bg-cream-50 rounded-xl p-3 text-sm text-coffee-700"><b>' + order.customerName + '</b> · ' + order.customerPhone + '<br/>' + order.addressLine + ', ' + order.city + '</div>' +
+      '</div>' +
+      '<div class="mt-4"><p class="ui text-[10px] font-bold text-orange-600 uppercase tracking-[0.18em] mb-2">Items (' + (order.items || []).length + ')</p>' +
+        '<div class="bg-cream-50 rounded-xl p-3">' + itemsHtml + '</div>' +
+      '</div>' +
+      '<div class="mt-4 p-3 bg-cream-100 rounded-xl flex justify-between items-center">' +
+        '<span class="text-sm text-coffee-600">Total paid</span>' +
+        '<span class="price text-xl">' + PK(order.total) + '</span>' +
+      '</div>' +
+      '<div class="mt-5 flex gap-3">' +
+        '<button onclick="reorder(' + order.id + ')" class="btn-gold flex-1 py-3 rounded-xl ui text-xs font-bold uppercase tracking-wider inline-flex items-center justify-center gap-2">' +
+          '<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h5M20 20v-5h-5M4 9a9 9 0 0115.5-4.5M20 15a9 9 0 01-15.5 4.5"/></svg>' +
+          'Reorder' +
+        '</button>' +
+        '<a href="https://wa.me/923007090124?text=' + encodeURIComponent('Hi, I need help with order ' + order.orderCode) + '" target="_blank" class="btn-ghost flex-1 py-3 rounded-xl ui text-xs font-bold uppercase tracking-wider inline-flex items-center justify-center gap-2">' +
+          '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15"/></svg>' +
+          'Chat Support' +
+        '</a>' +
+      '</div>';
+
+    document.getElementById('track-mdl').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeTracking(){ document.getElementById('track-mdl').classList.remove('open'); document.body.style.overflow = ''; }
+
+  // ===== TRACK MY ORDER =====
+  var MY_ORDERS = [];
+  function trackMyOrder(orderId){
+    var found = MY_ORDERS.find(function(o){ return o.id === orderId; });
+    if (!found){ toast('Order not found'); return; }
+    openTracking(found);
+  }
+
+  // ===== REORDER =====
+  function reorder(orderId){
+    if (!AUTH_USER){ openAuth('login'); return; }
+    fetch('api/orders/' + orderId + '/reorder', {headers:{'Authorization':'Bearer '+AUTH_TOKEN}})
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        var items = (data.items || []).filter(function(it){ return it.available; });
+        var unavailable = (data.items || []).filter(function(it){ return !it.available; });
+        if (items.length === 0){ toast('None of these items are currently available'); return; }
+        items.forEach(function(it){
+          var existing = cart.find(function(c){ return c.id === it.id; });
+          if (existing){ existing.qty = (existing.qty || 1) + it.qty; }
+          else { cart.push({id:it.id, title:it.title, price:it.price, img:it.image || 'images/logo.png', qty:it.qty}); }
+        });
+        persist(); updateCartUI(); applyFilters();
+        closeTracking();
+        closeOrders();
+        openCart();
+        if (unavailable.length > 0){
+          toast(items.length + ' items added. ' + unavailable.length + ' unavailable, skipped.');
+        } else {
+          toast(items.length + ' items added to cart ✓');
+        }
+      })
+      .catch(function(){ toast('Could not reorder'); });
+  }
+
+  // --- Checkout flow
+  function startCheckout(){
+    if (cart.length === 0){ toast('Cart is empty'); return; }
+    if (!AUTH_USER){
+      window.__pendingCheckout = true;
+      toast('Please log in to checkout');
+      closeCart();
+      openAuth('login');
+      return;
+    }
+    closeCart();
+    document.getElementById('co-name').value = AUTH_USER.name || '';
+    document.getElementById('co-phone').value = AUTH_USER.phone || '';
+    if (AUTH_USER.city) document.getElementById('co-city').value = AUTH_USER.city;
+    coShowStep(1);
+    document.getElementById('co-step-done').classList.add('hidden');
+    document.getElementById('co-title').textContent = 'Checkout';
+    document.getElementById('co-mdl').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    // Load saved addresses and render picker
+    fetchAddresses().then(renderCheckoutAddressPicker);
+  }
+
+  function renderCheckoutAddressPicker(){
+    var box = document.getElementById('co-saved-addrs');
+    if (!box) return;
+    if (SAVED_ADDRESSES.length === 0){ box.classList.add('hidden'); box.innerHTML = ''; return; }
+    box.classList.remove('hidden');
+    var html = '<p class="ui text-[10px] font-bold text-orange-600 uppercase tracking-[0.18em] mb-2">Saved Addresses</p>';
+    html += '<div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">';
+    html += SAVED_ADDRESSES.map(function(a){
+      return '<button type="button" onclick="useAddress(' + a.id + ')" class="text-left p-3 rounded-xl border bg-white hover:border-orange-400 hover:bg-orange-50 transition ' + (a.isDefault ? 'border-orange-400 bg-orange-50' : 'border-orange-200') + '">' +
+        '<p class="ui text-[9.5px] font-bold text-orange-600 uppercase tracking-wider mb-1">' + a.label + (a.isDefault ? ' · Default' : '') + '</p>' +
+        '<p class="fd font-bold text-coffee-900 text-sm">' + a.name + '</p>' +
+        '<p class="text-xs text-coffee-500">' + a.city + ' — ' + (a.addressLine.length > 36 ? a.addressLine.slice(0,36) + '…' : a.addressLine) + '</p>' +
+      '</button>';
+    }).join('');
+    html += '</div>';
+    html += '<p class="text-xs text-coffee-500 mb-2">Or enter a new address below:</p>';
+    box.innerHTML = html;
+    // Auto-fill default address
+    var def = SAVED_ADDRESSES.find(function(a){ return a.isDefault; }) || SAVED_ADDRESSES[0];
+    if (def) useAddress(def.id);
+  }
+
+  function useAddress(id){
+    var a = SAVED_ADDRESSES.find(function(x){ return x.id === id; });
+    if (!a) return;
+    document.getElementById('co-name').value = a.name;
+    document.getElementById('co-phone').value = a.phone;
+    document.getElementById('co-city').value = a.city;
+    document.getElementById('co-addr').value = a.addressLine;
+    document.getElementById('co-notes').value = a.notes || '';
+    // Highlight the selected card
+    document.querySelectorAll('#co-saved-addrs button').forEach(function(b){
+      b.classList.remove('border-orange-400','bg-orange-50');
+      b.classList.add('border-orange-200');
+    });
+    var selBtn = document.querySelector('#co-saved-addrs button[onclick="useAddress(' + id + ')"]');
+    if (selBtn){ selBtn.classList.remove('border-orange-200'); selBtn.classList.add('border-orange-400','bg-orange-50'); }
+  }
+  function closeCheckout(){ document.getElementById('co-mdl').classList.remove('open'); document.body.style.overflow = ''; }
+
+  function coShowStep(n){
+    for (var i = 1; i <= 3; i++){
+      document.getElementById('co-step-' + i).classList.toggle('hidden', i !== n);
+      var dot = document.getElementById('step-' + i + '-dot');
+      if (dot){
+        dot.classList.toggle('text-orange-600', i <= n);
+        dot.classList.toggle('text-coffee-400', i > n);
+        var circle = dot.querySelector('span');
+        circle.classList.toggle('bg-orange-400', i <= n);
+        circle.classList.toggle('text-white', i <= n);
+        circle.classList.toggle('bg-cream-100', i > n);
+      }
+    }
+  }
+
+  function coNext(n){
+    if (n === 2){
+      var name = document.getElementById('co-name').value.trim();
+      var phone = document.getElementById('co-phone').value.trim();
+      var addr = document.getElementById('co-addr').value.trim();
+      if (!name || !phone || !addr){ toast('Please fill all address fields'); return; }
+    }
+    if (n === 3) renderCheckoutSummary();
+    coShowStep(n);
+  }
+
+  function selPay(el){
+    document.querySelectorAll('.pm-chip').forEach(function(c){ c.classList.remove('sel'); });
+    el.classList.add('sel');
+    var pm = el.getAttribute('data-pm');
+    var info = document.getElementById('pm-info');
+    if (pm === 'COD') info.textContent = 'Pay cash when the order arrives. No advance payment required.';
+    else if (pm === 'BANK_TRANSFER') info.textContent = 'You will receive bank details on WhatsApp after placing the order. Share the receipt screenshot to confirm.';
+    else if (pm === 'JAZZCASH') info.textContent = 'JazzCash transfer details will be sent via WhatsApp. Account: 0300 7090124';
+    else if (pm === 'EASYPAISA') info.textContent = 'EasyPaisa transfer details will be sent via WhatsApp. Account: 0300 7090124';
+    else if (pm === 'CARD') info.textContent = 'A payment link will be sent via WhatsApp for secure card payment.';
+  }
+
+  function selectedPayment(){
+    var sel = document.querySelector('.pm-chip.sel');
+    return sel ? sel.getAttribute('data-pm') : 'COD';
+  }
+
+  function cityFee(city){
+    var c = (city || '').toLowerCase().trim();
+    if (!c) return 300;
+    if (/habibabad|pattoki|okara|chunian|kasur/i.test(c)) return 0;
+    if (/lahore|sheikhupura|nankana|renala/i.test(c)) return 250;
+    if (/faisalabad|multan|gujranwala|sialkot/i.test(c)) return 400;
+    if (/karachi|islamabad|rawalpindi|peshawar|quetta/i.test(c)) return 600;
+    return 350;
+  }
+
+  var APPLIED_COUPON = null;
+
+  function renderCheckoutSummary(){
+    var subtotal = cart.reduce(function(s, c){ return s + (c.price * (c.qty || 1)); }, 0);
+    var city = document.getElementById('co-city').value;
+    var fee = cityFee(city);
+    var discount = APPLIED_COUPON ? APPLIED_COUPON.discount : 0;
+    var total = Math.max(0, subtotal - discount + fee);
+    var pointsEarn = Math.floor(total / 100);
+    var pm = selectedPayment();
+    var pmLabel = {COD:'Cash on Delivery', BANK_TRANSFER:'Bank Transfer', JAZZCASH:'JazzCash', EASYPAISA:'EasyPaisa', CARD:'Debit/Credit Card'}[pm];
+
+    var itemsHtml = cart.map(function(c){
+      return '<div class="flex gap-3 py-2.5 border-b border-orange-200/40 last:border-0">' +
+        '<img src="' + c.img + '" class="w-12 h-12 rounded-lg object-cover flex-shrink-0"/>' +
+        '<div class="flex-1 min-w-0">' +
+          '<p class="fd font-bold text-coffee-900 text-sm line-clamp-1">' + c.title + '</p>' +
+          '<p class="text-xs text-coffee-500">Qty: ' + (c.qty || 1) + ' × ' + PK(c.price) + '</p>' +
+        '</div>' +
+        '<span class="fd font-bold text-coffee-900 text-sm">' + PK(c.price * (c.qty || 1)) + '</span>' +
+      '</div>';
+    }).join('');
+
+    var couponSection = '';
+    if (APPLIED_COUPON){
+      couponSection = '<div class="coupon-applied">' +
+        '<div class="ca-info"><div class="ca-badge"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>' +
+        '<div><b>' + APPLIED_COUPON.code + '</b><small>' + APPLIED_COUPON.label + ' · −' + PK(APPLIED_COUPON.discount) + '</small></div></div>' +
+        '<button class="remove-btn" onclick="removeCoupon()" title="Remove">×</button>' +
+      '</div>';
+    } else {
+      couponSection = '<div id="coupon-hints-box" class="coupon-hints"></div>' +
+        '<div class="coupon-row">' +
+          '<input id="co-coupon" type="text" placeholder="Coupon code" autocomplete="off"/>' +
+          '<button onclick="applyCoupon()" id="co-coupon-btn">Apply</button>' +
+        '</div>' +
+        '<p id="co-coupon-err" class="text-xs text-red-600 font-semibold mb-3" style="display:none"></p>';
+    }
+
+    document.getElementById('co-summary').innerHTML =
+      '<div class="bg-cream-50 rounded-xl p-4 mb-4">' + itemsHtml + '</div>' +
+      couponSection +
+      '<div class="space-y-1.5 text-sm">' +
+        '<div class="flex justify-between"><span class="text-coffee-500">Subtotal</span><span class="fd font-semibold text-coffee-900">' + PK(subtotal) + '</span></div>' +
+        (discount > 0 ? '<div class="flex justify-between"><span class="text-emerald-600">Coupon discount</span><span class="fd font-semibold text-emerald-600">− ' + PK(discount) + '</span></div>' : '') +
+        '<div class="flex justify-between"><span class="text-coffee-500">Delivery to ' + city + '</span><span class="fd font-semibold ' + (fee === 0 ? 'text-emerald-600' : 'text-coffee-900') + '">' + (fee === 0 ? 'Free' : PK(fee)) + '</span></div>' +
+        '<div class="flex justify-between pt-2 border-t border-orange-200/60"><span class="fd font-bold text-coffee-900">Total</span><span class="price text-xl">' + PK(total) + '</span></div>' +
+        (pointsEarn > 0 ? '<div class="flex justify-between items-center pt-2"><span class="text-xs text-coffee-500">You\'ll earn</span><span class="points-chip"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 16.8 6.2 19.9l1.1-6.5L2.6 8.8l6.5-.9L12 2z"/></svg>' + pointsEarn + ' points</span></div>' : '') +
+      '</div>' +
+      '<div class="mt-4 p-3 bg-orange-50 border border-orange-200 rounded-xl text-xs text-coffee-600">' +
+        '<p class="ui text-[9.5px] font-bold text-orange-600 uppercase tracking-wider mb-1">Payment Method</p>' +
+        '<p class="font-semibold text-coffee-900">' + pmLabel + '</p>' +
+      '</div>';
+
+    if (!APPLIED_COUPON){
+      // Show suggested coupons
+      fetch('api/coupons/public').then(function(r){return r.json();}).then(function(list){
+        var box = document.getElementById('coupon-hints-box');
+        if (!box || !Array.isArray(list) || list.length === 0) return;
+        box.innerHTML = list.slice(0, 4).map(function(c){
+          return '<span class="coupon-hint" onclick="suggestCoupon(\'' + c.code + '\')">🎟 ' + c.code + '</span>';
+        }).join('');
+      }).catch(function(){});
+    }
+  }
+
+  function suggestCoupon(code){
+    var inp = document.getElementById('co-coupon');
+    if (inp){ inp.value = code; applyCoupon(); }
+  }
+
+  function applyCoupon(){
+    var inp = document.getElementById('co-coupon');
+    var errBox = document.getElementById('co-coupon-err');
+    var btn = document.getElementById('co-coupon-btn');
+    var code = (inp.value || '').trim().toUpperCase();
+    if (!code) return;
+    var subtotal = cart.reduce(function(s, c){ return s + (c.price * (c.qty || 1)); }, 0);
+    btn.disabled = true; btn.textContent = '...';
+    fetch('api/coupons/validate', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({code:code, subtotal:subtotal})})
+      .then(function(r){ return r.json().then(function(d){ return {ok:r.ok, data:d}; }); })
+      .then(function(res){
+        btn.disabled = false; btn.textContent = 'Apply';
+        if (!res.ok || !res.data.valid){
+          errBox.style.display = ''; errBox.textContent = res.data.error || 'Invalid coupon';
+          return;
+        }
+        APPLIED_COUPON = res.data;
+        toast('Coupon ' + res.data.code + ' applied — Save ' + PK(res.data.discount));
+        renderCheckoutSummary();
+      })
+      .catch(function(){ btn.disabled = false; btn.textContent = 'Apply'; errBox.style.display = ''; errBox.textContent = 'Network error'; });
+  }
+
+  function removeCoupon(){ APPLIED_COUPON = null; renderCheckoutSummary(); }
+
+  // ===== NEWSLETTER =====
+  function submitNewsletter(e){
+    e.preventDefault();
+    var email = document.getElementById('nl-email').value.trim();
+    var msg = document.getElementById('nl-msg');
+    if (!email) return;
+    msg.textContent = 'Subscribing...';
+    msg.style.color = '#5c4a35';
+    fetch('api/newsletter/subscribe', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({email:email, source:'footer'})})
+      .then(function(r){ return r.json().then(function(d){ return {ok:r.ok, data:d}; }); })
+      .then(function(res){
+        if (!res.ok){ msg.textContent = res.data.error || 'Subscription failed'; msg.style.color = '#b91c1c'; return; }
+        if (res.data.alreadySubscribed){ msg.textContent = 'You\'re already subscribed ✓'; msg.style.color = '#047857'; }
+        else { msg.textContent = 'Thanks! You\'ll get our best deals.'; msg.style.color = '#047857'; }
+        document.getElementById('nl-email').value = '';
+        toast('Subscribed ✓');
+      })
+      .catch(function(){ msg.textContent = 'Network error'; msg.style.color = '#b91c1c'; });
+  }
+
+  function placeOrder(){
+    if (!AUTH_USER){ openAuth('login'); return; }
+    var btn = document.getElementById('co-place');
+    btn.disabled = true;
+    btn.textContent = 'Placing order...';
+    var payload = {
+      items: cart.map(function(c){ return { id: c.id, qty: c.qty || 1 }; }),
+      customerName: document.getElementById('co-name').value.trim(),
+      customerPhone: document.getElementById('co-phone').value.trim(),
+      addressLine: document.getElementById('co-addr').value.trim(),
+      city: document.getElementById('co-city').value,
+      notes: document.getElementById('co-notes').value.trim(),
+      deliveryDate: document.getElementById('co-date').value,
+      paymentMethod: selectedPayment(),
+      couponCode: APPLIED_COUPON ? APPLIED_COUPON.code : ''
+    };
+    fetch('api/orders', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json', 'Authorization':'Bearer ' + AUTH_TOKEN},
+      body: JSON.stringify(payload)
+    })
+      .then(function(r){ return r.json().then(function(d){ return {ok:r.ok, data:d}; }); })
+      .then(function(res){
+        btn.disabled = false;
+        btn.textContent = 'Place Order';
+        if (!res.ok){ toast(res.data.error || 'Order failed'); return; }
+        // Show confirmation
+        document.getElementById('co-step-1').classList.add('hidden');
+        document.getElementById('co-step-2').classList.add('hidden');
+        document.getElementById('co-step-3').classList.add('hidden');
+        document.getElementById('co-step-done').classList.remove('hidden');
+        document.getElementById('co-code').textContent = res.data.orderCode;
+        document.getElementById('co-title').textContent = 'Order Confirmed';
+        // Clear cart + reset coupon + refresh points
+        clearCart();
+        APPLIED_COUPON = null;
+        if (res.data.pointsEarned > 0){
+          var doneDiv = document.getElementById('co-step-done');
+          var pointsNote = document.createElement('p');
+          pointsNote.className = 'inline-flex items-center gap-2 mx-auto mb-4 points-chip';
+          pointsNote.style.display = 'inline-flex';
+          pointsNote.innerHTML = '<svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 16.8 6.2 19.9l1.1-6.5L2.6 8.8l6.5-.9L12 2z"/></svg> You earned ' + res.data.pointsEarned + ' loyalty points';
+          var existing = doneDiv.querySelector('.points-chip');
+          if (existing) existing.remove();
+          doneDiv.insertBefore(pointsNote, doneDiv.querySelector('.flex.gap-3'));
+        }
+        fetchUserPoints();
+        toast('Order placed! ✓');
+      })
+      .catch(function(){ btn.disabled = false; btn.textContent = 'Place Order'; toast('Network error'); });
+  }
+
+  // --- My Orders
+  function openOrders(){
+    if (!AUTH_USER){ openAuth('login'); return; }
+    document.getElementById('usr-dropdown').classList.remove('open');
+    document.getElementById('ord-mdl').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    loadMyOrders();
+  }
+  function closeOrders(){ document.getElementById('ord-mdl').classList.remove('open'); document.body.style.overflow = ''; }
+
+  function statusPill(status){
+    var cls = 'st-pill st-' + (status || 'placed');
+    var label = status || 'placed';
+    return '<span class="' + cls + '"><span class="st-dot"></span>' + label.toUpperCase() + '</span>';
+  }
+
+  function loadMyOrders(){
+    var list = document.getElementById('ord-list');
+    var empty = document.getElementById('ord-empty');
+    list.innerHTML = '<p class="text-center text-coffee-500 text-sm py-8">Loading orders...</p>';
+    empty.classList.add('hidden');
+    fetch('api/orders/mine', { headers: {'Authorization':'Bearer ' + AUTH_TOKEN} })
+      .then(function(r){ return r.json(); })
+      .then(function(orders){
+        if (!Array.isArray(orders) || orders.length === 0){
+          list.innerHTML = '';
+          empty.classList.remove('hidden');
+          return;
+        }
+        MY_ORDERS = orders;
+        list.innerHTML = orders.map(function(o){
+          var itemsBrief = o.items.slice(0, 3).map(function(it){
+            return '<div class="flex items-center gap-2"><img src="' + (it.image || 'images/logo.png') + '" class="w-8 h-8 rounded object-cover"/><span class="text-xs text-coffee-600 truncate">' + it.title + ' <span class="text-coffee-400">×' + it.qty + '</span></span></div>';
+          }).join('');
+          var more = o.items.length > 3 ? '<p class="text-[10px] text-coffee-400 mt-1">+' + (o.items.length - 3) + ' more items</p>' : '';
+          return '<div class="ord-card">' +
+            '<div class="flex items-start justify-between gap-3 mb-3">' +
+              '<div>' +
+                '<p class="ui text-[10px] font-bold text-orange-600 uppercase tracking-wider">' + o.orderCode + '</p>' +
+                '<p class="fd font-bold text-coffee-900 text-sm">' + new Date(o.createdAt + 'Z').toLocaleDateString('en-PK', {day:'numeric',month:'short',year:'numeric'}) + '</p>' +
+              '</div>' +
+              statusPill(o.status) +
+            '</div>' +
+            '<div class="space-y-1 mb-3">' + itemsBrief + more + '</div>' +
+            '<div class="flex items-center justify-between pt-3 border-t border-orange-200/40 mb-3">' +
+              '<span class="text-xs text-coffee-500">' + o.paymentMethod.replace('_', ' ') + '</span>' +
+              '<span class="price text-base">' + PK(o.total) + '</span>' +
+            '</div>' +
+            '<div class="flex gap-2">' +
+              '<button onclick="trackMyOrder(' + o.id + ')" class="flex-1 py-2 rounded-lg ui text-[10.5px] font-bold uppercase tracking-wider bg-orange-50 border border-orange-300 text-orange-700 hover:bg-orange-100 transition">Track Order</button>' +
+              '<button onclick="reorder(' + o.id + ')" class="flex-1 py-2 rounded-lg ui text-[10.5px] font-bold uppercase tracking-wider btn-gold">Reorder</button>' +
+            '</div>' +
+          '</div>';
+        }).join('');
+      })
+      .catch(function(){
+        list.innerHTML = '<p class="text-center text-coffee-500 text-sm py-8">Could not load orders. Try again.</p>';
+      });
+  }
+
+  renderUserUI();
+
+  // --- Wire up
+  document.getElementById('cart-btn').addEventListener('click', openCart);
+  document.getElementById('mnav-btn').addEventListener('click', openMnav);
+  document.getElementById('search-input').addEventListener('input', function(e){ doSearch(e.target.value); });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape'){ closeCart(); closeSearch({target:{id:'search-overlay'}}); closeQV({target:{id:'qv-overlay'}}); closeMnav(); closeAuth(); closeCheckout(); closeOrders(); closeProfile(); closeAddresses(); closeAddressEdit(); closeTracking(); }
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k'){ e.preventDefault(); openSearch(); }
+    if (e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA'){ e.preventDefault(); openSearch(); }
+  });
+
+  // Click outside modal cards to close
+  ['auth-mdl','co-mdl','ord-mdl','prof-mdl','addr-mdl','addr-edit-mdl','track-mdl'].forEach(function(id){
+    var m = document.getElementById(id);
+    if (m) m.addEventListener('click', function(e){
+      if (e.target.id === id){
+        if (id === 'auth-mdl') closeAuth();
+        else if (id === 'co-mdl') closeCheckout();
+        else if (id === 'ord-mdl') closeOrders();
+        else if (id === 'prof-mdl') closeProfile();
+        else if (id === 'addr-mdl') closeAddresses();
+        else if (id === 'addr-edit-mdl') closeAddressEdit();
+        else if (id === 'track-mdl') closeTracking();
+      }
+    });
+  });
+  window.addEventListener('scroll', onScroll, {passive:true});
+
+  // --- Hero parallax (background image)
+  var heroBg = document.getElementById('hero-bg');
+  function heroParallax(){
+    if (!heroBg || window.scrollY > window.innerHeight) return;
+    heroBg.style.transform = 'translate3d(0,' + (window.scrollY * 0.1).toFixed(2) + 'px,0)';
+  }
+  if (!window.matchMedia || !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    window.addEventListener('scroll', heroParallax, {passive:true});
+    heroParallax();
+  }
+
+  // --- Boot
+  rebuildBrands();
+  applyFilters();
+  updateCartUI();
+  updateWishUI();
+  initReveal();
+  initCounters();
+  onScroll();
+  loadLiveProducts();
+  </script>
+</body>
+</html>

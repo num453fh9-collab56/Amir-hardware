@@ -1,0 +1,9 @@
+node_modules/
+server.js
+store.db
+.jwt-secret
+package-lock.json
+.claude/
+.git/
+*.log
+*.old.html

@@ -1404,17 +1404,25 @@
   // --- Reveal on scroll
   function initReveal(){
     var els = document.querySelectorAll('.reveal:not(.on)');
-    if (!('IntersectionObserver' in window)){ els.forEach(function(el){ el.classList.add('on'); }); return; }
+    // Instantly reveal anything near or above the viewport
+    els.forEach(function(el){
+      var r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight * 1.5) el.classList.add('on');
+    });
+    if (!('IntersectionObserver' in window)){
+      document.querySelectorAll('.reveal:not(.on)').forEach(function(el){ el.classList.add('on'); });
+      return;
+    }
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(e){
         if (e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); }
       });
-    }, {threshold:0.05, rootMargin:'0px 0px -30px 0px'});
-    els.forEach(function(el){ io.observe(el); });
-    // Safety fallback: reveal anything missed after 3 seconds
+    }, {threshold:0.01, rootMargin:'300px 0px 100px 0px'});
+    document.querySelectorAll('.reveal:not(.on)').forEach(function(el){ io.observe(el); });
+    // Hard safety fallback at 800ms — guarantee no section stays hidden
     setTimeout(function(){
       document.querySelectorAll('.reveal:not(.on)').forEach(function(el){ el.classList.add('on'); });
-    }, 3000);
+    }, 800);
   }
 
   // --- Stat counters

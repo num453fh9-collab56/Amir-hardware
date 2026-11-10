@@ -6,7 +6,7 @@
 (function () {
   "use strict";
 
-  const API = "http://localhost:5000/api";
+  const API = "/api";
   const TOKEN_KEY = "ah_admin_token";
   const NAME_KEY = "ah_admin_name";
 
@@ -180,7 +180,7 @@
         const thumb =
           '<span class="thumb">' +
           (p.image
-            ? '<img src="http://localhost:5000' + p.image + '" alt="" loading="lazy" onerror="this.parentElement.innerHTML=\'\\uD83D\\uDCE6\'" />'
+            ? '<img src="' + p.image + '" alt="" loading="lazy" onerror="this.parentElement.innerHTML=\'\\uD83D\\uDCE6\'" />'
             : "📦") +
           "</span>";
 
@@ -295,7 +295,7 @@
       fDesc.value = p.description;
       fStock.checked = p.inStock;
       if (p.image) {
-        imgPreview.innerHTML = '<img src="http://localhost:5000' + p.image + '" alt="" />';
+        imgPreview.innerHTML = '<img src="' + p.image + '" alt="" />';
         imgFilename.textContent = "Current image: " + p.image.split("/").pop();
       }
       modalTitle.innerHTML = "Edit <span>Product</span>";

@@ -285,7 +285,7 @@
      renders real uploaded photos into the premium grid.
      Falls back to the static showcase if the API is offline.
      ============================================================ */
-  const API_BASE = "http://localhost:5000";
+  const API_BASE = "";
   const premGrid = document.getElementById("prem-grid");
   const catalogueStatus = document.getElementById("catalogue-status");
 

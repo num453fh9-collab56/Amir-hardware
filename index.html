@@ -1420,17 +1420,25 @@
   }
 
   function clearFilters(){
-    document.getElementById('s-cat').value = '';
-    document.getElementById('s-brand').value = '';
-    document.getElementById('s-sort').value = 'newest';
-    document.getElementById('p-search').value = '';
+    var _sCat = document.getElementById('s-cat');
+    var _sBrand = document.getElementById('s-brand');
+    var _sSort = document.getElementById('s-sort');
+    var _pSearch = document.getElementById('p-search');
+    if (!_sCat || !_sBrand || !_sSort || !_pSearch) return;
+    _sCat.value = '';
+    _sBrand.value = '';
+    _sSort.value = 'newest';
+    _pSearch.value = '';
     applyFilters();
   }
 
   function filterProducts(cat){
-    document.getElementById('s-cat').value = cat;
+    var _sCat = document.getElementById('s-cat');
+    if (!_sCat){ window.location.href = 'products.html?cat=' + encodeURIComponent(cat); return; }
+    _sCat.value = cat;
     applyFilters();
-    document.getElementById('products').scrollIntoView({behavior:'smooth'});
+    var _p = document.getElementById('products');
+    if (_p) _p.scrollIntoView({behavior:'smooth'});
   }
 
   // --- Cart
@@ -1515,10 +1523,15 @@
   }
   function openWish(){
     if (wishlist.length === 0){ toast('Wishlist is empty'); return; }
+    if (!document.getElementById('product-grid')){
+      window.location.href = 'products.html?view=wishlist';
+      return;
+    }
     clearFilters();
     var saved = PRODUCTS.filter(function(p){ return wishlist.indexOf(p.id) > -1; });
     renderProducts(saved);
-    document.getElementById('products').scrollIntoView({behavior:'smooth'});
+    var _p = document.getElementById('products');
+    if (_p) _p.scrollIntoView({behavior:'smooth'});
     toast('Showing wishlist (' + wishlist.length + ')');
   }
 

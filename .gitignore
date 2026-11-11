@@ -36,3 +36,6 @@ scratchpad/
 
 # Misc large binaries
 Gemini_Generated_Image_*.jfif
+
+.vercel
+.env*

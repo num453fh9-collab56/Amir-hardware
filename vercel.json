@@ -2,11 +2,9 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "framework": null,
-  "buildCommand": null,
   "outputDirectory": null,
-  "installCommand": null,
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/404.html" }
+    { "source": "/api/(.*)", "destination": "/api" }
   ],
   "headers": [
     {

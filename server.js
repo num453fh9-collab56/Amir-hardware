@@ -11,6 +11,7 @@ const cors = require("cors");
 const multer = require("multer");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const rateLimit = require("express-rate-limit");
 
 const PORT = process.env.PORT || 5000;
 const crypto = require("crypto");
@@ -288,7 +289,22 @@ if (!existing && DEFAULT_ADMIN.password) {
 if (!fs.existsSync(UPLOAD_DIR)) fs.mkdirSync(UPLOAD_DIR, { recursive: true });
 
 const app = express();
-app.use(cors());
+app.set("trust proxy", 1);
+
+// CORS: lock down to an allowlist via CORS_ORIGINS env (comma separated).
+// Same-origin requests (no Origin header, e.g. the site itself) are always allowed.
+const CORS_ORIGINS = (process.env.CORS_ORIGINS || "")
+  .split(",")
+  .map(function (s) { return s.trim(); })
+  .filter(Boolean);
+app.use(cors({
+  origin: function (origin, cb) {
+    if (!origin) return cb(null, true);
+    if (CORS_ORIGINS.length === 0) return cb(null, true);
+    if (CORS_ORIGINS.indexOf(origin) >= 0) return cb(null, true);
+    return cb(new Error("Origin not allowed"), false);
+  }
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static(UPLOAD_DIR));
@@ -301,23 +317,53 @@ app.use(function (req, res, next) {
 app.use(express.static(__dirname, { dotfiles: "deny" }));
 
 /* ---------- multer image upload ---------- */
+const ALLOWED_IMAGE_MIMES = new Set([
+  "image/jpeg", "image/jpg", "image/png", "image/gif", "image/webp", "image/avif"
+]);
+const ALLOWED_IMAGE_EXTS = new Set([
+  ".jpg", ".jpeg", ".png", ".gif", ".webp", ".avif"
+]);
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, UPLOAD_DIR);
   },
   filename: function (req, file, cb) {
-    const ext = path.extname(file.originalname).toLowerCase() || ".jpg";
+    const raw = path.extname(file.originalname).toLowerCase();
+    const ext = ALLOWED_IMAGE_EXTS.has(raw) ? raw : ".jpg";
     const unique = Date.now() + "-" + Math.round(Math.random() * 1e9);
     cb(null, "product-" + unique + ext);
   }
 });
 
 const fileFilter = function (req, file, cb) {
-  if (/^image\//.test(file.mimetype)) cb(null, true);
-  else cb(new Error("Only image files are allowed."), false);
+  // Reject SVG, HTML, XML and anything else — client MIME is not trusted on its own,
+  // so we also validate the original extension.
+  const mime = String(file.mimetype || "").toLowerCase();
+  const ext = path.extname(file.originalname || "").toLowerCase();
+  if (ALLOWED_IMAGE_MIMES.has(mime) && ALLOWED_IMAGE_EXTS.has(ext)) {
+    return cb(null, true);
+  }
+  return cb(new Error("Only JPEG, PNG, GIF, WEBP or AVIF images are allowed."), false);
 };
 
 const upload = multer({ storage, fileFilter, limits: { fileSize: 5 * 1024 * 1024 } });
+
+/* ---------- rate limiters for auth endpoints ---------- */
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: "Too many login attempts. Please try again in 15 minutes." }
+});
+const registerLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000,
+  max: 20,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: "Too many signup attempts. Please try again later." }
+});
 
 /* ---------- JWT helpers ---------- */
 function signToken(admin) {
@@ -382,7 +428,7 @@ function toPublic(p) {
 /* ============================================================
    AUTH
    ============================================================ */
-app.post("/api/auth/login", function (req, res) {
+app.post("/api/auth/login", loginLimiter, function (req, res) {
   const { email, password } = req.body || {};
   if (!email || !password) {
     return res.status(400).json({ error: "Email and password are required." });
@@ -499,10 +545,10 @@ function normalizePhone(raw) {
   return digits;
 }
 
-app.post("/api/user/register", function (req, res) {
+app.post("/api/user/register", registerLimiter, function (req, res) {
   const { name, phone, email, password, city } = req.body || {};
   if (!name || !phone || !password) return res.status(400).json({ error: "Name, phone and password are required." });
-  if (String(password).length < 4) return res.status(400).json({ error: "Password must be at least 4 characters." });
+  if (String(password).length < 8) return res.status(400).json({ error: "Password must be at least 8 characters." });
   const normPhone = normalizePhone(phone);
   if (!normPhone || normPhone.length < 10) return res.status(400).json({ error: "Please enter a valid phone number." });
   const existing = db.prepare("SELECT id FROM users WHERE phone = ?").get(normPhone);
@@ -519,7 +565,7 @@ app.post("/api/user/register", function (req, res) {
   res.status(201).json({ token: signUserToken(user), user });
 });
 
-app.post("/api/user/login", function (req, res) {
+app.post("/api/user/login", loginLimiter, function (req, res) {
   const { phone, password } = req.body || {};
   if (!phone || !password) return res.status(400).json({ error: "Phone and password are required." });
   const normPhone = normalizePhone(phone);
@@ -1051,7 +1097,7 @@ app.put("/api/user/profile", userAuthRequired, function (req, res) {
 app.put("/api/user/password", userAuthRequired, function (req, res) {
   const { currentPassword, newPassword } = req.body || {};
   if (!currentPassword || !newPassword) return res.status(400).json({ error: "Current and new password are required." });
-  if (String(newPassword).length < 4) return res.status(400).json({ error: "New password must be at least 4 characters." });
+  if (String(newPassword).length < 8) return res.status(400).json({ error: "New password must be at least 8 characters." });
   const row = db.prepare("SELECT * FROM users WHERE id = ?").get(req.user.uid);
   if (!row || !bcrypt.compareSync(String(currentPassword), row.password)) {
     return res.status(401).json({ error: "Current password is incorrect." });
@@ -1185,7 +1231,12 @@ app.get("/api/orders/:id/reorder", userAuthRequired, function (req, res) {
 
 /* ---------- error handler (multer etc.) ---------- */
 app.use(function (err, req, res, next) {
-  res.status(400).json({ error: err.message || "Server error." });
+  // Full detail server-side; a safe generic message to the client. Multer file-type
+  // errors are user-actionable so we keep those — everything else is opaque.
+  const msg = String(err && err.message || "");
+  const isSafe = /only|allowed|too large|file size|invalid file/i.test(msg);
+  if (!isSafe) console.error("[error]", req.method, req.path, err);
+  res.status(400).json({ error: isSafe ? msg : "Bad request." });
 });
 
 app.listen(PORT, function () {

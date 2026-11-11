@@ -438,11 +438,11 @@
       const itemsCount = (o.items || []).reduce((s, it) => s + (it.qty || 1), 0);
       const dateStr = new Date(o.createdAt + "Z").toLocaleDateString("en-PK", { day: "numeric", month: "short" });
       return `<tr>
-        <td><b style="color:#f3a05d">${o.orderCode}</b><br/><small style="color:#999">${dateStr}</small></td>
-        <td>${o.customerName}<br/><small style="color:#999">${o.customerPhone}</small></td>
-        <td>${itemsCount} item${itemsCount === 1 ? "" : "s"}<br/><small style="color:#999">${o.city}</small></td>
+        <td><b style="color:#f3a05d">${escapeHtml(o.orderCode)}</b><br/><small style="color:#999">${dateStr}</small></td>
+        <td>${escapeHtml(o.customerName)}<br/><small style="color:#999">${escapeHtml(o.customerPhone)}</small></td>
+        <td>${itemsCount} item${itemsCount === 1 ? "" : "s"}<br/><small style="color:#999">${escapeHtml(o.city)}</small></td>
         <td><b>${fmtPKR(o.total)}</b></td>
-        <td><small>${(o.paymentMethod || "").replace("_", " ")}</small><br/><small style="color:#999">${(o.paymentStatus || "").replace("_", " ")}</small></td>
+        <td><small>${escapeHtml((o.paymentMethod || "").replace("_", " "))}</small><br/><small style="color:#999">${escapeHtml((o.paymentStatus || "").replace("_", " "))}</small></td>
         <td>
           <select class="ord-status-sel" data-id="${o.id}" style="background:#1e1e1e;color:#eee;border:1px solid #333;padding:4px 8px;border-radius:6px;font-size:12px">
             ${STATUS_LIST.map(s => '<option value="' + s + '"' + (s === o.status ? " selected" : "") + ">" + s + "</option>").join("")}
@@ -488,10 +488,10 @@
     document.getElementById("ord-mod-code").textContent = o.orderCode;
     const itemsHtml = (o.items || []).map(it => `
       <div style="display:flex;gap:12px;padding:10px;background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;margin-bottom:8px">
-        <img src="${it.image || "images/logo.png"}" style="width:48px;height:48px;border-radius:8px;object-fit:cover;flex-shrink:0"/>
+        <img src="${escapeHtml(it.image || "images/logo.png")}" style="width:48px;height:48px;border-radius:8px;object-fit:cover;flex-shrink:0"/>
         <div style="flex:1;min-width:0">
-          <p style="color:#eee;font-weight:600;font-size:13px">${it.title}</p>
-          <p style="color:#888;font-size:11px">${it.brand || ""} · Qty ${it.qty} × ${fmtPKR(it.price)}</p>
+          <p style="color:#eee;font-weight:600;font-size:13px">${escapeHtml(it.title)}</p>
+          <p style="color:#888;font-size:11px">${escapeHtml(it.brand || "")} · Qty ${Number(it.qty) || 0} × ${fmtPKR(it.price)}</p>
         </div>
         <b style="color:#f3a05d">${fmtPKR(it.price * it.qty)}</b>
       </div>`).join("");
@@ -500,20 +500,20 @@
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
         <div>
           <p style="color:#888;font-size:11px;text-transform:uppercase;letter-spacing:0.1em">Customer</p>
-          <p style="color:#eee;font-weight:600">${o.customerName}</p>
-          <p style="color:#aaa;font-size:13px">${o.customerPhone}</p>
-          ${o.userName ? '<p style="color:#666;font-size:11px">Account: ' + o.userName + '</p>' : ""}
+          <p style="color:#eee;font-weight:600">${escapeHtml(o.customerName)}</p>
+          <p style="color:#aaa;font-size:13px">${escapeHtml(o.customerPhone)}</p>
+          ${o.userName ? '<p style="color:#666;font-size:11px">Account: ' + escapeHtml(o.userName) + '</p>' : ""}
         </div>
         <div>
           <p style="color:#888;font-size:11px;text-transform:uppercase;letter-spacing:0.1em">Delivery</p>
-          <p style="color:#eee;font-weight:600">${o.city}</p>
-          <p style="color:#aaa;font-size:13px">${o.addressLine}</p>
-          ${o.deliveryDate ? '<p style="color:#666;font-size:11px">Preferred: ' + o.deliveryDate + '</p>' : ""}
+          <p style="color:#eee;font-weight:600">${escapeHtml(o.city)}</p>
+          <p style="color:#aaa;font-size:13px">${escapeHtml(o.addressLine)}</p>
+          ${o.deliveryDate ? '<p style="color:#666;font-size:11px">Preferred: ' + escapeHtml(o.deliveryDate) + '</p>' : ""}
         </div>
         <div>
           <p style="color:#888;font-size:11px;text-transform:uppercase;letter-spacing:0.1em">Payment</p>
-          <p style="color:#eee;font-weight:600">${(o.paymentMethod || "").replace("_", " ")}</p>
-          <p style="color:#aaa;font-size:13px">${(o.paymentStatus || "").replace("_", " ")}</p>
+          <p style="color:#eee;font-weight:600">${escapeHtml((o.paymentMethod || "").replace("_", " "))}</p>
+          <p style="color:#aaa;font-size:13px">${escapeHtml((o.paymentStatus || "").replace("_", " "))}</p>
         </div>
         <div>
           <p style="color:#5c4a35;font-size:10px;text-transform:uppercase;letter-spacing:0.14em;font-weight:700;margin-bottom:4px">Status</p>
@@ -546,7 +546,7 @@
           </div>
           <div>
             <label style="color:#5c4a35;font-size:10px;text-transform:uppercase;letter-spacing:0.12em;font-weight:700">Tracking Number</label>
-            <input id="ord-detail-tracking" type="text" value="${(o.trackingNumber || "").replace(/"/g, '&quot;')}" placeholder="e.g. TCS12345678" style="background:#fff;color:#1a1308;border:1px solid rgba(201,162,77,0.3);padding:7px 10px;border-radius:9px;width:100%;margin-top:4px;font-weight:600"/>
+            <input id="ord-detail-tracking" type="text" value="${escapeHtml(o.trackingNumber || "")}" placeholder="e.g. TCS12345678" style="background:#fff;color:#1a1308;border:1px solid rgba(201,162,77,0.3);padding:7px 10px;border-radius:9px;width:100%;margin-top:4px;font-weight:600"/>
           </div>
           <div>
             <label style="color:#5c4a35;font-size:10px;text-transform:uppercase;letter-spacing:0.12em;font-weight:700">Delivery Slot</label>
@@ -559,13 +559,13 @@
           </div>
           <div>
             <label style="color:#5c4a35;font-size:10px;text-transform:uppercase;letter-spacing:0.12em;font-weight:700">Estimated Delivery</label>
-            <input id="ord-detail-eta" type="date" value="${o.estimatedDelivery || ""}" style="background:#fff;color:#1a1308;border:1px solid rgba(201,162,77,0.3);padding:7px 10px;border-radius:9px;width:100%;margin-top:4px;font-weight:600"/>
+            <input id="ord-detail-eta" type="date" value="${escapeHtml(o.estimatedDelivery || "")}" style="background:#fff;color:#1a1308;border:1px solid rgba(201,162,77,0.3);padding:7px 10px;border-radius:9px;width:100%;margin-top:4px;font-weight:600"/>
           </div>
         </div>
         <button id="ord-detail-track-save" style="background:linear-gradient(135deg,#f3a05d,#b84f15);color:#fff;border:none;padding:9px 16px;border-radius:10px;cursor:pointer;margin-top:10px;font-weight:700;width:100%;font-size:12px;letter-spacing:0.08em;text-transform:uppercase">Save Tracking Info</button>
       </div>
 
-      ${o.notes ? '<div style="margin-bottom:12px;padding:10px;background:rgba(255,255,255,0.6);border:1px solid rgba(201,162,77,0.25);border-radius:10px"><p style="color:#5c4a35;font-size:10px;text-transform:uppercase;letter-spacing:0.14em;font-weight:700;margin-bottom:4px">Notes</p><p style="color:#1a1308;font-size:13px">' + o.notes + '</p></div>' : ""}
+      ${o.notes ? '<div style="margin-bottom:12px;padding:10px;background:rgba(255,255,255,0.6);border:1px solid rgba(201,162,77,0.25);border-radius:10px"><p style="color:#5c4a35;font-size:10px;text-transform:uppercase;letter-spacing:0.14em;font-weight:700;margin-bottom:4px">Notes</p><p style="color:#1a1308;font-size:13px">' + escapeHtml(o.notes) + '</p></div>' : ""}
       <p style="color:#888;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px">Items</p>
       ${itemsHtml}
       <div style="margin-top:12px;padding:12px;background:#1a1a1a;border-radius:10px">

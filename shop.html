@@ -1308,14 +1308,15 @@
         '</div>'
       : '<div class="rev-form" style="text-align:center"><p class="text-xs text-coffee-600">Please <button onclick="closeQV({target:{id:\'qv-overlay\'}});openAuth(\'login\')" class="text-orange-600 font-semibold hover:underline">log in</button> to write a review.</p></div>';
     var listHtml = (data.reviews || []).map(function(r){
+      var escH = function(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); };
       var initials = (r.userName || 'C').split(' ').map(function(w){return w[0]}).join('').slice(0,2).toUpperCase();
       var dt = new Date((r.createdAt || '') + 'Z');
       var dateStr = dt.toLocaleDateString('en-PK', {day:'numeric', month:'short', year:'numeric'});
       return '<div class="rev-item">' +
-        '<div class="rev-head"><div class="av">' + initials + '</div><div class="who"><b>' + r.userName + '</b><small>' + dateStr + '</small></div>' + (r.verifiedPurchase ? '<span class="verified">✓ Verified</span>' : '') + '</div>' +
+        '<div class="rev-head"><div class="av">' + escH(initials) + '</div><div class="who"><b>' + escH(r.userName) + '</b><small>' + dateStr + '</small></div>' + (r.verifiedPurchase ? '<span class="verified">✓ Verified</span>' : '') + '</div>' +
         starsHTML(r.rating, 'sm') +
-        (r.title ? '<p class="rev-title">' + r.title + '</p>' : '') +
-        (r.body ? '<p class="rev-body">' + r.body + '</p>' : '') +
+        (r.title ? '<p class="rev-title">' + escH(r.title) + '</p>' : '') +
+        (r.body ? '<p class="rev-body">' + escH(r.body) + '</p>' : '') +
       '</div>';
     }).join('');
     box.innerHTML = '<h4 class="fd font-bold text-coffee-900 text-lg mb-4">Customer <em class="italic" style="background:linear-gradient(135deg,#ed7f3c,#b84f15);-webkit-background-clip:text;background-clip:text;color:transparent">Reviews</em></h4>' + summaryHtml + formHtml + listHtml;

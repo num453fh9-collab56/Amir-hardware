@@ -255,20 +255,33 @@ for (const sp of SEED_PRODUCTS) {
 if (process.env.NODE_ENV !== "test") console.log("[seed] ensured default products");
 
 /* ---------- seed default admin account ---------- */
+const IS_PROD = process.env.NODE_ENV === "production";
 const DEFAULT_ADMIN = {
   email: process.env.ADMIN_EMAIL || "admin@amirhardware.com",
-  password: process.env.ADMIN_PASSWORD || "admin123"
+  password: process.env.ADMIN_PASSWORD || (IS_PROD ? null : "admin123")
 };
 
+if (IS_PROD && !process.env.ADMIN_PASSWORD) {
+  console.error("[fatal] ADMIN_PASSWORD env var is required in production. Refusing to boot with a default admin password.");
+  process.exit(1);
+}
+if (DEFAULT_ADMIN.password && DEFAULT_ADMIN.password.length < 12) {
+  console.warn("[warn] ADMIN_PASSWORD is shorter than 12 characters — use a strong password.");
+}
+
 const existing = db.prepare("SELECT id FROM admins WHERE email = ?").get(DEFAULT_ADMIN.email);
-if (!existing) {
+if (!existing && DEFAULT_ADMIN.password) {
   const hash = bcrypt.hashSync(DEFAULT_ADMIN.password, 10);
   db.prepare("INSERT INTO admins (email, password, name) VALUES (?, ?, ?)").run(
     DEFAULT_ADMIN.email,
     hash,
     "Amir Hardware Admin"
   );
-  console.log("[setup] Default admin created — email: " + DEFAULT_ADMIN.email + " / password: " + DEFAULT_ADMIN.password);
+  if (!IS_PROD) {
+    console.log("[setup] Default admin created — email: " + DEFAULT_ADMIN.email + " (dev password used; override with ADMIN_PASSWORD env var)");
+  } else {
+    console.log("[setup] Admin account created for " + DEFAULT_ADMIN.email);
+  }
 }
 
 /* ---------- uploads + static dirs ---------- */

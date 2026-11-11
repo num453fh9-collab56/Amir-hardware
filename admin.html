@@ -911,6 +911,13 @@
       });
     });
 
+    // Shared HTML escape for inline renderers in this file
+    function esc(str){
+      return String(str == null ? '' : str).replace(/[&<>"']/g, function(c){
+        return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+      });
+    }
+
     // Recent activity feed
     window.renderActivity = function(orders){
       var list = document.getElementById('activity-list');
@@ -937,9 +944,9 @@
         }[o.status] || 'updated order';
         var total = 'Rs ' + Number(o.total || 0).toLocaleString('en-PK');
         return '<div class="activity-item">' +
-          '<div class="av ' + avatars[i % avatars.length] + '">' + initials + '</div>' +
+          '<div class="av ' + avatars[i % avatars.length] + '">' + esc(initials) + '</div>' +
           '<div class="ai-body">' +
-            '<p class="ai-txt"><b>' + who + '</b> ' + action + ' <em>' + o.orderCode + '</em> — ' + total + '</p>' +
+            '<p class="ai-txt"><b>' + esc(who) + '</b> ' + action + ' <em>' + esc(o.orderCode) + '</em> — ' + total + '</p>' +
             '<p class="ai-time">' + time + '</p>' +
           '</div>' +
         '</div>';
@@ -963,7 +970,7 @@
       var maxN = entries[0].n || 1;
       el.innerHTML = entries.map(function(e){
         var pct = Math.round((e.n / maxN) * 100);
-        return '<div class="cat-card"><p class="lbl">' + e.cat + '</p><p class="val">' + e.n + ' <small style="font-size:11px;color:var(--text-dim);font-family:Inter;font-weight:500">items</small></p><div class="bar"><span style="width:' + pct + '%"></span></div></div>';
+        return '<div class="cat-card"><p class="lbl">' + esc(e.cat) + '</p><p class="val">' + e.n + ' <small style="font-size:11px;color:var(--text-dim);font-family:Inter;font-weight:500">items</small></p><div class="bar"><span style="width:' + pct + '%"></span></div></div>';
       }).join('');
     };
 

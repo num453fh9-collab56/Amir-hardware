@@ -3,11 +3,6 @@
   "trailingSlash": false,
   "framework": null,
   "outputDirectory": null,
-  "functions": {
-    "api/index.js": {
-      "includeFiles": "**"
-    }
-  },
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api" }
   ],

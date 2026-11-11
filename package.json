@@ -2,10 +2,10 @@
   "name": "amir-hardware-server",
   "version": "1.0.0",
   "description": "Amir Hardware store backend — Express + SQLite + JWT admin API",
-  "main": "server.js",
+  "main": "api/_app.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node --watch server.js"
+    "start": "node api/_app.js",
+    "dev": "node --watch api/_app.js"
   },
   "engines": {
     "node": ">=22.13.0"

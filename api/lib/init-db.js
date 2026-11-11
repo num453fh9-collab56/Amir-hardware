@@ -1,6 +1,6 @@
 /* Run once to initialize Postgres schema + seed admin/coupons.
-   Usage:  node -r dotenv/config lib/init-db.js  dotenv_config_path=.env.local */
-require("dotenv").config({ path: require("path").join(__dirname, "..", ".env.local") });
+   Usage:  node api/lib/init-db.js */
+require("dotenv").config({ path: require("path").join(__dirname, "..", "..", ".env.local") });
 const db = require("./db");
 
 (async () => {

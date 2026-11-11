@@ -52,8 +52,8 @@ function init() {
 
 async function seed() {
   // Seed admin
-  const adminEmail = (process.env.ADMIN_EMAIL || "admin@amirhardware.com").toLowerCase();
-  const adminPassword = process.env.ADMIN_PASSWORD;
+  const adminEmail = clean(process.env.ADMIN_EMAIL || "admin@amirhardware.com").toLowerCase();
+  const adminPassword = clean(process.env.ADMIN_PASSWORD);
   if (adminPassword) {
     const { rows } = { rows: await sql.query("SELECT id FROM admins WHERE email = $1", [adminEmail]) };
     if (rows.length === 0) {
